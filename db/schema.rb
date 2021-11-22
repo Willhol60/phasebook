@@ -10,10 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_161021) do
+ActiveRecord::Schema.define(version: 2021_11_22_165918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "books", force: :cascade do |t|
+    t.string "title"
+    t.string "ISBN"
+    t.string "author"
+    t.integer "pages"
+    t.string "category"
+    t.string "poster_url"
+    t.text "description"
+    t.string "publisher"
+    t.date "publishing_date"
+    t.string "google_link"
+    t.float "rating"
+    t.integer "rating_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "session_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["session_id"], name: "index_comments_on_session_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string "read_status", default: "Future"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "user_rating"
+    t.integer "cheers", default: 0
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_sessions_on_book_id"
+    t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,8 +64,15 @@ ActiveRecord::Schema.define(version: 2021_11_22_161021) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "profile_image"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "sessions"
+  add_foreign_key "comments", "users"
+  add_foreign_key "sessions", "books"
+  add_foreign_key "sessions", "users"
 end

@@ -2,21 +2,40 @@
 
 <% @readings.each do |reading| %>
   <% if reading.read_status == 'Finished' %>
-    <div>
-      <%= reading.user.profile_image %>
-      <%= reading.user.first_name %> <%= reading.user.last_name %>
-    </div>
-    <div>
-      <%= reading.book.poster_url %>
-      <%= reading.book.title %>
-      <%= reading.book.author %>
-      <%= reading.book.pages %>
-    </div>
-    <div>
-      <%= reading.start_date %>
-      <%= reading.end_date %>
-      <%= reading.user_rating %>
-      <%= reading.cheers %>
+    <div class="container card-product">
+      <%# <img src= <%= reading.book.poster_url %>
+      <div class="card-product-infos">
+
+        <div class="user-info">
+          <%= image_tag (reading.user.profile_image), class: "avatar" %>
+          <%= reading.user.first_name %> <%= reading.user.last_name %>
+        </div>
+
+        <div class="reading-info">
+          <% if reading.end_date && reading.start_date %>
+            <p>days to read:<%= (reading.end_date - reading.start_date).to_i %></p>
+          <% end %>
+          <%# <%= reading.start_date %>
+          <%# <%= reading.end_date %>
+          <%= reading.book.poster_url %>
+          <p>title:<%= reading.book.title %></p>
+          <p>author:<%= reading.book.author %></p>
+          <p># pages:<%= reading.book.pages %></p>
+          <p>rating given:<%= reading.user_rating %></p>
+        </div>
+
+      </div>
+      <div>
+        <div class="cheers">
+          <p># cheers:<%= reading.cheers %></p>
+          <button></button>
+        </div>
+
+        <div class="comments">
+          <%# comments %>
+        </div>
+      </div>
+
     </div>
   <% end %>
 <% end %>

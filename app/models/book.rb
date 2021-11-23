@@ -1,4 +1,4 @@
 class Book < ApplicationRecord
-  has_many :sessions, dependent: :destroy
-  has_many :users, through: :sessions
+  has_many :readings, dependent: :destroy
+  has_many :users, through: :readings
 end

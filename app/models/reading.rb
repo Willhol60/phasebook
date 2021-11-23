@@ -1,4 +1,4 @@
-class Session < ApplicationRecord
+class Reading < ApplicationRecord
   belongs_to :user
   belongs_to :book
   has_many :comments, dependent: :destroy

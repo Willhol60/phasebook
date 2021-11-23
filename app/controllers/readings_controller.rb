@@ -1,5 +1,4 @@
 class ReadingsController < ApplicationController
-
   def index
     @readings = Reading.all
   end
@@ -18,12 +17,18 @@ class ReadingsController < ApplicationController
   end
 
   def edit
+    @reading = Reading.find(params[:id])
+  end
 
+  def update
+    @reading = Reading.find(params[:id])
+    @reading.update(reading_params)
+    redirect_to reading_path(@reading)
   end
 
   private
 
   def reading_params
-    params.require(:)
+    params.require(:reading).permit(:read_status, :start_date, :end_date, :user_rating, :cheers)
   end
 end

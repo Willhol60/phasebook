@@ -1,0 +1,8 @@
+<h1>Temporary page - to be incorporated into newsfeed (under a session)</h1>
+
+<h2>Create a new comment</h2>
+
+<%= simple_form_for @comment do |f| %>
+  <%= f.input :content, placeholder: 'Comment here...', label:false %>
+  <%= f.submit %>
+<% end %>

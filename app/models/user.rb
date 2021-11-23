@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many :readings
-  has_many :comments
+  has_many :readings, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :books, through: :readings
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

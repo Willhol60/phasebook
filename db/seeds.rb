@@ -18,10 +18,14 @@ tolkein_url = 'https://www.googleapis.com/books/v1/volumes?q=tolkein'
 star_wars_url = 'https://www.googleapis.com/books/v1/volumes?q=star+wars'
 
 # creating 2 users
-rami = User.new(first_name: 'Rami', last_name: 'Assaf', email: 'rami@email.org', password: 'password', profile_image: 'gandalf.jpg' )
+rami = User.new({ first_name: 'Rami', last_name: 'Assaf',
+                  email: 'rami@email.org', password: 'password',
+                  profile_image: 'gandalf.jpg' })
 rami.save
 
-simon = User.new(first_name: 'Simon', last_name: 'Foster', email: 'simon@email.org', password: 'password', profile_image: 'vader.jpg' )
+simon = User.new({ first_name: 'Simon', last_name: 'Foster',
+                   email: 'simon@email.org', password: 'password',
+                   profile_image: 'vader.jpg' })
 simon.save
 
 # creating books lists
@@ -34,29 +38,33 @@ star_wars_books = JSON.parse(star_wars_file)
 sw_array = star_wars_books['items']
 
 sw_array.each do |book|
-  this_book = Book.new(title: book['volumeInfo']['title'], ISBN: book['volumeInfo']['industryIdentifiers'][0]['identifier'] ,  author: book['volumeInfo']['authors'][0], pages: book['volumeInfo']['pageCount'])
+  this_book = Book.new({ title: book['volumeInfo']['title'],
+                         ISBN: book['volumeInfo']['industryIdentifiers'][0]['identifier'],
+                         author: book['volumeInfo']['authors'][0],
+                         pages: book['volumeInfo']['pageCount'] })
   this_book.save
 end
 
 t_array.each do |book|
-  this_book = Book.new(title: book['volumeInfo']['title'], ISBN: book['volumeInfo']['industryIdentifiers'][0]['identifier'] ,  author: book['volumeInfo']['authors'][0], pages: book['volumeInfo']['pageCount'])
+  this_book = Book.new({ title: book['volumeInfo']['title'],
+                         ISBN: book['volumeInfo']['industryIdentifiers'][0]['identifier'],
+                         author: book['volumeInfo']['authors'][0],
+                         pages: book['volumeInfo']['pageCount'] })
   this_book.save
 end
 
 # create reading sessions
-counter = 1
-20.times do
-  reed = Reading.new(user_id: rand(1..2),
-                     book_id: counter,
+Book.all.ids.each do |id|
+  reed = Reading.new(user_id: User.all.ids.sample,
+                     book_id: id,
                      read_status: ['Finished', 'Future'].sample)
   reed.save
-  counter += 1
 end
 
 # creating comments
 10.times do
-  bla = Comment.create(reading_id: rand(1..20),
-                 user_id: rand(1..2),
-                 content: %w[cool nice great brilliant shite loser unlucky congratulations loveya].sample )
+  bla = Comment.create(reading_id: Reading.all.ids.sample,
+                       user_id: User.all.ids.sample,
+                       content: %w[cool nice great brilliant shite loser unlucky congratulations loveya].sample)
   bla.save
 end

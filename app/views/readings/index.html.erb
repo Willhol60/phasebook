@@ -1,0 +1,22 @@
+<h1>Newsfeed</h1>
+
+<% @readings.each do |reading| %>
+  <% if reading.read_status == 'Finished' %>
+    <div>
+      <%= reading.user.profile_image %>
+      <%= reading.user.first_name %> <%= reading.user.last_name %>
+    </div>
+    <div>
+      <%= reading.book.poster_url %>
+      <%= reading.book.title %>
+      <%= reading.book.author %>
+      <%= reading.book.pages %>
+    </div>
+    <div>
+      <%= reading.start_date %>
+      <%= reading.end_date %>
+      <%= reading.user_rating %>
+      <%= reading.cheers %>
+    </div>
+  <% end %>
+<% end %>

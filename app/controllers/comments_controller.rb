@@ -9,17 +9,27 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to book_readings_path(anchor: "comment-#{@comment.id}")
     else
-      render new
+      render :new
     end
   end
 
-  def edit
-  end
+  # def edit
+  # end
 
   def update
+    @comment = Comment.find(params[:id])
+    @comment.update(comment_params)
+
+    respond_to do |format|
+      format.html { redirect_to book_readings_path(anchor: "comment-#{@comment.id}") }
+      # format.text
+    end
   end
 
   def destroy
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    redirect_to book_readings_path
   end
 
   private

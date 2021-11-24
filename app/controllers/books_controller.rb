@@ -10,10 +10,6 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
   end
 
-  def new
-    @book = Book.new
-  end
-
   def create
     @book = Book.new(book_params)
     if @book.save

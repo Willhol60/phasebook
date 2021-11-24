@@ -15,12 +15,15 @@
     <br>
     <%
     title = book['volumeInfo']['subtitle'] ? "#{book['volumeInfo']['title']}: #{book['volumeInfo']['subtitle']}" : book['volumeInfo']['title']
+    poster_url = book['volumeInfo']['imageLinks'] ? book['volumeInfo']['imageLinks']['thumbnail'] : "placeholder.jpg"
     params_hash = { title: title,
-                    ISBN: book['volumeInfo']['industryIdentifiers'][0]['identifier'],
-                    author: book['volumeInfo']['authors'].first
+                    author: book['volumeInfo']['authors'].first,
+                    poster_url: poster_url,
                   }
     %>
     <%= link_to "Submit", books_path(book: params_hash), method: :post  %>
   </li>
   <% end %>
   </ul>
+
+<!-- order library by most recently added, and change submit button to add to library-->

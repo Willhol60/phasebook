@@ -7,6 +7,8 @@
       <% @readings.each do |reading| %>
         <% if reading.read_status == 'Finished' %>
 
+
+
           <%# CARD: %>
           <div id="container card-product">
             <%# <img src= <%= reading.book.poster_url %>
@@ -44,23 +46,40 @@
             </div>
           </div>
 
+          <%# we'll need a controller around the whole reading card and comment card for the stimulus controller %>
+
+
+
           <div class="container comment-window">
             <% reading.comments.each do |comment| %>
               <div class="comment-row">
                 <%= image_tag (comment.user.profile_image), class: "avatar" %>
                 <div class="comment">
                   <div class="comment-first-line">
-                    <p><strong><%= comment.user.first_name %> <%= comment.user.last_name %></strong></p>
-                    <p><%= (comment.created_at).strftime('%A, %d %b %Y %l:%M %p') %></p>
+
+                    <% if comment.user.id == current_user.id %>
+                      <p><strong>You</strong></p>
+                      <%= link_to 'x', comment_path(comment), method: :delete, remote: true %>
+                    <% else %>
+                      <p><strong ><%= comment.user.first_name %> <%= comment.user.last_name %></strong></p>
+                    <% end %>
                     <%# <p><%= comment.updated_at %>
                   </div>
-                  <p><%= comment.content %></p>
+                  <div class="comment-second-line">
+                    <p id="comment-<%= comment.id %>"><%= comment.content %></p>
+                    <p><em><%= (comment.created_at).strftime('%A, %d %b %Y %l:%M %p') %></em></p>
+                  </div>
                 </div>
               </div>
             <% end %>
-            <%= simple_form_for [reading.book, reading, @comment] do |f| %>
+
+            <%= simple_form_for([reading.book, reading, @comment], remote: true) do |f| %>
+            <% if reading.comments.empty? %>
+              <%= f.input :content, placeholder: 'Be the first to comment!...', label:false %>
+            <% else %>
               <%= f.input :content, placeholder: 'Comment here...', label:false %>
-              <%= f.submit %>
+            <% end %>
+            <%= f.submit %>
             <% end %>
             <%# simple form text input to add a comment - in 'comment new' view page %>
           </div>

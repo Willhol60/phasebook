@@ -1,6 +1,7 @@
 class ReadingsController < ApplicationController
   def index
     @readings = Reading.all
+    @comment = Comment.new
   end
 
   def new

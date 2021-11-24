@@ -6,3 +6,14 @@
   <%= f.input :content, placeholder: 'Comment here...', label:false %>
   <%= f.submit %>
 <% end %>
+
+
+
+<%# building the comments for the newsfeed (to be moved) %>
+<div class="comment">
+<%# need to change @reading to reading so takes info from the reading index iteration %>
+  <% reading.comments.each do |comment| %>
+    <%= image_tag (comment.user.profile_image), class: "avatar" %>
+
+  <% end %>
+</div>

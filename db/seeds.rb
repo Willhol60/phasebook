@@ -38,18 +38,37 @@ star_wars_books = JSON.parse(star_wars_file)
 sw_array = star_wars_books['items']
 
 sw_array.each do |book|
-  this_book = Book.new({ title: book['volumeInfo']['title'],
-                         ISBN: book['volumeInfo']['industryIdentifiers'][0]['identifier'],
-                         author: book['volumeInfo']['authors'][0],
-                         pages: book['volumeInfo']['pageCount'] })
+  title = book['volumeInfo']['subtitle'] ? "#{book['volumeInfo']['title']}: #{book['volumeInfo']['subtitle']}" : book['volumeInfo']['title']
+  puts book['volumeInfo']['categories']
+  this_book = Book.new({  title: title,
+                          ISBN: book['volumeInfo']['industryIdentifiers'][0]['identifier'],
+                          author: book['volumeInfo']['authors'].first,
+                          pages: book['volumeInfo']['pageCount'],
+
+                          poster_url: book['volumeInfo']['imageLinks']['thumbnail'],
+                          description: book['volumeInfo']['description'],
+                          publisher: book['volumeInfo']['publisher'],
+                          publishing_date: book['volumeInfo']['publishedDate'],
+                          google_link: book['volumeInfo']['previewLink'],
+                          rating: book['volumeInfo']['averageRating'],
+                          rating_count: book['volumeInfo']['ratingsCount'] })
   this_book.save
 end
 
 t_array.each do |book|
-  this_book = Book.new({ title: book['volumeInfo']['title'],
-                         ISBN: book['volumeInfo']['industryIdentifiers'][0]['identifier'],
-                         author: book['volumeInfo']['authors'][0],
-                         pages: book['volumeInfo']['pageCount'] })
+  title = book['volumeInfo']['subtitle'] ? "#{book['volumeInfo']['title']}: #{book['volumeInfo']['subtitle']}" : book['volumeInfo']['title']
+  this_book = Book.new({  title: title,
+                          ISBN: book['volumeInfo']['industryIdentifiers'][0]['identifier'],
+                          author: book['volumeInfo']['authors'].first,
+                          pages: book['volumeInfo']['pageCount'],
+
+                          poster_url: book['volumeInfo']['imageLinks']['thumbnail'],
+                          description: book['volumeInfo']['description'],
+                          publisher: book['volumeInfo']['publisher'],
+                          publishing_date: book['volumeInfo']['publishedDate'],
+                          google_link: book['volumeInfo']['previewLink'],
+                          rating: book['volumeInfo']['averageRating'],
+                          rating_count: book['volumeInfo']['ratingsCount'] })
   this_book.save
 end
 

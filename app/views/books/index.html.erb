@@ -3,9 +3,13 @@
 <ul>
   <% @books.each do |book| %>
   <li>
+    <h3> <%= book.title %> </h3>
     <%= image_tag book.poster_url %>
-    Title: <%= book.title %>
+    <br>
     Author: <%= book.author %>
+    <br>
+    Category: <%= book.category %>
+    <br>
   </li>
   <% end %>
 </ul>

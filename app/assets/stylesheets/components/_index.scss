@@ -4,3 +4,35 @@
 @import "card";
 @import "comment";
 @import "navbar";
+
+
+body {
+  // display: flex;
+  // justify-content: space-around;
+}
+
+#left-third #middle-third #right-third {
+  height: 100%;
+}
+
+#left-third {
+  top: 20px;
+  // width: 100px;
+  padding: 20px;
+  flex-shrink: auto;
+}
+
+h1 {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+#middle-third {
+  // display: block;
+  flex-grow: 2;
+}
+
+#right-third {
+  // width: 100px;
+  flex-shrink: auto;
+}

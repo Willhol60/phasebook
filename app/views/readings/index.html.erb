@@ -7,78 +7,82 @@
       <% @readings.each do |reading| %>
         <% if reading.read_status == 'Finished' %>
           <%# CARD: %>
-          <div class="container card-product">
-            <%# <img src= <%= reading.book.poster_url %>
-            <div class="card-product-infos">
+          <div data-controller="comment-window">
+            <div class="container card-product">
+              <%# <img src= <%= reading.book.poster_url %>
+              <div class="card-product-infos">
 
-              <div class="user-info">
-                <%= image_tag (reading.user.profile_image), class: "avatar" %>
-                <div class="user-full-name">
-                  <%= reading.user.first_name %> <%= reading.user.last_name %>
+                <div class="user-info">
+                  <%= image_tag (reading.user.profile_image), class: "avatar" %>
+                  <div class="user-full-name">
+                    <%= reading.user.first_name %> <%= reading.user.last_name %>
+                  </div>
+                  <div class="post-time">
+                    Just now
+                  </div>
                 </div>
-                <div class="post-time">
-                  Just now
+
+                <div class="reading-info">
+                  <% if reading.end_date && reading.start_date %>
+                    <p>days to read:<%= (reading.end_date - reading.start_date).to_i %></p>
+                  <% end %>
+                  <%# <%= reading.start_date %>
+                  <%# <%= reading.end_date %>
+                  <%= reading.book.poster_url %>
+                  <p><%= reading.book.title %></p>
+                  <p><%= reading.book.author %></p>
+                  <p><%= reading.book.pages %> pages</p>
+                  <p>User rating: <%= reading.user_rating %></p>
                 </div>
+
               </div>
+              <div>
+                <div class="cheers">
+                  <p id="reading-<%= reading.id %>"><%= reading.cheers %> cheers</p>
+                  <button></button>
+                </div>
+                <p data-action="click->comment-window#revealWindow"><%= reading.comments.count %> comments...</p>
+              </div>
+            </div>
 
-              <div class="reading-info">
-                <% if reading.end_date && reading.start_date %>
-                  <p>days to read:<%= (reading.end_date - reading.start_date).to_i %></p>
+            <%# we'll need a controller around the whole reading card and comment card for the stimulus controller %>
+            <div class="container comment-window <%= "d-none" unless params[:reading] == reading.id.to_s %>" data-comment-window-target="content">
+              <%= simple_form_for([reading.book, reading, @comment], remote: true) do |f| %>
+                <% if reading.comments.empty? %>
+                  <%= f.input :content, placeholder: 'Be the first to comment!...', label:false %>
+                <% else %>
+                  <%= f.input :content, placeholder: 'Comment here...', label:false %>
                 <% end %>
-                <%# <%= reading.start_date %>
-                <%# <%= reading.end_date %>
-                <%= reading.book.poster_url %>
-                <p><%= reading.book.title %></p>
-                <p><%= reading.book.author %></p>
-                <p><%= reading.book.pages %> pages</p>
-                <p>User rating: <%= reading.user_rating %></p>
-              </div>
+                <%= f.submit %>
+              <% end %>
+              <% reading.comments.reverse.each do |comment| %>
+                <div class="comment-row">
+                  <%= image_tag (comment.user.profile_image), class: "avatar" %>
+                  <div class="comment">
+                    <div class="comment-first-line">
 
-            </div>
-            <div>
-              <div class="cheers">
-                <p><%= reading.cheers %> cheers</p>
-                <button></button>
-              </div>
-            </div>
-          </div>
+                      <% if comment.user.id == current_user.id %>
+                        <p><strong>You</strong></p>
+                        <%= link_to comment_path(comment), method: :delete, remote: true do %>
+                          <i class="fa fa-trash" aria-hidden="true"></i>
+                        <% end %>
+                      <% else %>
+                        <p><strong ><%= comment.user.first_name %> <%= comment.user.last_name %></strong></p>
+                      <% end %>
 
-          <%# we'll need a controller around the whole reading card and comment card for the stimulus controller %>
-
-          <div class="container comment-window">
-            <% reading.comments.each do |comment| %>
-              <div class="comment-row">
-                <%= image_tag (comment.user.profile_image), class: "avatar" %>
-                <div class="comment">
-                  <div class="comment-first-line">
-
-                    <% if comment.user.id == current_user.id %>
-                      <p><strong>You</strong></p>
-                      <%= link_to 'x', comment_path(comment), method: :delete, remote: true %>
-                    <% else %>
-                      <p><strong ><%= comment.user.first_name %> <%= comment.user.last_name %></strong></p>
-                    <% end %>
-                    <%# <p><%= comment.updated_at %>
-                  </div>
-                  <div class="comment-second-line">
-                    <p id="comment-<%= comment.id %>"><%= comment.content %></p>
-                    <p><em><%= (comment.created_at).strftime('%A, %d %b %Y %l:%M %p') %></em></p>
+                    </div>
+                    <div class="comment-second-line">
+                      <p id="comment-<%= comment.id %>"><%= comment.content %></p>
+                      <p><em><%= (comment.created_at).strftime('%A, %d %b %Y %l:%M %p') %></em></p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            <% end %>
+              <% end %>
 
-            <%= simple_form_for([reading.book, reading, @comment], remote: true) do |f| %>
-            <% if reading.comments.empty? %>
-              <%= f.input :content, placeholder: 'Be the first to comment!...', label:false %>
-            <% else %>
-              <%= f.input :content, placeholder: 'Comment here...', label:false %>
-            <% end %>
-            <%= f.submit %>
-            <% end %>
-            <%# simple form text input to add a comment - in 'comment new' view page %>
+              <%# simple form text input to add a comment - in 'comment new' view page %>
+            </div>
+            <%# END OF CARD %>
           </div>
-          <%# END OF CARD %>
 
         <% end %>
       <% end %>

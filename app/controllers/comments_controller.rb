@@ -9,9 +9,10 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.reading_id = params[:reading_id]
     @comment.user_id = current_user.id
+    reading = @comment.reading_id
     if @comment.save
       # this will need to be changed to Stimulus auto-loading
-      redirect_to book_readings_path(anchor: "comment-#{@comment.id}")
+      redirect_to book_readings_path(anchor: "reading-#{reading}", reading: reading)
     else
       render :new
     end
@@ -31,9 +32,12 @@ class CommentsController < ApplicationController
   # end
 
   def destroy
+    puts params[:id]
     @comment = Comment.find(params[:id])
+    reading = @comment.reading_id
+    book = @comment.reading.book
     @comment.destroy
-    redirect_to book_readings_path
+    redirect_to book_readings_path(book, anchor: "reading-#{reading}", reading: reading)
   end
 
   private

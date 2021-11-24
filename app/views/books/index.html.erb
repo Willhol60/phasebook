@@ -1,4 +1,18 @@
+
 <h1>Library</h1>
+
+<br>
+<%= form_tag search_books_path, method: :get do |form| %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Find a book"
+  %>
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+<% end %>
+<br>
+
+
 
 <ul>
   <% @books.each do |book| %>

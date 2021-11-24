@@ -1,3 +1,6 @@
+require 'open-uri'
+require 'json'
+
 class BooksController < ApplicationController
   def index
     @books = Book.all
@@ -18,6 +21,16 @@ class BooksController < ApplicationController
     else
       render :new
     end
+  end
+
+  def search
+    @query = params[:query]
+    url = "https://www.googleapis.com/books/v1/volumes?q=#{@query}"
+    open_file = URI.open(url).read
+    read_books = JSON.parse(open_file)
+    @books = read_books['items']
+
+
   end
   # do we need update/create?
 

@@ -1,0 +1,18 @@
+<br>
+<ul>
+  <% @books.each do |book| %>
+  <li>
+    <h3> <%= book['volumeInfo']['title'] %> </h3>
+    <% if  book['volumeInfo']['imageLinks'] %>
+      <%= image_tag book['volumeInfo']['imageLinks']['thumbnail'] %>
+    <% else %>
+      <%= image_tag "placeholder.jpg", style:"width: 128px; height: 167px; object-fit: cover" %>
+    <% end %>
+    <br>
+    Author: <%= book['volumeInfo']['authors'].first %>
+    <br>
+    Publisher: <%= book['volumeInfo']['publisher'] ? book['volumeInfo']['publisher'] : "Unknown publisher" %>
+    <br>
+  </li>
+  <% end %>
+  </ul>

@@ -13,6 +13,14 @@
     <br>
     Publisher: <%= book['volumeInfo']['publisher'] ? book['volumeInfo']['publisher'] : "Unknown publisher" %>
     <br>
+    <%
+    title = book['volumeInfo']['subtitle'] ? "#{book['volumeInfo']['title']}: #{book['volumeInfo']['subtitle']}" : book['volumeInfo']['title']
+    params_hash = { title: title,
+                    ISBN: book['volumeInfo']['industryIdentifiers'][0]['identifier'],
+                    author: book['volumeInfo']['authors'].first
+                  }
+    %>
+    <%= link_to "Submit", books_path(book: params_hash), method: :post  %>
   </li>
   <% end %>
   </ul>

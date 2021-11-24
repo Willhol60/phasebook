@@ -17,7 +17,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     if @book.save
-      redirect_to reading_path(@book)
+      redirect_to books_path
     else
       render :new
     end
@@ -29,8 +29,6 @@ class BooksController < ApplicationController
     open_file = URI.open(url).read
     read_books = JSON.parse(open_file)
     @books = read_books['items']
-
-
   end
   # do we need update/create?
 

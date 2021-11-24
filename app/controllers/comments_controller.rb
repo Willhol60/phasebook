@@ -1,11 +1,14 @@
 class CommentsController < ApplicationController
   def new
+    # @book = params[:book_id]
+    # @reading = params[:reading_id]
     @comment = Comment.new
   end
 
   def create
     @comment = Comment.new(comment_params)
-    @comment.reading = params[:reading_id]
+    @comment.reading_id = params[:reading_id]
+    @comment.user_id = current_user.id
     if @comment.save
       redirect_to book_readings_path(anchor: "comment-#{@comment.id}")
     else

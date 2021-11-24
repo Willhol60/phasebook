@@ -2,7 +2,7 @@
 
 <h2>Create a new comment</h2>
 
-<%= simple_form_for @comment do |f| %>
+<%= simple_form_for [:book, :reading, @comment] do |f| %>
   <%= f.input :content, placeholder: 'Comment here...', label:false %>
   <%= f.submit %>
 <% end %>

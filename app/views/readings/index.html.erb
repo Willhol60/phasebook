@@ -1,30 +1,27 @@
 <body>
   <div class="row">
-    <div class="col-sm" id="left-third">
+    <div class="col-sm left-third">
       <h1>Newsfeed</h1>
     </div>
-    <div class="col-sm" id="middle-third">
+    <div class="col-sm middle-third">
       <% @readings.each do |reading| %>
         <% if reading.read_status == 'Finished' %>
-
-
-
           <%# CARD: %>
-          <div id="container card-product">
+          <div class="container card-product">
             <%# <img src= <%= reading.book.poster_url %>
-            <div id="card-product-infos">
+            <div class="card-product-infos">
 
-              <div id="user-info">
+              <div class="user-info">
                 <%= image_tag (reading.user.profile_image), class: "avatar" %>
-                <div id="user-full-name">
+                <div class="user-full-name">
                   <%= reading.user.first_name %> <%= reading.user.last_name %>
                 </div>
-                <div id="post-time">
+                <div class="post-time">
                   Just now
                 </div>
               </div>
 
-              <div id="reading-info">
+              <div class="reading-info">
                 <% if reading.end_date && reading.start_date %>
                   <p>days to read:<%= (reading.end_date - reading.start_date).to_i %></p>
                 <% end %>
@@ -47,8 +44,6 @@
           </div>
 
           <%# we'll need a controller around the whole reading card and comment card for the stimulus controller %>
-
-
 
           <div class="container comment-window">
             <% reading.comments.each do |comment| %>
@@ -88,7 +83,7 @@
         <% end %>
       <% end %>
     </div>
-    <div class="col-sm" id="right-third">
+    <div class="col-sm right-third">
 
     </div>
   </div>

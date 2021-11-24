@@ -11,11 +11,11 @@ body {
   // justify-content: space-around;
 }
 
-#left-third #middle-third #right-third {
+.left-third .middle-third .right-third {
   height: 100%;
 }
 
-#left-third {
+.left-third {
   top: 20px;
   // width: 100px;
   padding: 20px;
@@ -27,12 +27,12 @@ h1 {
   position: sticky;
 }
 
-#middle-third {
+.middle-third {
   // display: block;
   flex-grow: 2;
 }
 
-#right-third {
+.right-third {
   // width: 100px;
   flex-shrink: auto;
 }

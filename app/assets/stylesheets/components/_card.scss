@@ -35,7 +35,7 @@
 }
 
 .card-product .card-product-infos {
-  padding: 8px;
+  padding: 15px;
   // display: flex;
 }
 
@@ -54,5 +54,19 @@
 
 .buttons {
   padding: 10px;
-  border-top: 5px black;
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: grey;
+  // border-top: 5px black;
+}
+
+.button-col {
+  padding: 5px;
+}
+
+.reaction-counts {
+  padding: 10px;
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: grey;
 }

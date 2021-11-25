@@ -1,6 +1,8 @@
 class ReadingsController < ApplicationController
   def index
+    # raise
     @readings = Reading.all
+    @comment = Comment.new
   end
 
   def new
@@ -24,6 +26,17 @@ class ReadingsController < ApplicationController
     @reading = Reading.find(params[:id])
     @reading.update(reading_params)
     redirect_to reading_path(@reading)
+  end
+
+  def cheers
+    @reading = Reading.find(params[:id])
+    if current_user.voted_for? @reading
+      @reading.unliked_by current_user
+    else
+      @reading.liked_by current_user
+    end
+    # give an anchor to stop the page jumping
+    redirect_to book_readings_path(@reading.book, @reading)
   end
 
   private

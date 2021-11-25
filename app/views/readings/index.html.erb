@@ -1,41 +1,179 @@
-<h1>Newsfeed</h1>
-
-<% @readings.each do |reading| %>
-  <% if reading.read_status == 'Finished' %>
-    <div class="container card-product">
-      <%# <img src= <%= reading.book.poster_url %>
-      <div class="card-product-infos">
-
-        <div class="user-info">
-          <%= image_tag (reading.user.profile_image), class: "avatar" %>
-          <%= reading.user.first_name %> <%= reading.user.last_name %>
-        </div>
-
-        <div class="reading-info">
-          <% if reading.end_date && reading.start_date %>
-            <p>days to read:<%= (reading.end_date - reading.start_date).to_i %></p>
-          <% end %>
-          <%# <%= reading.start_date %>
-          <%# <%= reading.end_date %>
-          <%= reading.book.poster_url %>
-          <p>title:<%= reading.book.title %></p>
-          <p>author:<%= reading.book.author %></p>
-          <p># pages:<%= reading.book.pages %></p>
-          <p>rating given:<%= reading.user_rating %></p>
-        </div>
-
-      </div>
-      <div>
-        <div class="cheers">
-          <p># cheers:<%= reading.cheers %></p>
-          <button></button>
-        </div>
-
-        <div class="comments">
-          <%# comments %>
+<body>
+  <div class="row">
+    <div class="col-sm left-third">
+      <h1>Newsfeed</h1>
+      <%# QUOTES AND NEWS: %>
+      <div class="flip-card">
+        <div class="flip-card-inner card-quote-of-the-day">
+          <div class="flip-card-front">
+          </div>
+          <div class="flip-card-back">
+            "I would always rather be happy than dignified."
+            ― Charlotte Brontë, Jane Eyre
+          </div>
         </div>
       </div>
+      <div class="flip-card">
+        <div class="flip-card-inner card-news">
+          <div class="flip-card-front">
+          </div>
+          <div class="flip-card-back">
+            <div class="card-news-source">
+              BBC:
+            </div>
+            <div class="card-news-title">
+              <a href="https://www.bbc.co.uk/news/uk-wales-59354988" target="_blank">
+                Old and rare books among 400,000 destroyed in fire
+              </a>
+            </div>
+            <div class="card-news-posting-time">
+              14:57 20 Nov
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card">
+        <div class="flip-card-inner card-news">
+          <div class="flip-card-front">
+          </div>
+          <div class="flip-card-back">
+            <div class="card-news-source">
+              Independent:
+            </div>
+            <div class="card-news-title">
+              <a href="https://www.independent.co.uk/arts-entertainment/books/features/abdulrazak-gurnah-nobel-prize-books-b1949697.html" target="_blank">
+                Why one Nobel Laureate is struggling to sell books in America
+              </a>
+            </div>
+            <div class="card-news-posting-time">
+              00:00 05 Nov
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card">
+        <div class="flip-card-inner card-news">
+          <div class="flip-card-front">
+          </div>
+          <div class="flip-card-back">
+            <div class="card-news-source">
+              Independent:
+            </div>
+            <div class="card-news-title">
+              <a href="https://www.independent.co.uk/arts-entertainment/books/features/abdulrazak-gurnah-nobel-prize-books-b1949697.html" target="_blank">
+                Why one Nobel Laureate is struggling to sell books in America
+              </a>
+            </div>
+            <div class="card-news-posting-time">
+              00:00 05 Nov
+            </div>
+          </div>
+        </div>
+      </div>
+      <%# END OF QUOTES AND NEWS %>
+      <div class="terms">
+        Terms of Service |
+        Privacy Policy |
+        Cookie Policy
+        <br>
+        © 2021 Phasebook, Inc.
+      </div>
+    </div>
+    <div class="col-sm middle-third">
+      <% @readings.each do |reading| %>
+        <% if reading.read_status == 'Finished' %>
+          <%# CARD: %>
+          <div data-controller="comment-window">
+            <div class="container card-product">
+              <%# <img src= <%= reading.book.poster_url %>
+              <div class="card-product-infos">
+
+                <%# id below needed for when comment auto-loads to stop page jumping %>
+                <div class="user-info" id="reading-<%= reading.id %>" >
+                  <%= image_tag (reading.user.profile_image), class: "avatar" %>
+                  <div class="user-full-name">
+                    <%= reading.user.first_name %> <%= reading.user.last_name %>
+                  </div>
+                  <% if reading.end_date %>
+                  <%# need to set the start_date whenever the read_status is marked as 'Current' %>
+                  <%# need to set the end_date whenever the read_status is marked as 'Finished' %>
+                    <div class="post-time">
+                      <% if (Time.now - reading.end_date) < (1/24/60) %>
+                        <%= "Just now" %>
+                      <% elsif (Time.now - reading.end_date) < (1/24) %>
+                        <%= "In the last hour" %>
+                      <% elsif (Time.now - reading.end_date) < 1 %>
+                        <%= "Today" %>
+                      <% else %>
+                        <%= reading.end_date.strftime('%A, %d %b %Y %l:%M %p') %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+
+                <div class="reading-info">
+                  <% if reading.end_date && reading.start_date %>
+                    <p>days to read:<%= (reading.end_date - reading.start_date).to_i %></p>
+                  <% end %>
+                  <%= reading.book.poster_url %>
+                  <p><%= reading.book.title %></p>
+                  <p><%= reading.book.author %></p>
+                  <p><%= reading.book.pages %> pages</p>
+                  <p>User rating: <%= reading.user_rating %></p>
+                </div>
+
+              </div>
+              <div class="buttons">
+
+                <%= link_to cheers_book_reading_path(reading.book, reading) do %>
+                  <button><%= pluralize(reading.votes_for.size, 'cheer')... %></button>
+                <% end %>
+
+                <button data-action="click->comment-window#revealWindow"><%= pluralize(reading.comments.count, 'comment')... %></button>
+              </div>
+            </div>
+
+            <div class="container comment-window <%= "d-none" unless params[:reading] == reading.id.to_s %>" data-comment-window-target="content">
+              <%= simple_form_for([reading.book, reading, @comment], remote: true) do |f| %>
+                <% if reading.comments.empty? %>
+                  <%= f.input :content, placeholder: 'Be the first to comment!...', label:false %>
+                <% else %>
+                  <%= f.input :content, placeholder: 'Comment here...', label:false %>
+                <% end %>
+                <%= f.button :submit, class: "btn btn-primary" %>
+              <% end %>
+              <% reading.comments.reverse.each do |comment| %>
+                <div class="comment-row">
+                  <%= image_tag (comment.user.profile_image), class: "avatar" %>
+                  <div class="comment">
+                    <div class="comment-first-line">
+
+                      <% if comment.user.id == current_user.id %>
+                        <p><strong>You</strong></p>
+                        <%= link_to comment_path(comment), method: :delete, remote: true do %>
+                          <i class="fa fa-trash" aria-hidden="true"></i>
+                        <% end %>
+                      <% else %>
+                        <p><strong ><%= comment.user.first_name %> <%= comment.user.last_name %></strong></p>
+                      <% end %>
+
+                    </div>
+                    <div class="comment-second-line">
+                      <p id="comment-<%= comment.id %>"><%= comment.content %></p>
+                      <p><em><%= (comment.created_at).strftime('%A, %d %b %Y %l:%M %p') %></em></p>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            <%# END OF CARD %>
+          </div>
+
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-sm right-third">
 
     </div>
-  <% end %>
-<% end %>
+  </div>
+</body>

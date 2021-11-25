@@ -1,6 +1,8 @@
 
 <h1>My Reads</h1>
 
+<h4>Top categories: <%= current_user.readings.filter_map{ |reading| reading.book.category if reading.book.category != "No category" }.uniq! %></h4>
+
 <br>
 <%= form_tag search_books_path, method: :get do |form| %>
   <%= text_field_tag :query,
@@ -10,8 +12,12 @@
   %>
   <%= submit_tag "Search", class: "btn btn-primary" %>
 <% end %>
+  <button type="button" class="btn btn-success">
+    <%= link_to "Random!", random_books_path %>
+  </button>
 <br>
-
+<%= @book %>
+<br>
 
 
 <ul>
@@ -24,6 +30,9 @@
     <br>
     Category: <%= book.category || "No category" %>
     <br>
+    <button type="button" class="btn btn-danger">
+      <%= link_to "Delete", book_path(book), method: :delete  %>
+    </button>
   </li>
   <% end %>
 </ul>

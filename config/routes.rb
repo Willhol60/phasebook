@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :books do
     collection do
       get 'search'
+      get 'random'
     end
     resources :readings, except: :destroy do
       resources :comments, except: :destroy

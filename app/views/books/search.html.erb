@@ -11,7 +11,7 @@
       author = book['volumeInfo']['authors'] ? book['volumeInfo']['authors'].first : "Unknown Author"
       publisher = book['volumeInfo']['publisher'] ? book['volumeInfo']['publisher'] : "Unknown publisher"
       pages = book['volumeInfo']['pageCount'] ? book['volumeInfo']['pageCount'] : 100
-      category = book['volumeInfo']['categories'] ? book['volumeInfo']['categories'].first : "No categories"
+      category = book['volumeInfo']['categories'] ? book['volumeInfo']['categories'].first : "No category"
       #Isbn = book['volumeInfo']['industryIdentifiers'][0]['type'].include?('ISBN') ? book['volumeInfo']['industryIdentifiers'][0]['identifier'] : "No ISBN"
       if book['volumeInfo']['industryIdentifiers'] && book['volumeInfo']['industryIdentifiers'][0]['type'].include?('ISBN')
         isban = book['volumeInfo']['industryIdentifiers'][0]['identifier']

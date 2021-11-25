@@ -71,6 +71,13 @@
         </div>
       </div>
       <%# END OF QUOTES AND NEWS %>
+      <div class="terms">
+        Terms of Service |
+        Privacy Policy |
+        Cookie Policy
+        <br>
+        © 2021 Phasebook, Inc.
+      </div>
     </div>
     <div class="col-sm middle-third">
       <% @readings.each do |reading| %>
@@ -108,8 +115,6 @@
                   <% if reading.end_date && reading.start_date %>
                     <p>days to read:<%= (reading.end_date - reading.start_date).to_i %></p>
                   <% end %>
-                  <%# <%= reading.start_date %>
-                  <%# <%= reading.end_date %>
                   <%= reading.book.poster_url %>
                   <p><%= reading.book.title %></p>
                   <p><%= reading.book.author %></p>
@@ -160,8 +165,6 @@
                   </div>
                 </div>
               <% end %>
-
-              <%# simple form text input to add a comment - in 'comment new' view page %>
             </div>
             <%# END OF CARD %>
           </div>

@@ -35,6 +35,7 @@ class ReadingsController < ApplicationController
     else
       @reading.liked_by current_user
     end
+    # give an anchor to stop the page jumping
     redirect_to book_readings_path(@reading.book, @reading)
   end
 

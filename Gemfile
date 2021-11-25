@@ -26,6 +26,7 @@ gem 'omniauth-google'
 gem 'omniauth-facebook'
 gem 'chartkick'
 gem 'hightop'
+gem 'acts_as_votable'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

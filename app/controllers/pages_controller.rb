@@ -18,23 +18,24 @@ class PagesController < ApplicationController
   #   end
   # end
 
-  def time_spent
-    time = 0
-    @readings.each do |reading|
-      duration = reading.end_date - reading.start_date
-      time += duration
-    end
-  end
+  # def time_spent
+  #   time = 0
+  #   @readings.each do |reading|
+  #     duration = reading.end_date - reading.start_date
+  #     time += duration
+  #   end
+  #   return time
+  # end
 
-  def avg_speed
-    time_spent / books_read
-  end
+  # def avg_speed
+  #   time_spent / books_read
+  # end
 
-  def categories
-    total = 0
-    @readings.each do |reading|
-      cat = reading.book.category.count
-      total += cat
-    end
-  end
+  # def categories
+  #   total = 0
+  #   @readings.each do |reading|
+  #     cat = reading.book.category.count
+  #     total += cat
+  #   end
+  # end
 end

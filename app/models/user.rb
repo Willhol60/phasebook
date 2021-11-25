@@ -16,6 +16,7 @@ class User < ApplicationRecord
     else
       ["Fiction", "Performing Arts", "Philosophy", "Biography & Autobiography", "Art"].sample
     end
+  end
 
   def books_read
     total = 0

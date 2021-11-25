@@ -17,4 +17,17 @@ class User < ApplicationRecord
     end
     return total
   end
+
+  def time_spent
+    time = 0
+    readings.each do |reading|
+      duration = (reading.end_date - reading.start_date).to_i
+      time += duration
+    end
+    return time
+  end
+
+  def avg_speed
+    time_spent / books_read
+  end
 end

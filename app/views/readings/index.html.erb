@@ -108,8 +108,6 @@
                   <% if reading.end_date && reading.start_date %>
                     <p>days to read:<%= (reading.end_date - reading.start_date).to_i %></p>
                   <% end %>
-                  <%# <%= reading.start_date %>
-                  <%# <%= reading.end_date %>
                   <%= reading.book.poster_url %>
                   <p><%= reading.book.title %></p>
                   <p><%= reading.book.author %></p>

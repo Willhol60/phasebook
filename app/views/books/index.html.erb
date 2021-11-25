@@ -17,7 +17,7 @@
 
 <br>
 
-
+<!-- making a small change -->
 <ul>
   <% user_books = @books.joins(:readings).joins(:users).where("first_name =?", "Rami").to_a %>
   <% user_books.each do |book| %>

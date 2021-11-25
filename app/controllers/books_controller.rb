@@ -32,7 +32,6 @@ class BooksController < ApplicationController
     read_books = JSON.parse(open_file)
     @books = read_books['items']
   end
-  # do we need update/create?
 
   def destroy
     @book = Book.find(params[:id])

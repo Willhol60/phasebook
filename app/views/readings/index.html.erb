@@ -79,61 +79,96 @@
         © 2021 Phasebook, Inc.
       </div>
     </div>
+
     <div class="col-sm middle-third">
       <% @readings.each do |reading| %>
         <% if reading.read_status == 'Finished' %>
+
           <%# CARD: %>
           <div data-controller="comment-window">
             <div class="container card-product">
               <%# <img src= <%= reading.book.poster_url %>
-              <div class="card-product-infos">
+              <div class="row card-product-infos">
 
-                <%# id below needed for when comment auto-loads to stop page jumping %>
-                <div class="user-info" id="reading-<%= reading.id %>" >
-                  <%= image_tag (reading.user.profile_image), class: "avatar" %>
-                  <div class="user-full-name">
-                    <%= reading.user.first_name %> <%= reading.user.last_name %>
-                  </div>
-                  <% if reading.end_date %>
-                  <%# need to set the start_date whenever the read_status is marked as 'Current' %>
-                  <%# need to set the end_date whenever the read_status is marked as 'Finished' %>
-                    <div class="post-time">
-                      <% if (Time.now - reading.end_date) < (1/24/60) %>
-                        <%= "Just now" %>
-                      <% elsif (Time.now - reading.end_date) < (1/24) %>
-                        <%= "In the last hour" %>
-                      <% elsif (Time.now - reading.end_date) < 1 %>
-                        <%= "Today" %>
-                      <% else %>
-                        <%= reading.end_date.strftime('%A, %d %b %Y %l:%M %p') %>
-                      <% end %>
+                <div class="col col-md-4">
+                  <%= image_tag reading.book.poster_url, style:"width: 100%; height: 100%; object-fit: cover" %>
+                </div>
+
+                <div class="col">
+                  <%# id below needed for when comment auto-loads to stop page jumping %>
+                  <div class="row user-info" id="reading-<%= reading.id %>" >
+                    <%= image_tag (reading.user.profile_image), class: "col col-2 avatar" %>
+                    <div class="col col-md-auto">
+                      <div class="row">
+                        <div class="col user-full-name">
+                          <%= reading.user.first_name %> <%= reading.user.last_name %>
+                        </div>
+                        <% if reading.end_date %>
+                        <%# need to set the start_date whenever the read_status is marked as 'Current' %>
+                        <%# need to set the end_date whenever the read_status is marked as 'Finished' %>
+                          <div class="col post-time">
+                            <% if (Time.now - reading.end_date) < (1/24/60) %>
+                              <%= "Just now" %>
+                            <% elsif (Time.now - reading.end_date) < (1/24) %>
+                              <%= "In the last hour" %>
+                            <% elsif (Time.now - reading.end_date) < 1 %>
+                              <%= "Today" %>
+                            <% else %>
+                              <%= reading.end_date.strftime('%A, %d %b %Y %l:%M %p') %>
+                            <% end %>
+                          </div>
+                        <% end %>
+                      </div>
                     </div>
-                  <% end %>
+                  </div>
+
+                  <div class="row reading-info">
+                    <div class="col">
+                      <div class="row">
+                        <% if reading.end_date && reading.start_date %>
+                          <p>days to read:<%= (reading.end_date - reading.start_date).to_i %></p>
+                        <% end %>
+                      </div>
+                      <div class="row">
+                        <p><%= reading.book.title %></p>
+                      </div>
+                      <div class="row">
+                        <p><%= reading.book.author %></p>
+                      </div>
+                      <div class="row">
+                        <p><%= reading.book.pages %> pages</p>
+                      </div>
+                      <div class="row">
+                        <p>User rating: <%= reading.user_rating %></p>
+                      </div>
+
+                      <div class="row reaction-counts">
+                        <div class="col">
+                          <%= pluralize(reading.votes_for.size, 'cheer') %>
+                        </div>
+                        <div class="col">
+                          <%= pluralize(reading.comments.count, 'comment') %>
+                        </div>
+                      </div>
+
+                      <div class="row buttons">
+                        <div class="col">
+                          <%= link_to cheers_book_reading_path(reading.book, reading) do %>
+                            <% if current_user.voted_for? reading %>
+                              <button class="btn button-cheer"></button>
+                            <% else %>
+                              <button>Cheer</button>
+                            <% end %>
+                          <% end %>
+                        </div>
+                        <div class="col">
+                          <button data-action="click->comment-window#revealWindow">Leave a comment</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <div class="reading-info">
-                  <% if reading.end_date && reading.start_date %>
-                    <p>days to read:<%= (reading.end_date - reading.start_date).to_i %></p>
-                  <% end %>
-                  <%= reading.book.poster_url %>
-                  <p><%= reading.book.title %></p>
-                  <p><%= reading.book.author %></p>
-                  <p><%= reading.book.pages %> pages</p>
-                  <p>User rating: <%= reading.user_rating %></p>
-                </div>
-
-              </div>
-              <div class="buttons">
-
-                <%= link_to cheers_book_reading_path(reading.book, reading) do %>
-                  <% if current_user.voted_for? reading %>
-                    <button class="button-cheer"><%= pluralize(reading.votes_for.size, 'cheer')... %></button>
-                  <% else %>
-                    <button><%= pluralize(reading.votes_for.size, 'cheer')... %></button>
-                  <% end %>
-                <% end %>
-
-                <button data-action="click->comment-window#revealWindow"><%= pluralize(reading.comments.count, 'comment')... %></button>
               </div>
             </div>
 
@@ -171,6 +206,7 @@
               <% end %>
             </div>
             <%# END OF CARD %>
+
           </div>
 
         <% end %>

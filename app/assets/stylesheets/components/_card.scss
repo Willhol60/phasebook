@@ -1,7 +1,7 @@
-
 .card-product {
   overflow: hidden;
-  height: 350px;
+  //height: 350px;
+  height: fit-content;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   // display: flex;
@@ -15,14 +15,19 @@
   width: 80px;
   object-fit: cover;
 }
+
 .card-product h2 {
   font-size: 16px;
   font-weight: bold;
   margin: 0;
 }
 
+.avatar {
+  padding: 0px;
+}
+
 .card-product p {
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.4;
   opacity: .7;
   margin-bottom: 0;
@@ -32,4 +37,22 @@
 .card-product .card-product-infos {
   padding: 8px;
   // display: flex;
+}
+
+.user-info {
+  padding: 10px;
+}
+
+.reading-info {
+  padding: 10px;
+}
+
+.reaction-counts {
+  padding: 10px;
+  border-top: 5px black;
+}
+
+.buttons {
+  padding: 10px;
+  border-top: 5px black;
 }

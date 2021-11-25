@@ -18,11 +18,7 @@
   <% @books.each do |book| %>
   <li>
     <h3> <%= book.title %> </h3>
-    <% if  book.poster_url %>
-      <%= image_tag book.poster_url %>
-    <% else %>
-      <%= image_tag "placeholder.jpg", style:"width: 128px; height: 167px; object-fit: cover" %>
-    <% end %>
+    <%= image_tag book.poster_url, style:"width: 128px; height: 167px; object-fit: cover" %>
     <br>
     Author: <%= book.author %>
     <br>

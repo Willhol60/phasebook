@@ -10,18 +10,17 @@
     class: "form-control",
     placeholder: "Find a book"
   %>
-  <%= submit_tag "Search", class: "btn btn-primary" %>
+  <%= submit_tag "Search", class: "btn btn-primary mb-2 mt-2" %>
 <% end %>
-  <button type="button" class="btn btn-success">
-    <%= link_to "Random!", random_books_path %>
-  </button>
+<%= link_to "Random!", random_books_path, class: 'btn btn-success' %>
 <br>
-<%= @book %>
+
 <br>
 
 
 <ul>
-  <% @books.each do |book| %>
+  <% user_books = @books.joins(:readings).joins(:users).where("first_name =?", "Rami").to_a %>
+  <% user_books.each do |book| %>
   <li>
     <h3> <%= book.title %> </h3>
     <%= image_tag book.poster_url, style:"width: 128px; height: 167px; object-fit: cover" %>
@@ -30,9 +29,7 @@
     <br>
     Category: <%= book.category || "No category" %>
     <br>
-    <button type="button" class="btn btn-danger">
-      <%= link_to "Delete", book_path(book), method: :delete  %>
-    </button>
+    <%= link_to "Delete", book_path(book), method: :delete, class: "btn btn-danger"  %>
   </li>
   <% end %>
 </ul>

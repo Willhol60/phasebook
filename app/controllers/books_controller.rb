@@ -2,6 +2,7 @@ require 'open-uri'
 require 'json'
 
 class BooksController < ApplicationController
+  before_action :user_signed_in?, only: [:create]
   def index
     @books = Book.all.reorder(updated_at: :desc)
 
@@ -13,11 +14,15 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
+    @reading = Reading.new
     if @book.save
       redirect_to books_path
     else
       render :new
     end
+    @reading.book = @book
+    @reading.user = current_user
+    @reading.save
   end
 
   def search

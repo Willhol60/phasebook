@@ -38,19 +38,37 @@ star_wars_books = JSON.parse(star_wars_file)
 sw_array = star_wars_books['items']
 
 sw_array.each do |book|
-  this_book = Book.new({ title: book['volumeInfo']['title'],
-                         ISBN: book['volumeInfo']['industryIdentifiers'][0]['identifier'],
-                         author: book['volumeInfo']['authors'][0],
-                         pages: book['volumeInfo']['pageCount'] })
-  this_book.save
+  title = book['volumeInfo']['subtitle'] ? "#{book['volumeInfo']['title']}: #{book['volumeInfo']['subtitle']}" : book['volumeInfo']['title']
+  this_book = Book.new({  title: title,
+                          ISBN: book['volumeInfo']['industryIdentifiers'][0]['identifier'],
+                          author: book['volumeInfo']['authors'].first,
+                          pages: book['volumeInfo']['pageCount'],
+                          poster_url: book['volumeInfo']['imageLinks']['thumbnail'],
+                          description: book['volumeInfo']['description'],
+                          publisher: book['volumeInfo']['publisher'],
+                          publishing_date: book['volumeInfo']['publishedDate'],
+                          google_link: book['volumeInfo']['previewLink'],
+                          rating: book['volumeInfo']['averageRating'],
+                          rating_count: book['volumeInfo']['ratingsCount'] })
+  this_book.category = (book['volumeInfo']['categories'] || ["No category"]).first
+  this_book.save!
 end
 
 t_array.each do |book|
-  this_book = Book.new({ title: book['volumeInfo']['title'],
-                         ISBN: book['volumeInfo']['industryIdentifiers'][0]['identifier'],
-                         author: book['volumeInfo']['authors'][0],
-                         pages: book['volumeInfo']['pageCount'] })
-  this_book.save
+  title = book['volumeInfo']['subtitle'] ? "#{book['volumeInfo']['title']}: #{book['volumeInfo']['subtitle']}" : book['volumeInfo']['title']
+  this_book = Book.new({  title: title,
+                          ISBN: book['volumeInfo']['industryIdentifiers'][0]['identifier'],
+                          author: book['volumeInfo']['authors'].first,
+                          pages: book['volumeInfo']['pageCount'],
+                          poster_url: book['volumeInfo']['imageLinks']['thumbnail'],
+                          description: book['volumeInfo']['description'],
+                          publisher: book['volumeInfo']['publisher'],
+                          publishing_date: book['volumeInfo']['publishedDate'],
+                          google_link: book['volumeInfo']['previewLink'],
+                          rating: book['volumeInfo']['averageRating'],
+                          rating_count: book['volumeInfo']['ratingsCount'] })
+  this_book.category = (book['volumeInfo']['categories'] || ["No category"]).first
+  this_book.save!
 end
 
 # create reading sessions
@@ -58,7 +76,7 @@ Book.all.ids.each do |id|
   reed = Reading.new(user_id: User.all.ids.sample,
                      book_id: id,
                      read_status: ['Finished', 'Future'].sample)
-  reed.save
+  reed.save!
 end
 
 # creating comments
@@ -66,5 +84,5 @@ end
   bla = Comment.create(reading_id: Reading.all.ids.sample,
                        user_id: User.all.ids.sample,
                        content: %w[cool nice great brilliant shite loser unlucky congratulations loveya].sample)
-  bla.save
+  bla.save!
 end

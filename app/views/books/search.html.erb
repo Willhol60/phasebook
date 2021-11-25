@@ -1,0 +1,58 @@
+<br>
+<ul>
+  <% @books.each do |book| %>
+  <li>
+    <!--
+    Creating attributes with API hardening so that unavailable categories dont break page
+    -->
+    <%
+      title = book['volumeInfo']['subtitle'] ? "#{book['volumeInfo']['title']}: #{book['volumeInfo']['subtitle']}" : book['volumeInfo']['title']
+      poster_url = book['volumeInfo']['imageLinks'] ? book['volumeInfo']['imageLinks']['thumbnail'] : "placeholder.jpg"
+      author = book['volumeInfo']['authors'] ? book['volumeInfo']['authors'].first : "Unknown Author"
+      publisher = book['volumeInfo']['publisher'] ? book['volumeInfo']['publisher'] : "Unknown publisher"
+      pages = book['volumeInfo']['pageCount'] ? book['volumeInfo']['pageCount'] : 100
+      category = book['volumeInfo']['categories'] ? book['volumeInfo']['categories'].first : "No category"
+      #Isbn = book['volumeInfo']['industryIdentifiers'][0]['type'].include?('ISBN') ? book['volumeInfo']['industryIdentifiers'][0]['identifier'] : "No ISBN"
+      if book['volumeInfo']['industryIdentifiers'] && book['volumeInfo']['industryIdentifiers'][0]['type'].include?('ISBN')
+        isban = book['volumeInfo']['industryIdentifiers'][0]['identifier']
+      else
+        isban = "No ISBN"
+      end
+      description = book['volumeInfo']['description'] ? book['volumeInfo']['description'] : "No description"
+      google_link = book['volumeInfo']['previewLink'] ? book['volumeInfo']['previewLink'] : "www.google.com"
+      rating = book['volumeInfo']['averageRating'] ? book['volumeInfo']['averageRating'] : 0
+      rating_count = book['volumeInfo']['ratingsCount'] ? book['volumeInfo']['ratingsCount'] : 0
+    %>
+
+
+    <h3> <%= title %> </h3>
+    <%= image_tag poster_url, style:"width: 128px; height: 167px; object-fit: cover" %>
+    <br>
+    Author: <%= author %>
+    <br>
+    Publisher: <%= publisher %>
+    <br>
+    ISBN: <%= isban %>
+    <br>
+    <%
+     params_hash = { title: title,
+                    author: author,
+                    poster_url: poster_url,
+                    publisher: publisher,
+                    ISBN: isban,
+                    pages: pages,
+                    category: category,
+                    description: description,
+                    google_link: google_link,
+                    rating: rating,
+                    rating_count: rating_count
+                  }
+    %>
+    <button type="button" class="btn btn-outline-primary">
+      <%= link_to "Add to Library", books_path(book: params_hash), method: :post  %>
+    </button>
+  </li>
+  <% end %>
+  </ul>
+
+<!-- order library by most recently added, and change submit button to add to library-->

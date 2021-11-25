@@ -6,4 +6,8 @@ export default class extends Controller {
   revealWindow() {
     this.contentTarget.classList.toggle('d-none');
   }
+
+  toggleCheer() {
+
+  }
 }

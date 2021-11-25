@@ -28,6 +28,16 @@ class ReadingsController < ApplicationController
     redirect_to reading_path(@reading)
   end
 
+  def cheers
+    @reading = Reading.find(params[:id])
+    if current_user.voted_for? @reading
+      @reading.unliked_by current_user
+    else
+      @reading.liked_by current_user
+    end
+    redirect_to book_readings_path(@reading.book, @reading)
+  end
+
   private
 
   def reading_params

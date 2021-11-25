@@ -1,7 +1,13 @@
 class ReadingsController < ApplicationController
   def index
-    # raise
-    @readings = Reading.all
+    if params[:query].present?
+      @readings = User.where("first_name ILIKE ? OR last_name ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")[0].readings
+      # books = Book.where("title ILIKE ?", "%#{params[:query]}%")
+      # books.each { |book| @readings << book }
+      # users.each { |user| @readings << user }
+    else
+      @readings = Reading.all
+    end
     @comment = Comment.new
   end
 
@@ -18,15 +24,15 @@ class ReadingsController < ApplicationController
     end
   end
 
-  def edit
-    @reading = Reading.find(params[:id])
-  end
+  # def edit
+  #   @reading = Reading.find(params[:id])
+  # end
 
-  def update
-    @reading = Reading.find(params[:id])
-    @reading.update(reading_params)
-    redirect_to reading_path(@reading)
-  end
+  # def update
+  #   @reading = Reading.find(params[:id])
+  #   @reading.update(reading_params)
+  #   redirect_to reading_path(@reading)
+  # end
 
   def cheers
     @reading = Reading.find(params[:id])
@@ -35,8 +41,10 @@ class ReadingsController < ApplicationController
     else
       @reading.liked_by current_user
     end
+    book = @reading.book
     # give an anchor to stop the page jumping
-    redirect_to book_readings_path(@reading.book, @reading)
+    # redirect_to book_readings_path(@reading.book, @reading)
+    redirect_to book_readings_path(book, anchor: "reading-#{@reading.id}")
   end
 
   private

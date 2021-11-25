@@ -3,6 +3,14 @@
     <div class="col-sm left-third">
       <h1>Newsfeed</h1>
       <%# QUOTES AND NEWS: %>
+      <%= form_tag book_readings_path(:book), method: :get do %>
+        <%= text_field_tag :query,
+          params[:query],
+          class: "form-control",
+          placeholder: "Search for a friend to see what they've been reading..."
+        %>
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+      <% end %><br>
       <div class="flip-card">
         <div class="flip-card-inner card-quote-of-the-day">
           <div class="flip-card-front">

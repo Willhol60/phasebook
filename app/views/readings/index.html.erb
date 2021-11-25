@@ -149,30 +149,30 @@
                       <div class="row">
                         <p>User rating: <%= reading.user_rating %></p>
                       </div>
+                    </div>
+                  </div>
 
-                      <div class="row reaction-counts">
-                        <div class="col">
-                          <%= pluralize(reading.votes_for.size, 'cheer') %>
-                        </div>
-                        <div class="col">
-                          <%= pluralize(reading.comments.count, 'comment') %>
-                        </div>
-                      </div>
+                  <div class="row reaction-counts">
+                    <div class="col">
+                      <%= pluralize(reading.votes_for.size, 'cheer') %>
+                    </div>
+                    <div class="col">
+                      <%= pluralize(reading.comments.count, 'comment') %>
+                    </div>
+                  </div>
 
-                      <div class="row buttons">
-                        <div class="col">
-                          <%= link_to cheers_book_reading_path(reading.book, reading) do %>
-                            <% if current_user.voted_for? reading %>
-                              <button class="btn button-cheer"></button>
-                            <% else %>
-                              <button>Cheer</button>
-                            <% end %>
-                          <% end %>
-                        </div>
-                        <div class="col">
-                          <button data-action="click->comment-window#revealWindow">Leave a comment</button>
-                        </div>
-                      </div>
+                  <div class="row buttons">
+                    <div class="col button-col">
+                      <%= link_to cheers_book_reading_path(reading.book, reading) do %>
+                        <% if current_user.voted_for? reading %>
+                          <button class="btn button-cheer"></button>
+                        <% else %>
+                          <button>Cheer</button>
+                        <% end %>
+                      <% end %>
+                    </div>
+                    <div class="col button-col">
+                      <button data-action="click->comment-window#revealWindow">Leave a comment</button>
                     </div>
                   </div>
                 </div>

@@ -29,13 +29,15 @@ class User < ApplicationRecord
   def time_spent
     time = 0
     readings.each do |reading|
-      duration = (reading.end_date - reading.start_date).to_i
-      time += duration
+      if reading.end_date && reading.start_date
+        duration = (reading.end_date - reading.start_date).to_i
+        time += duration
+      end
     end
     return time
   end
 
   def avg_speed
-    time_spent / books_read
+    time_spent / books_read if time_spent && books_read && books_read.positive?
   end
 end

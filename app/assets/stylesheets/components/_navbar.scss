@@ -5,7 +5,7 @@
   position: fixed;
   z-index: 1;
   top: 0;
-  right: 0;
+  left: 0;
   background-color: #f4d19b;
   overflow-x: hidden;
   transition: 0.5s;
@@ -35,9 +35,8 @@
 
 #main {
   display: flex;
-  justify-content: right;
+  justify-content: left;
   transition: margin-left .5s;
-  margin-right: 150px;
   padding: 16px;
 }
 

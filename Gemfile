@@ -24,6 +24,8 @@ gem 'redis', '~> 4.0'
 gem 'omniauth'
 gem 'omniauth-google'
 gem 'omniauth-facebook'
+gem 'acts_as_votable'
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

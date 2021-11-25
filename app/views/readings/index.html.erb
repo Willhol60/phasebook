@@ -126,7 +126,11 @@
               <div class="buttons">
 
                 <%= link_to cheers_book_reading_path(reading.book, reading) do %>
-                  <button><%= pluralize(reading.votes_for.size, 'cheer')... %></button>
+                  <% if current_user.voted_for? reading %>
+                    <button class="button-cheer"><%= pluralize(reading.votes_for.size, 'cheer')... %></button>
+                  <% else %>
+                    <button><%= pluralize(reading.votes_for.size, 'cheer')... %></button>
+                  <% end %>
                 <% end %>
 
                 <button data-action="click->comment-window#revealWindow"><%= pluralize(reading.comments.count, 'comment')... %></button>

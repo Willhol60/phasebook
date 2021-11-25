@@ -8,4 +8,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable
 
   # validates :first_name, :last_name, presence: true
+
+  def books_read
+    total = 0
+    readings.each do |reading|
+      total += 1 unless reading.read_status == 'Future'
+    end
+    return total
+  end
 end

@@ -1,0 +1,33 @@
+.comment-window {
+  overflow: scroll;
+  height: 200px;
+  width: 70%;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  // display: flex;
+  margin-bottom: 24px;
+  height: fit-content;
+}
+
+.comment-row {
+  display: flex;
+  margin: 3px;
+}
+
+.comment {
+  border: 1px solid grey;
+  border-radius: 8px;
+  background-color: lightblue;
+  flex-grow: 1;
+  padding: 6px;
+}
+
+.comment-first-line {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-second-line {
+  display: flex;
+  justify-content: space-between;
+}

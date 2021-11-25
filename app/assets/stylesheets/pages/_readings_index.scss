@@ -4,20 +4,18 @@
 }
 
 .left-third {
-  top: 20px;
+  top: 0;
   // width: 100px;
   padding: 20px;
   flex-shrink: auto;
-}
-
-h1 {
-  position: -webkit-sticky;
   position: sticky;
+  height: 100vh;
 }
 
 .middle-third {
   // display: block;
   flex-grow: 2;
+  overflow: auto;
 }
 
 .right-third {
@@ -93,4 +91,9 @@ h1 {
 
 .flip-card-back {
   transform: rotateY(180deg);
+}
+
+.terms {
+  position: absolute;
+  bottom: 0;
 }

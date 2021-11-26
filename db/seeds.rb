@@ -29,18 +29,22 @@ will = User.new({ first_name: 'Will', last_name: 'Holmes',
 will.save
 
 jeremy = User.new({ first_name: 'Jeremy', last_name: 'Fisher',
+                    email: 'jeremy@email.org', password: 'password',
                     profile_image: 'jeremy.png' })
 jeremy.save
 
 jemima = User.new({ first_name: 'Jemima', last_name: 'Puddle-Duck',
+                    email: 'jemima@email.org', password: 'password',
                     profile_image: 'jemima.jpg' })
 jemima.save
 
 tiggy = User.new({ first_name: 'Mrs Tiggy', last_name: 'Winkle',
+                   email: 'tiggy@email.org', password: 'password',
                    profile_image: 'tiggy.jpg' })
 tiggy.save
 
 squirrel = User.new({ first_name: 'Squirrel', last_name: 'Nutkin',
+                      email: 'squirrel@email.org', password: 'password',
                       profile_image: 'squirrel.jpg' })
 squirrel.save
 
@@ -213,7 +217,8 @@ end
 # create reading sessions
 
 Book.all.ids.each do |id|
-  reading = Reading.new(user_id: User.all.ids.sample,
+  users = User.where(first_name: 'Jeremy').or(User.where(first_name: 'Jemima').or(User.where(first_name: 'Mrs Tiggy').or(User.where(first_name: 'Squirrel'))))
+  reading = Reading.new(user_id: users.sample.id,
                         book_id: id,
                         read_status: ['Finished', 'Future'].sample)
   if reading.read_status == 'Finished'

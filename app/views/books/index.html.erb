@@ -1,64 +1,68 @@
-<h1>My Reads</h1>
+<div class='container'>
+  <h1>My Reads</h1>
 
-Top categories:
-<br>
-<% current_user.top_categories.each do |key, value| %>
-  <%= "Category: #{key}, Number of books: #{value}. "%>
+  Top categories:
   <br>
-<% end %>
-<br>
-<%= form_tag search_books_path, method: :get do |form| %>
-  <%= text_field_tag :query,
-    params[:query],
-    class: "form-control",
-    placeholder: "Find a book by title, ISBN, author, or category"
-  %>
-  <%= submit_tag "Search", class: "btn btn-primary mb-2 mt-2" %>
-<% end %>
-<%= link_to "Random!", random_books_path, class: 'btn btn-success' %>
-<br>
+  <% current_user.top_categories.each do |key, value| %>
+    <%= "Category: #{key}, Number of books: #{value}. "%>
+    <br>
+  <% end %>
+  <br>
+  <%= form_tag search_books_path, method: :get do |form| %>
+    <%= text_field_tag :query,
+      params[:query],
+      class: "form-control",
+      placeholder: "Find a book by title, ISBN, author, or category"
+    %>
+    <%= submit_tag "Search", class: "btn btn-primary mb-2 mt-2" %>
+  <% end %>
+  <%= link_to "Random!", random_books_path, class: 'btn btn-success mb-2' %>
+  <br>
 
-<%# Copied from readings index: %>
-<% current_user.readings.reverse.each do |reading| %>
-  <%# CARD: %>
-  <div data-controller="comment-window">
-    <div class="container card-product">
-      <%# <img src= <%= reading.book.poster_url %>
-      <div class="row card-product-infos">
+  <%# Copied from readings index: %>
+  <% current_user.readings.reverse.each do |reading| %>
+    <%# CARD: %>
+    <div data-controller="comment-window">
+      <div class="container card-product">
+        <%# <img src= <%= reading.book.poster_url %>
+        <div class="row card-product-infos">
 
-        <div class="col col-md-4">
-          <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain" %>
-        </div>
+          <div class="col col-md-4">
+            <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain" %>
+          </div>
 
-        <div class="col">
-          <%# id below needed for when comment auto-loads to stop page jumping %>
-          <div class="row reading-info">
-            <div class="col">
-              <div class="row">
-                <% if reading.end_date && reading.start_date %>
-                  <p>days to read:<%= (reading.end_date - reading.start_date).to_i %></p>
-                <% end %>
+          <div class="col">
+            <%# id below needed for when comment auto-loads to stop page jumping %>
+            <div class="row reading-info">
+              <div class="col">
+                <div class="row">
+                  <% if reading.end_date && reading.start_date %>
+                    <p>days to read:<%= (reading.end_date - reading.start_date).to_i %></p>
+                  <% end %>
+                </div>
+                <div class="row">
+                  <p><%= reading.book.title %></p>
+                </div>
+                <div class="row">
+                  <p><%= reading.book.author %></p>
+                </div>
+                <div class="row">
+                  <p><%= reading.book.pages %> pages</p>
+                </div>
+                <div class="row">
+                  <p>User rating: <%= reading.user_rating %></p>
+                </div>
+                <div class='row'>
+                  <p>Category: <%= reading.book.category %></p>
+                </div>
+                <br>
+                <%= link_to "Delete", book_path(reading.book), method: :delete, class: "btn btn-danger"  %>
               </div>
-              <div class="row">
-                <p><%= reading.book.title %></p>
-              </div>
-              <div class="row">
-                <p><%= reading.book.author %></p>
-              </div>
-              <div class="row">
-                <p><%= reading.book.pages %> pages</p>
-              </div>
-              <div class="row">
-                <p>User rating: <%= reading.user_rating %></p>
-              </div>
-              Category: <%= reading.book.category %>
-              <br>
-              <%= link_to "Delete", book_path(reading.book), method: :delete, class: "btn btn-danger"  %>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <%# END OF CARD %>
-<% end %>
+    <%# END OF CARD %>
+  <% end %>
+</div>

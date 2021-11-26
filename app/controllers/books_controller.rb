@@ -60,21 +60,21 @@ class BooksController < ApplicationController
   end
 
   def random_book_hash(book)
-    title = book['volumeInfo']['title'] ? book['volumeInfo']['title'] : "No title"
+    title = book['volumeInfo']['title'] || "No title"
     poster_url = book['volumeInfo']['imageLinks'] ? book['volumeInfo']['imageLinks']['thumbnail'] : "placeholder.jpg"
     author = book['volumeInfo']['authors'] ? book['volumeInfo']['authors'].first : "Unknown Author"
-    publisher = book['volumeInfo']['publisher'] ? book['volumeInfo']['publisher'] : "Unknown publisher"
-    pages = book['volumeInfo']['pageCount'] ? book['volumeInfo']['pageCount'] : 100
+    publisher = book['volumeInfo']['publisher'] || "Unknown publisher"
+    pages = book['volumeInfo']['pageCount'] || 100
     category = book['volumeInfo']['categories'] ? book['volumeInfo']['categories'].first : "No category"
     if book['volumeInfo']['industryIdentifiers'] && book['volumeInfo']['industryIdentifiers'][0]['type'].include?('ISBN')
       isban = book['volumeInfo']['industryIdentifiers'][0]['identifier']
     else
       isban = "No ISBN"
     end
-    description = book['volumeInfo']['description'] ? book['volumeInfo']['description'] : "No description"
-    google_link = book['volumeInfo']['previewLink'] ? book['volumeInfo']['previewLink'] : "www.google.com"
-    rating = book['volumeInfo']['averageRating'] ? book['volumeInfo']['averageRating'] : 0
-    rating_count = book['volumeInfo']['ratingsCount'] ? book['volumeInfo']['ratingsCount'] : 0
+    description = book['volumeInfo']['description'] || "No description"
+    google_link = book['volumeInfo']['previewLink'] || "www.google.com"
+    rating = book['volumeInfo']['averageRating'] || 0
+    rating_count = book['volumeInfo']['ratingsCount'] || 0
     { title: title,
       author: author,
       poster_url: poster_url,

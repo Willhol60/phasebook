@@ -1,7 +1,12 @@
 
 <h1>My Reads</h1>
 
-<h4>Top categories: <%= current_user.readings.filter_map{ |reading| reading.book.category if reading.book.category != "No category" }.uniq! %></h4>
+Top categories:
+<br>
+<% current_user.top_categories.each do |key, value| %>
+  <%= "Category: #{key}, Number of books: #{value}. "%>
+  <br>
+<% end %>
 <br>
 <%= form_tag search_books_path, method: :get do |form| %>
   <%= text_field_tag :query,

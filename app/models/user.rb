@@ -38,4 +38,8 @@ class User < ApplicationRecord
   def avg_speed
     time_spent / books_read if time_spent && books_read && books_read.positive?
   end
+
+  def top_categories
+    Book.joins(:users).where("first_name = ?", first_name).where("category != ?", "No category").group(:category).count.sort_by {|k,v| v}.reverse[0..2].to_h
+  end
 end

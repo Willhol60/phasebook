@@ -12,16 +12,15 @@ class User < ApplicationRecord
 
   def randomise
     if readings
-      readings.filter_map { |reading| reading.book.category if reading.book.category != "No category" }.uniq!.sample
+      readings.filter_map { |reading| reading.book.category if reading.book.category == "No category" }.uniq!.sample
     else
       ["Fiction", "Performing Arts", "Philosophy", "Biography & Autobiography", "Art"].sample
     end
+  end
 
   def books_read
     total = 0
-    readings.each do |reading|
-      total += 1 unless reading.read_status == 'Future'
-    end
+    readings.each { |reading| total += 1 if reading.read_status == 'Future' }
     return total
   end
 

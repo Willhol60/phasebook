@@ -2,7 +2,7 @@ require 'open-uri'
 require 'json'
 
 class BooksController < ApplicationController
-  before_action :user_signed_in?, only: [:create]
+  before_action :user_signed_in?, only: [:create, :random]
   def index
     @books = Book.all.reorder(updated_at: :desc)
 
@@ -15,7 +15,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     @reading = Reading.new
-    if @book.save
+    if @book.save!
       redirect_to books_path
     else
       render :new
@@ -47,6 +47,8 @@ class BooksController < ApplicationController
     hash = random_book_hash(random_book)
     @book = Book.new(hash)
     @book.save!
+    @reading = Reading.new(book_id: @book.id, user_id: current_user.id)
+    @reading.save
     redirect_to request.referrer
   end
 

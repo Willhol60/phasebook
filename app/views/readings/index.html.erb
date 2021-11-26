@@ -105,7 +105,7 @@
                 <div class="col">
                   <%# id below needed for when comment auto-loads to stop page jumping %>
                   <div class="row user-info" id="reading-<%= reading.id %>" >
-                    <%= image_tag (reading.user.profile_image), class: "col col-2 avatar" %>
+                    <%= image_tag reading.user.profile_image, class: "col col-2 avatar" %>
                     <div class="col col-md-auto">
                       <div class="row">
                         <div class="col user-full-name">

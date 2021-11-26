@@ -217,7 +217,8 @@ Book.all.ids.each do |id|
                         book_id: id,
                         read_status: ['Finished', 'Future'].sample)
   if reading.read_status == 'Finished'
-    reading.end_date = Date.today - rand(10)
+    # reading.start_date = Date.today - rand(20)
+    reading.end_date = Date.today - rand(20)
     reading.cheers = rand(15)
     reading.user_rating = rand(5)
   end

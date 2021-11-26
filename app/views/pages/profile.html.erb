@@ -6,8 +6,8 @@
 
   <%= pie_chart current_user.top_categories, donut: true %>
 
-  <%= current_user.books_read %>
-  <%= current_user.time_spent %>
-  <%= current_user.avg_speed %>
+  <h3>Books read: <%= current_user.books_read %></h3><br>
+  <h3>Total time spent reading: <%= current_user.time_spent %></h3><br>
+  <h3>Reading speed: <%= current_user.avg_speed %></h3>
   </div>
 </div>

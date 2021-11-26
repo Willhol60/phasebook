@@ -2,6 +2,7 @@ require 'open-uri'
 require 'json'
 
 class BooksController < ApplicationController
+  before_action :user_signed_in?, only: [:create, :random]
   def index
     @books = Book.all.reorder(updated_at: :desc)
 
@@ -13,11 +14,15 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
-    if @book.save
+    @reading = Reading.new
+    if @book.save!
       redirect_to books_path
     else
       render :new
     end
+    @reading.book = @book
+    @reading.user = current_user
+    @reading.save
   end
 
   def search
@@ -27,7 +32,6 @@ class BooksController < ApplicationController
     read_books = JSON.parse(open_file)
     @books = read_books['items']
   end
-  # do we need update/create?
 
   def destroy
     @book = Book.find(params[:id])
@@ -43,6 +47,8 @@ class BooksController < ApplicationController
     hash = random_book_hash(random_book)
     @book = Book.new(hash)
     @book.save!
+    @reading = Reading.new(book_id: @book.id, user_id: current_user.id)
+    @reading.save
     redirect_to request.referrer
   end
 

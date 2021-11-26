@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'comments/destroy'
   get '/profile', to: 'pages#profile'
   devise_for :users
-  root to: 'readings#index'
+  root to: 'pages#home'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :books do
     collection do

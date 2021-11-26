@@ -24,3 +24,17 @@ button {
 // .button-add-to-library:active {
 //   background-color: #F4D19B;
 // }
+
+.btn-landing {
+  color: white;
+  background: #6cd1f4;
+  border: 2px solid white;
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-weight: 400;
+}
+
+.btn-landing:hover {
+  background: #f4d19b;
+  color: white;
+}

@@ -3,21 +3,11 @@
   <div class="row">
       <h1>My Profile</h1>
 
-<% user_categories = current_user.readings.filter_map { |reading| reading.book.category if reading.book.category != 'No category' }.uniq! %>
-<% current_user.readings do |reading| %>
-<% end %>
 
-<%
-  cat_hash = {}
-  user_categories.each do |cat|
-    cat_hash[cat] = Reading.joins(:book).where("category = ?", "#{cat}").joins(:user).where("first_name =?", "#{current_user.first_name}").to_a.size
-  end
- %>
- <% cat_hash %>
- <%= pie_chart cat_hash, donut: true %>
+  <%= pie_chart current_user.top_categories, donut: true %>
 
-<%= current_user.books_read %>
-<%= current_user.time_spent %>
-<%= current_user.avg_speed %>
+  <%= current_user.books_read %>
+  <%= current_user.time_spent %>
+  <%= current_user.avg_speed %>
   </div>
 </div>

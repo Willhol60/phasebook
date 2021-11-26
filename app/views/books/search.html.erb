@@ -6,22 +6,21 @@
     Creating attributes with API hardening so that unavailable categories dont break page
     -->
     <%
-      title = book['volumeInfo']['subtitle'] ? "#{book['volumeInfo']['title']}: #{book['volumeInfo']['subtitle']}" : book['volumeInfo']['title']
+      title = book['volumeInfo']['title'] || "No title"
       poster_url = book['volumeInfo']['imageLinks'] ? book['volumeInfo']['imageLinks']['thumbnail'] : "placeholder.jpg"
       author = book['volumeInfo']['authors'] ? book['volumeInfo']['authors'].first : "Unknown Author"
-      publisher = book['volumeInfo']['publisher'] ? book['volumeInfo']['publisher'] : "Unknown publisher"
-      pages = book['volumeInfo']['pageCount'] ? book['volumeInfo']['pageCount'] : 100
+      publisher = book['volumeInfo']['publisher'] || "Unknown publisher"
+      pages = book['volumeInfo']['pageCount'] || 100
       category = book['volumeInfo']['categories'] ? book['volumeInfo']['categories'].first : "No category"
-      #Isbn = book['volumeInfo']['industryIdentifiers'][0]['type'].include?('ISBN') ? book['volumeInfo']['industryIdentifiers'][0]['identifier'] : "No ISBN"
       if book['volumeInfo']['industryIdentifiers'] && book['volumeInfo']['industryIdentifiers'][0]['type'].include?('ISBN')
         isban = book['volumeInfo']['industryIdentifiers'][0]['identifier']
       else
         isban = "No ISBN"
       end
-      description = book['volumeInfo']['description'] ? book['volumeInfo']['description'] : "No description"
-      google_link = book['volumeInfo']['previewLink'] ? book['volumeInfo']['previewLink'] : "www.google.com"
-      rating = book['volumeInfo']['averageRating'] ? book['volumeInfo']['averageRating'] : 0
-      rating_count = book['volumeInfo']['ratingsCount'] ? book['volumeInfo']['ratingsCount'] : 0
+      description = book['volumeInfo']['description'] || "No description"
+      google_link = book['volumeInfo']['previewLink'] || "www.google.com"
+      rating = book['volumeInfo']['averageRating'] || 0
+      rating_count = book['volumeInfo']['ratingsCount'] || 0
     %>
 
 

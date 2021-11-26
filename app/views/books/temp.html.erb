@@ -1,25 +1,4 @@
-<h1>My Reads</h1>
-
-Top categories:
-<br>
-<% current_user.top_categories.each do |key, value| %>
-  <%= "Category: #{key}, Number of books: #{value}. "%>
-  <br>
-<% end %>
-<br>
-<%= form_tag search_books_path, method: :get do |form| %>
-  <%= text_field_tag :query,
-    params[:query],
-    class: "form-control",
-    placeholder: "Find a book by title, ISBN, author, or category"
-  %>
-  <%= submit_tag "Search", class: "btn btn-primary mb-2 mt-2" %>
-<% end %>
-<%= link_to "Random!", random_books_path, class: 'btn btn-success' %>
-<br>
-
-<%# Copied from readings index: %>
-<% current_user.readings.reverse.each do |reading| %>
+<% current_user.readings.each do |reading| %>
   <%# CARD: %>
   <div data-controller="comment-window">
     <div class="container card-product">
@@ -27,7 +6,7 @@ Top categories:
       <div class="row card-product-infos">
 
         <div class="col col-md-4">
-          <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain" %>
+          <%= image_tag reading.book.poster_url, style:"width: 100%; height: 100%; object-fit: contain" %>
         </div>
 
         <div class="col">
@@ -51,9 +30,6 @@ Top categories:
               <div class="row">
                 <p>User rating: <%= reading.user_rating %></p>
               </div>
-              Category: <%= reading.book.category %>
-              <br>
-              <%= link_to "Delete", book_path(reading.book), method: :delete, class: "btn btn-danger"  %>
             </div>
           </div>
         </div>
@@ -62,3 +38,14 @@ Top categories:
   </div>
   <%# END OF CARD %>
 <% end %>
+
+
+    <h3> <%= title %> </h3>
+    <%= image_tag poster_url, style:"width: 128px; height: 167px; object-fit: cover" %>
+    <br>
+    Author: <%= author %>
+    <br>
+    Publisher: <%= publisher %>
+    <br>
+    ISBN: <%= isban %>
+    <br>

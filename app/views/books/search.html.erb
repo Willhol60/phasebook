@@ -1,7 +1,4 @@
-<br>
-<ul>
   <% @books.each do |book| %>
-  <li>
     <!--
     Creating attributes with API hardening so that unavailable categories dont break page
     -->
@@ -23,33 +20,52 @@
       rating_count = book['volumeInfo']['ratingsCount'] || 0
     %>
 
+    <%# CARD: %>
+  <div data-controller="comment-window">
+    <div class="container card-product">
+      <%# <img src= <%= book.poster_url %>
+      <div class="row card-product-infos">
 
-    <h3> <%= title %> </h3>
-    <%= image_tag poster_url, style:"width: 128px; height: 167px; object-fit: cover" %>
-    <br>
-    Author: <%= author %>
-    <br>
-    Publisher: <%= publisher %>
-    <br>
-    ISBN: <%= isban %>
-    <br>
-    <%
-     params_hash = { title: title,
-                    author: author,
-                    poster_url: poster_url,
-                    publisher: publisher,
-                    ISBN: isban,
-                    pages: pages,
-                    category: category,
-                    description: description,
-                    google_link: google_link,
-                    rating: rating,
-                    rating_count: rating_count
-                  }
-    %>
-    <%= link_to "Add to Library", books_path(book: params_hash), method: :post, class: "btn btn-outline-primary"  %>
-  </li>
+        <div class="col col-md-4">
+          <%= image_tag poster_url, style:"width: 250px; height: 100%; object-fit: contain" %>
+        </div>
+
+        <div class="col">
+          <%# id below needed for when comment auto-loads to stop page jumping %>
+          <div class="row reading-info">
+            <div class="col">
+              <div class="row">
+                <p><%= title %></p>
+              </div>
+              <div class="row">
+                <p><%= author %></p>
+              </div>
+              <div class="row">
+                <p><%= pages %> pages</p>
+              </div>
+              Category: <%= category %>
+               <% params_hash = { title: title,
+                                  author: author,
+                                  poster_url: poster_url,
+                                  publisher: publisher,
+                                  ISBN: isban,
+                                  pages: pages,
+                                  category: category,
+                                  description: description,
+                                  google_link: google_link,
+                                  rating: rating,
+                                  rating_count: rating_count
+                                } %>
+              <div class="row">
+                <%= link_to "Add to Library", books_path(book: params_hash), method: :post, class: "btn btn-outline-primary"  %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%# END OF CARD %>
   <% end %>
-  </ul>
 
 <!-- order library by most recently added, and change submit button to add to library-->

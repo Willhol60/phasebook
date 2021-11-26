@@ -25,7 +25,7 @@ simon.save
 
 will = User.new({ first_name: 'Will', last_name: 'Holmes',
                   email: 'will@email.org', password: 'password',
-                  profile_image: 'selfie.jpeg' })
+                  profile_image: 'selfie.jpg' })
 will.save
 
 jeremy = User.new({ first_name: 'Jeremy', last_name: 'Fisher',

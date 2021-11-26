@@ -99,7 +99,7 @@
               <div class="row card-product-infos">
 
                 <div class="col col-md-4">
-                  <%= image_tag reading.book.poster_url, style:"width: 100%; height: 100%; object-fit: cover" %>
+                  <%= image_tag reading.book.poster_url, style:"width: 100%; height: 100%; object-fit: contain" %>
                 </div>
 
                 <div class="col">
@@ -115,14 +115,14 @@
                         <%# need to set the start_date whenever the read_status is marked as 'Current' %>
                         <%# need to set the end_date whenever the read_status is marked as 'Finished' %>
                           <div class="col post-time">
-                            <% if (Time.now - reading.end_date) < (1/24/60) %>
-                              <%= "Just now" %>
-                            <% elsif (Time.now - reading.end_date) < (1/24) %>
-                              <%= "In the last hour" %>
-                            <% elsif (Time.now - reading.end_date) < 1 %>
+                            <% if (Date.today - reading.end_date) < 1/24/60 %>
                               <%= "Today" %>
+                            <% elsif (Date.today - reading.end_date).to_f < 2 %>
+                              <%= "Yesterday" %>
+                            <% elsif (Date.today - reading.end_date).to_f < 7 %>
+                              <%= "This week" %>
                             <% else %>
-                              <%= reading.end_date.strftime('%A, %d %b %Y %l:%M %p') %>
+                            <%= reading.end_date %>
                             <% end %>
                           </div>
                         <% end %>
@@ -161,7 +161,7 @@
                     </div>
                   </div>
 
-                  <div class="row buttons">
+                  <div class="row mt-auto buttons">
                     <div class="col button-col">
                       <%= link_to cheers_book_reading_path(reading.book, reading) do %>
                         <% if current_user.voted_for? reading %>
@@ -172,7 +172,12 @@
                       <% end %>
                     </div>
                     <div class="col button-col">
-                      <button data-action="click->comment-window#revealWindow">Leave a comment</button>
+                      <button data-action="click->comment-window#revealWindow">Comment</button>
+                    </div>
+                    <div class="col button-col">
+                      <%= link_to add_to_library_book_reading_path(reading.book, reading) do %>
+                        <button class="button-add-to-library">Add to library</button>
+                      <% end %>
                     </div>
                   </div>
                 </div>

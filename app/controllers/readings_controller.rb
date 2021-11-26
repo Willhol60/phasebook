@@ -47,6 +47,13 @@ class ReadingsController < ApplicationController
     redirect_to book_readings_path(book, anchor: "reading-#{@reading.id}")
   end
 
+  def add_to_library
+    @reading = Reading.find(params[:id])
+    book = @reading.book
+    # redirect_to new_book_reading_path(@reading)
+    redirect_to book_readings_path(book, anchor: "reading-#{@reading.id}")
+  end
+
   private
 
   def reading_params

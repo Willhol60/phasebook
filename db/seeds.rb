@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 # loading and destroying
 User.destroy_all
 Book.destroy_all
@@ -14,8 +6,11 @@ require 'open-uri'
 require 'json'
 
 # loading api url
-tolkein_url = 'https://www.googleapis.com/books/v1/volumes?q=tolkein'
-star_wars_url = 'https://www.googleapis.com/books/v1/volumes?q=star+wars'
+fifty_url = 'https://www.googleapis.com/books/v1/volumes?q=fifty+shades'
+beatrix_url = 'https://www.googleapis.com/books/v1/volumes?q=beatrix'
+bad_url = 'https://www.googleapis.com/books/v1/volumes?q=bad+behavior'
+lady_url = 'https://www.googleapis.com/books/v1/volumes?q=lady+chat'
+peter_url = 'https://www.googleapis.com/books/v1/volumes?q=peter+rabbit'
 
 # creating 2 users
 rami = User.new({ first_name: 'Rami', last_name: 'Assaf',
@@ -28,61 +23,212 @@ simon = User.new({ first_name: 'Simon', last_name: 'Foster',
                    profile_image: 'vader.jpg' })
 simon.save
 
+will = User.new({ first_name: 'Will', last_name: 'Holmes',
+                  email: 'will@email.org', password: 'password',
+                  profile_image: 'selfie.jpeg' })
+will.save
+
+jeremy = User.new({ first_name: 'Jeremy', last_name: 'Fisher',
+                    profile_image: 'jeremy.png' })
+jeremy.save
+
+jemima = User.new({ first_name: 'Jemima', last_name: 'Puddle-Duck',
+                    profile_image: 'jemima.jpg' })
+jemima.save
+
+tiggy = User.new({ first_name: 'Mrs Tiggy', last_name: 'Winkle',
+                   profile_image: 'tiggy.jpg' })
+tiggy.save
+
+squirrel = User.new({ first_name: 'Squirrel', last_name: 'Nutkin',
+                      profile_image: 'squirrel.jpg' })
+squirrel.save
+
 # creating books lists
-tolkein_file = URI.open(tolkein_url).read
-tolkein_books = JSON.parse(tolkein_file)
-t_array = tolkein_books['items']
+beatrix_books = JSON.parse(URI.open(beatrix_url).read)
+beatrix_array = beatrix_books['items']
 
-star_wars_file = URI.open(star_wars_url).read
-star_wars_books = JSON.parse(star_wars_file)
-sw_array = star_wars_books['items']
+fifty_books = JSON.parse(URI.open(fifty_url).read)
+fifty_array = fifty_books['items']
 
-sw_array.each do |book|
-  title = book['volumeInfo']['subtitle'] ? "#{book['volumeInfo']['title']}: #{book['volumeInfo']['subtitle']}" : book['volumeInfo']['title']
+bad_books = JSON.parse(URI.open(bad_url).read)
+bad_array = bad_books['items']
+
+lady_books = JSON.parse(URI.open(lady_url).read)
+lady_array = lady_books['items']
+
+peter_books = JSON.parse(URI.open(peter_url).read)
+peter_array = peter_books['items']
+
+beatrix_array.each do |book|
+  title = book['volumeInfo']['title'] ? "#{book['volumeInfo']['title']}: #{book['volumeInfo']['subtitle']}" : "No title"
+  poster_url = book['volumeInfo']['imageLinks'] ? book['volumeInfo']['imageLinks']['thumbnail'] : "placeholder.jpg"
+  author = book['volumeInfo']['authors'] ? book['volumeInfo']['authors'].first : "Unknown Author"
+  publisher = book['volumeInfo']['publisher'] || "Unknown publisher"
+  pages = book['volumeInfo']['pageCount'] || 100
+  if book['volumeInfo']['industryIdentifiers'] && book['volumeInfo']['industryIdentifiers'][0]['type'].include?('ISBN')
+    isban = book['volumeInfo']['industryIdentifiers'][0]['identifier']
+  else
+    isban = "No ISBN"
+  end
+  description = book['volumeInfo']['description'] || "No description"
+  google_link = book['volumeInfo']['previewLink'] || "www.google.com"
+  rating = book['volumeInfo']['averageRating'] || 0
+  rating_count = book['volumeInfo']['ratingsCount'] || 0
   this_book = Book.new({  title: title,
-                          ISBN: book['volumeInfo']['industryIdentifiers'][0]['identifier'],
-                          author: book['volumeInfo']['authors'].first,
-                          pages: book['volumeInfo']['pageCount'],
-                          poster_url: book['volumeInfo']['imageLinks']['thumbnail'],
-                          description: book['volumeInfo']['description'],
-                          publisher: book['volumeInfo']['publisher'],
+                          ISBN: isban,
+                          author: author,
+                          pages: pages,
+                          poster_url: poster_url,
+                          description: description,
+                          publisher: publisher,
                           publishing_date: book['volumeInfo']['publishedDate'],
-                          google_link: book['volumeInfo']['previewLink'],
-                          rating: book['volumeInfo']['averageRating'],
-                          rating_count: book['volumeInfo']['ratingsCount'] })
+                          google_link: google_link,
+                          rating: rating,
+                          rating_count: rating_count })
   this_book.category = (book['volumeInfo']['categories'] || ["No category"]).first
   this_book.save!
 end
 
-t_array.each do |book|
-  title = book['volumeInfo']['subtitle'] ? "#{book['volumeInfo']['title']}: #{book['volumeInfo']['subtitle']}" : book['volumeInfo']['title']
+fifty_array.each do |book|
+  title = book['volumeInfo']['title'] ? "#{book['volumeInfo']['title']}: #{book['volumeInfo']['subtitle']}" : "No title"
+  poster_url = book['volumeInfo']['imageLinks'] ? book['volumeInfo']['imageLinks']['thumbnail'] : "placeholder.jpg"
+  author = book['volumeInfo']['authors'] ? book['volumeInfo']['authors'].first : "Unknown Author"
+  publisher = book['volumeInfo']['publisher'] || "Unknown publisher"
+  pages = book['volumeInfo']['pageCount'] || 100
+  if book['volumeInfo']['industryIdentifiers'] && book['volumeInfo']['industryIdentifiers'][0]['type'].include?('ISBN')
+    isban = book['volumeInfo']['industryIdentifiers'][0]['identifier']
+  else
+    isban = "No ISBN"
+  end
+  description = book['volumeInfo']['description'] || "No description"
+  google_link = book['volumeInfo']['previewLink'] || "www.google.com"
+  rating = book['volumeInfo']['averageRating'] || 0
+  rating_count = book['volumeInfo']['ratingsCount'] || 0
   this_book = Book.new({  title: title,
-                          ISBN: book['volumeInfo']['industryIdentifiers'][0]['identifier'],
-                          author: book['volumeInfo']['authors'].first,
-                          pages: book['volumeInfo']['pageCount'],
-                          poster_url: book['volumeInfo']['imageLinks']['thumbnail'],
-                          description: book['volumeInfo']['description'],
-                          publisher: book['volumeInfo']['publisher'],
+                          ISBN: isban,
+                          author: author,
+                          pages: pages,
+                          poster_url: poster_url,
+                          description: description,
+                          publisher: publisher,
                           publishing_date: book['volumeInfo']['publishedDate'],
-                          google_link: book['volumeInfo']['previewLink'],
-                          rating: book['volumeInfo']['averageRating'],
-                          rating_count: book['volumeInfo']['ratingsCount'] })
+                          google_link: google_link,
+                          rating: rating,
+                          rating_count: rating_count })
+  this_book.category = (book['volumeInfo']['categories'] || ["No category"]).first
+  this_book.save!
+end
+
+bad_array.each do |book|
+  title = book['volumeInfo']['title'] ? "#{book['volumeInfo']['title']}: #{book['volumeInfo']['subtitle']}" : "No title"
+  poster_url = book['volumeInfo']['imageLinks'] ? book['volumeInfo']['imageLinks']['thumbnail'] : "placeholder.jpg"
+  author = book['volumeInfo']['authors'] ? book['volumeInfo']['authors'].first : "Unknown Author"
+  publisher = book['volumeInfo']['publisher'] || "Unknown publisher"
+  pages = book['volumeInfo']['pageCount'] || 100
+  if book['volumeInfo']['industryIdentifiers'] && book['volumeInfo']['industryIdentifiers'][0]['type'].include?('ISBN')
+    isban = book['volumeInfo']['industryIdentifiers'][0]['identifier']
+  else
+    isban = "No ISBN"
+  end
+  description = book['volumeInfo']['description'] || "No description"
+  google_link = book['volumeInfo']['previewLink'] || "www.google.com"
+  rating = book['volumeInfo']['averageRating'] || 0
+  rating_count = book['volumeInfo']['ratingsCount'] || 0
+  this_book = Book.new({  title: title,
+                          ISBN: isban,
+                          author: author,
+                          pages: pages,
+                          poster_url: poster_url,
+                          description: description,
+                          publisher: publisher,
+                          publishing_date: book['volumeInfo']['publishedDate'],
+                          google_link: google_link,
+                          rating: rating,
+                          rating_count: rating_count })
+  this_book.category = (book['volumeInfo']['categories'] || ["No category"]).first
+  this_book.save!
+end
+
+lady_array.each do |book|
+  title = book['volumeInfo']['title'] ? "#{book['volumeInfo']['title']}: #{book['volumeInfo']['subtitle']}" : "No title"
+  poster_url = book['volumeInfo']['imageLinks'] ? book['volumeInfo']['imageLinks']['thumbnail'] : "placeholder.jpg"
+  author = book['volumeInfo']['authors'] ? book['volumeInfo']['authors'].first : "Unknown Author"
+  publisher = book['volumeInfo']['publisher'] || "Unknown publisher"
+  pages = book['volumeInfo']['pageCount'] || 100
+  if book['volumeInfo']['industryIdentifiers'] && book['volumeInfo']['industryIdentifiers'][0]['type'].include?('ISBN')
+    isban = book['volumeInfo']['industryIdentifiers'][0]['identifier']
+  else
+    isban = "No ISBN"
+  end
+  description = book['volumeInfo']['description'] || "No description"
+  google_link = book['volumeInfo']['previewLink'] || "www.google.com"
+  rating = book['volumeInfo']['averageRating'] || 0
+  rating_count = book['volumeInfo']['ratingsCount'] || 0
+  this_book = Book.new({  title: title,
+                          ISBN: isban,
+                          author: author,
+                          pages: pages,
+                          poster_url: poster_url,
+                          description: description,
+                          publisher: publisher,
+                          publishing_date: book['volumeInfo']['publishedDate'],
+                          google_link: google_link,
+                          rating: rating,
+                          rating_count: rating_count })
+  this_book.category = (book['volumeInfo']['categories'] || ["No category"]).first
+  this_book.save!
+end
+
+peter_array.each do |book|
+  title = book['volumeInfo']['title'] ? "#{book['volumeInfo']['title']}: #{book['volumeInfo']['subtitle']}" : "No title"
+  poster_url = book['volumeInfo']['imageLinks'] ? book['volumeInfo']['imageLinks']['thumbnail'] : "placeholder.jpg"
+  author = book['volumeInfo']['authors'] ? book['volumeInfo']['authors'].first : "Unknown Author"
+  publisher = book['volumeInfo']['publisher'] || "Unknown publisher"
+  pages = book['volumeInfo']['pageCount'] || 100
+  if book['volumeInfo']['industryIdentifiers'] && book['volumeInfo']['industryIdentifiers'][0]['type'].include?('ISBN')
+    isban = book['volumeInfo']['industryIdentifiers'][0]['identifier']
+  else
+    isban = "No ISBN"
+  end
+  description = book['volumeInfo']['description'] || "No description"
+  google_link = book['volumeInfo']['previewLink'] || "www.google.com"
+  rating = book['volumeInfo']['averageRating'] || 0
+  rating_count = book['volumeInfo']['ratingsCount'] || 0
+  this_book = Book.new({  title: title,
+                          ISBN: isban,
+                          author: author,
+                          pages: pages,
+                          poster_url: poster_url,
+                          description: description,
+                          publisher: publisher,
+                          publishing_date: book['volumeInfo']['publishedDate'],
+                          google_link: google_link,
+                          rating: rating,
+                          rating_count: rating_count })
   this_book.category = (book['volumeInfo']['categories'] || ["No category"]).first
   this_book.save!
 end
 
 # create reading sessions
+
 Book.all.ids.each do |id|
-  reed = Reading.new(user_id: User.all.ids.sample,
-                     book_id: id,
-                     read_status: ['Finished', 'Future'].sample)
-  reed.save!
+  reading = Reading.new(user_id: User.all.ids.sample,
+                        book_id: id,
+                        read_status: ['Finished', 'Future'].sample)
+  if reading.read_status == 'Finished'
+    reading.end_date = Date.today - rand(10)
+    reading.cheers = rand(15)
+    reading.user_rating = rand(5)
+  end
+  reading.save!
 end
 
 # creating comments
-10.times do
-  bla = Comment.create(reading_id: Reading.all.ids.sample,
-                       user_id: User.all.ids.sample,
-                       content: %w[cool nice great brilliant shite loser unlucky congratulations loveya].sample)
-  bla.save!
+15.times do
+  readings = Reading.where(read_status: 'Finished')
+  comment = Comment.new(reading_id: readings.ids.sample,
+                        user_id: User.all.ids.sample,
+                        content: %w[cool nice great brilliant shite loser unlucky congratulations loveya].sample)
+  comment.save!
 end

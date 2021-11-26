@@ -115,14 +115,14 @@
                         <%# need to set the start_date whenever the read_status is marked as 'Current' %>
                         <%# need to set the end_date whenever the read_status is marked as 'Finished' %>
                           <div class="col post-time">
-                            <% if (Time.now - reading.end_date) < (1/24/60) %>
-                              <%= "Just now" %>
-                            <% elsif (Time.now - reading.end_date) < (1/24) %>
-                              <%= "In the last hour" %>
-                            <% elsif (Time.now - reading.end_date) < 1 %>
+                            <% if (Date.today - reading.end_date) < 1/24/60 %>
                               <%= "Today" %>
+                            <% elsif (Date.today - reading.end_date).to_f < 2 %>
+                              <%= "Yesterday" %>
+                            <% elsif (Date.today - reading.end_date).to_f < 7 %>
+                              <%= "This week" %>
                             <% else %>
-                              <%= reading.end_date.strftime('%A, %d %b %Y %l:%M %p') %>
+                            <%= reading.end_date %>
                             <% end %>
                           </div>
                         <% end %>

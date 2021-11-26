@@ -1,4 +1,8 @@
-<div class="container mt-5">
-<h1>My Newsfeed</h1>
-<p>Side nav bar implemented ------> </p>
+<div class="banner" style="background-image: url(<%= image_path "background.svg" %>);">
+  <div class="container">
+    <%= image_tag "logo_pb.png", class: "landing-logo" %>
+    <div><h1>Open a new chapter <br>in your life</h1></div>
+    <div><%= link_to "Try me!", books_path, class: "btn btn-landing" %></div>
+  </div>
+
 </div>

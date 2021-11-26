@@ -1,13 +1,21 @@
 <div class="container mt-5">
-<div></div>
+
   <div class="row">
       <h1>My Profile</h1>
 
 
-  <%= pie_chart current_user.top_categories, donut: true %>
+    <%= pie_chart current_user.top_categories, donut: true %>
+  </div>
 
-  <h3>Books read: <%= current_user.books_read %></h3><br>
-  <h3>Total time spent reading: <%= current_user.time_spent %></h3><br>
-  <h3>Reading speed: <%= current_user.avg_speed %></h3>
+  <div class='row'>
+    <h3>Books read: <%= current_user.books_read %></h3>
+    <br>
+  </div>
+  <div class='row'>
+    <h3>Total time spent reading: <%= current_user.time_spent %></h3>
+    <br>
+  </div>
+  <div class='row'>
+    <h3>Reading speed: <%= current_user.avg_speed %></h3>
   </div>
 </div>

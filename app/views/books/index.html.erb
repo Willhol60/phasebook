@@ -2,26 +2,24 @@
 <h1>My Reads</h1>
 
 <h4>Top categories: <%= current_user.readings.filter_map{ |reading| reading.book.category if reading.book.category != "No category" }.uniq! %></h4>
-
 <br>
 <%= form_tag search_books_path, method: :get do |form| %>
   <%= text_field_tag :query,
     params[:query],
     class: "form-control",
-    placeholder: "Find a book"
+    placeholder: "Find a book by title, ISBN, author, or category"
   %>
-  <%= submit_tag "Search", class: "btn btn-primary" %>
+  <%= submit_tag "Search", class: "btn btn-primary mb-2 mt-2" %>
 <% end %>
-  <button type="button" class="btn btn-success">
-    <%= link_to "Random!", random_books_path %>
-  </button>
-<br>
-<%= @book %>
+<%= link_to "Random!", random_books_path, class: 'btn btn-success' %>
 <br>
 
+<br>
 
+<!-- making a small change -->
 <ul>
-  <% @books.each do |book| %>
+  <% user_books = @books.joins(:readings).joins(:users).where("first_name = ?", current_user.first_name).to_a %>
+  <% user_books.each do |book| %>
   <li>
     <h3> <%= book.title %> </h3>
     <%= image_tag book.poster_url, style:"width: 128px; height: 167px; object-fit: cover" %>
@@ -30,9 +28,7 @@
     <br>
     Category: <%= book.category || "No category" %>
     <br>
-    <button type="button" class="btn btn-danger">
-      <%= link_to "Delete", book_path(book), method: :delete  %>
-    </button>
+    <%= link_to "Delete", book_path(book), method: :delete, class: "btn btn-danger"  %>
   </li>
   <% end %>
 </ul>

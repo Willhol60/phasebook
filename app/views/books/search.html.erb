@@ -48,9 +48,7 @@
                     rating_count: rating_count
                   }
     %>
-    <button type="button" class="btn btn-outline-primary">
-      <%= link_to "Add to Library", books_path(book: params_hash), method: :post  %>
-    </button>
+    <%= link_to "Add to Library", books_path(book: params_hash), method: :post, class: "btn btn-outline-primary"  %>
   </li>
   <% end %>
   </ul>

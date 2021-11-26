@@ -20,9 +20,7 @@ class User < ApplicationRecord
 
   def books_read
     total = 0
-    readings.each do |reading|
-      total += 1 unless reading.read_status == 'Future'
-    end
+    readings.each { |reading| total += 1 if reading.read_status == 'Future' }
     return total
   end
 

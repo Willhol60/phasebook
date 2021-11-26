@@ -217,8 +217,8 @@ end
 # create reading sessions
 
 Book.all.ids.each do |id|
-  users = User.where(first_name: 'Jeremy').or(User.where(first_name: 'Jemima').or(User.where(first_name: 'Mrs Tiggy').or(User.where(first_name: 'Squirrel'))))
-  reading = Reading.new(user_id: users.sample.id,
+  # users = User.where(first_name: 'Jeremy').or(User.where(first_name: 'Jemima').or(User.where(first_name: 'Mrs Tiggy').or(User.where(first_name: 'Squirrel'))))
+  reading = Reading.new(user_id: User.all.ids.sample,
                         book_id: id,
                         read_status: ['Finished', 'Future'].sample)
   if reading.read_status == 'Finished'

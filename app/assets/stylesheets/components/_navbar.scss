@@ -1,3 +1,15 @@
+.navbar-lewagon {
+  justify-content: space-between;
+  background: #FDFCE5;
+}
+
+.navbar-lewagon .navbar-collapse {
+  flex-grow: 0;
+}
+
+.navbar-lewagon .navbar-brand img {
+  width: 200px;
+}
 
 .sidenav {
   height: 100%;

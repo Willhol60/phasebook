@@ -1,4 +1,13 @@
 <body>
+
+  <div id="newsfeed-header">
+    <%= image_tag("shapes-left.svg", style: "width: 200px; height: 140px; position: absolute; top:200px; left: 40px")%>
+
+    <%= image_tag("book-pages-left.svg", style: "width: 200; height: 200px; position: absolute; top:200px")%>
+    <%= image_tag("woman-sitting-reading.svg", style: "width: 200px; height: 200px; position: absolute; left:650px; top: 170px;")%>
+    <%= image_tag("trees-and-sunset.svg", style: "width: 200; height: 200px; position: absolute; left:750px; top: 145px;")%>
+  </div>
+
   <div class="newsfeed-title">
     <h2>My Newsfeed</h2>
   </div>
@@ -12,7 +21,7 @@
     <div class="row readings-cards-row">
 
       <% @readings.select { |reading| reading.read_status == 'Finished' }.sort_by { |reading| reading[:end_date] }.reverse.each do |reading| %>
-        <% if card_counter != 0 && card_counter % 3 == 0 %>
+        <% if card_counter != 0 && card_counter % 1 == 0 %>
           </div>
           <div class="row readings-cards-row">
         <% end %>
@@ -153,85 +162,31 @@
         <% card_counter += 1 %>
       <% end %>
     </div>
+
+    <%= image_tag("woman-reading-lounge.svg", style: "width: 200; height: 200px; position: absolute; z-index: 9; left:50px; top: 1700px;")%>
+    <%= image_tag("book-pages-right.svg", style: "width: 200; height: 200px; position: absolute; z-index: 9; left:1000px; bottom: 100px;")%>
+    <%= image_tag("shapes-right.svg", style: "width: 200; height: 200px; position: absolute; z-index: 9; left:1000px; bottom: 100px;")%>
+
+  </div>
+
+  <div class="literature-quotes-container">
+    <%= image_tag("bottom-blue-curvy-shape.svg", style: "transform: rotate(180deg); width: 100%; height: 200px; z-index: 9; position: absolute; top: -120px; left: 40px")%>
+    <%= image_tag("book-pages-right.svg", style: "width: 200; height: 200px; position: absolute; top:-120px; left: 650px")%>
+    <%= image_tag("shapes-left.svg", style: "width: 200px; height: 140px; position: absolute; top:-120px; left: 650px")%>
+
+    <%# <div class="literature-quote-text"> %>
+    <div class="literature-quotes">
+      <h2>
+        "I would always rather be happy than dignified."
+      </h2>
+      <p>Charlotte Brontë, Jane Eyre</p>
+      <%# <div class="literature-quote-source"> %>
+      <div class="literature-quote-icons">
+        <div class="quote-icon-circle-current"></div>
+        <div class="quote-icon-circle"></div>
+        <div class="quote-icon-circle"></div>
+      </div>
+    </div>
   </div>
 
 </body>
-
-
-<%# QUOTES AND NEWS: %>
-<%= form_tag book_readings_path(:book), method: :get do %>
-  <%= text_field_tag :query,
-    params[:query],
-    class: "form-control",
-    placeholder: "Search for a friend to see what they've been reading..."
-  %>
-  <%= submit_tag "Search", class: "btn btn-primary" %>
-<% end %><br>
-<div class="flip-card">
-  <div class="flip-card-inner card-quote-of-the-day">
-    <div class="flip-card-front">
-    </div>
-    <div class="flip-card-back">
-      "I would always rather be happy than dignified."
-      ― Charlotte Brontë, Jane Eyre
-    </div>
-  </div>
-</div>
-<div class="flip-card">
-  <div class="flip-card-inner card-news">
-    <div class="flip-card-front">
-    </div>
-    <div class="flip-card-back">
-      <div class="card-news-source">
-        BBC:
-      </div>
-      <div class="card-news-title">
-        <a href="https://www.bbc.co.uk/news/uk-wales-59354988" target="_blank">
-          Old and rare books among 400,000 destroyed in fire
-        </a>
-      </div>
-      <div class="card-news-posting-time">
-        14:57 20 Nov
-      </div>
-    </div>
-  </div>
-</div>
-<div class="flip-card">
-  <div class="flip-card-inner card-news">
-    <div class="flip-card-front">
-    </div>
-    <div class="flip-card-back">
-      <div class="card-news-source">
-        Independent:
-      </div>
-      <div class="card-news-title">
-        <a href="https://www.independent.co.uk/arts-entertainment/books/features/abdulrazak-gurnah-nobel-prize-books-b1949697.html" target="_blank">
-          Why one Nobel Laureate is struggling to sell books in America
-        </a>
-      </div>
-      <div class="card-news-posting-time">
-        00:00 05 Nov
-      </div>
-    </div>
-  </div>
-</div>
-<div class="flip-card">
-  <div class="flip-card-inner card-news">
-    <div class="flip-card-front">
-    </div>
-    <div class="flip-card-back">
-      <div class="card-news-source">
-        Independent:
-      </div>
-      <div class="card-news-title">
-        <a href="https://www.independent.co.uk/arts-entertainment/books/features/abdulrazak-gurnah-nobel-prize-books-b1949697.html" target="_blank">
-          Why one Nobel Laureate is struggling to sell books in America
-        </a>
-      </div>
-      <div class="card-news-posting-time">
-        00:00 05 Nov
-      </div>
-    </div>
-  </div>
-</div>
-<%# END OF QUOTES AND NEWS %>

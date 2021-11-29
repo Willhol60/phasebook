@@ -2,6 +2,10 @@ body {
   background-color: $darkblue;
 }
 
+
+h6 {
+  font-size: small;
+
 #newsfeed-header {
   width: 100%;
   height: 200px;
@@ -89,49 +93,34 @@ body {
 
 .card-product {
   overflow: hidden;
-  //height: 350px;
-  // height: fit-content;
-  width: 350px;
+  height: 20vh;
+  width: 30vw;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
-  // margin: 10px;
   margin-bottom: 50px;
   border-radius: 3px;
+  position: relative;
 }
 
 .book-image {
-  width: 120px;
-  height: 180px;
-  background-color: gray;
-}
-
-.card-product img {
-  // height: 100%;
-  width: 120px;
-  max-height: 180px;
+  width: 20%;
+  height: 20vh;
   object-fit: cover;
+  position: absolute;
+  left: 0;
 }
 
-.card-product .card-product-infos {
-  // padding: 16px;
-  // display: flex;
-  // height: 200px;
-}
-
-.user-info {
-  display: inline;
+.right-align {
+  position: absolute;
+  right: 0;
+  width: 20vw;
 }
 
 .card-product h2 {
   font-size: 16px;
   font-weight: bold;
-  // margin: 0;
-}
-
-.avatar {
-  padding: 0px;
 }
 
 .card-product p {
@@ -142,38 +131,27 @@ body {
   // margin-top: 8px;
 }
 
-.user-info {
-  padding: 10px;
-}
-
 .reading-info {
-  // padding: 10px;
   margin-bottom: auto;
   overflow: hidden;
 }
 
 .reaction-counts {
-  // padding: 10px;
   border-top: 5px black;
   font-size: 10px;
 }
 
 .buttons {
-  // padding: 10px;
   border-top-style: solid;
   border-width: 1px;
   border-color: grey;
-  // border-top: 5px black;
 }
 
 .button-col {
   padding: 0px;
-  // margin-left: 2px;
-  // margin-right: 2px;
 }
 
 .reaction-counts {
-  // padding: 10px;
   font-size: 12px;
   border-top-style: solid;
   border-width: 1px;

@@ -79,13 +79,6 @@
         </div>
       </div>
       <%# END OF QUOTES AND NEWS %>
-      <div class="terms">
-        Terms of Service |
-        Privacy Policy |
-        Cookie Policy
-        <br>
-        © 2021 Phasebook, Inc.
-      </div>
     </div>
 
     <div class="col-sm middle-third">
@@ -122,7 +115,7 @@
                             <% elsif (Date.today - reading.end_date).to_f < 7 %>
                               <%= "This week" %>
                             <% else %>
-                            <%= reading.end_date %>
+                            <%= reading.end_date.strftime("%B %e %Y")%>
                             <% end %>
                           </div>
                         <% end %>

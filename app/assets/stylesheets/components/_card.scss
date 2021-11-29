@@ -92,7 +92,7 @@
 }
 
 .b-current {
-  color: orange;
+  color: #03cfa6;
 }
 
 .b-future {
@@ -103,20 +103,30 @@
   position: absolute;
   width: 60%;
   right: 20%;
+  margin-bottom: 5px;
   text-align: center;
   bottom: 0px;
   padding: 10px 15px;
   color: white;
-  background-color:#0071bc;
   transition-duration: 0.2s;
   font-size: 12px;
   font-weight: bold;
   border-radius: 5px;
 }
+.current {
+  background-color:#03cfa6;
+}
+
+.future {
+  background-color:#0071bc;
+}
+
 
 .read-button:hover {
-  color: white;
-  border: white solid 2px;
-  background-color: hsla(204, 80%, 52%, 0.957);
+  color: #0071bc;
+  font-style: bold;
+  background-color: white;
+  border: #28374e solid 2px;
   text-decoration: none;
+  box-shadow: 0px 0px 3px #28374e;
 }

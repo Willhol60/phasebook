@@ -10,7 +10,7 @@
           <i class="fas fa-bookmark"></i>
         </div>
         <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain;" %>
-        <%= link_to "Finish Reading", "#", class: "read-button"  %>
+        <%= link_to "Finish Reading", "#", class: "read-button current"  %>
       </li>
     <% end %>
     <% current_user.readings.where('read_status = ?', 'Future').reverse.each do |reading| %>
@@ -19,7 +19,7 @@
           <i class="fas fa-bookmark"></i>
         </div>
         <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain;" %>
-        <%= link_to "Start Reading", "#", class: "read-button"  %>
+        <%= link_to "Start Reading", "#", class: "read-button future"  %>
       </li>
     <% end %>
     </ul>

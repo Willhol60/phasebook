@@ -27,15 +27,18 @@ button {
 // }
 
 .btn-landing {
-  color: white;
-  background: #6cd1f4;
-  border: 2px solid white;
-  padding: 8px 24px;
-  border-radius: 50px;
+  z-index: 9;
+  width: 85px;
+  height: 85px;
+  background: white;
+  margin-top: 160px;
+  padding: 15px;
+  border-radius: 50%;
   font-weight: 400;
 }
 
 .btn-landing:hover {
-  background: #f4d19b;
+  #edit {color: white;}
+  background: #3FA9F5;
   color: white;
 }

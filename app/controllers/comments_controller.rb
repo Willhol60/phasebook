@@ -1,7 +1,5 @@
 class CommentsController < ApplicationController
   def new
-    # @book = params[:book_id]
-    # @reading = params[:reading_id]
     @comment = Comment.new
   end
 

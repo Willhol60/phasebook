@@ -1,5 +1,19 @@
 // Specific CSS for your home-page
-.landing-logo {
-  width: 300px;
-  transform: translate(5px, -250px);
+.box-blue {
+  position: absolute;
+  width: 800px;
+  height: 200px;
+  background: #28374E;
+  margin: 0 auto;
+  box-shadow: 0px 15px 10px -15px #111;
 }
+
+#edit.fa-angle-double-down {
+padding-top: 8px;
+color: #28374E;
+font-size: 40px;
+}
+
+// #edit.fa-angle-double-down:hover {
+//  color: white;
+// }

@@ -13,15 +13,3 @@ A social media platform for book lovers.
 * jQuery
 * Bootstrap
 * Heroku
-
-//
-To-do list, Fri 26 Nov:
--Fix randomiser button on Heroku (broken for some users)
--Will's disappearing cards
--Really fix the styling guys
--Try to find out why some links dont always work
-
-
-
-
-//

@@ -16,28 +16,30 @@
   <% end %>
   <%= link_to "Random!", random_books_path, class: 'btn btn-success mb-2' %>
 
-  <div class="d-flex flex-wrap justify-content-center">
+  <div class="d-flex flex-wrap justify-content-center align-items-center p-2">
     <% current_user.readings.reverse.each do |reading| %>
     <%# CARD: %>
-
-      <div data-controller="library-card" class="m-3">
-        <div data-action="mouseenter->library-card#changeCard mouseleave->library-card#changeCardBack">
-        <%# <img src= <%= reading.book.poster_url %>
-          <div data-library-card-target="cover">
-            <%= image_tag reading.book.poster_url, style:"width: 280px; height: 400px; object-fit: contain" %>
-          </div>
-          <div class="d-none" data-library-card-target="info" style="width: 300px; height: 420px" >
-            <div class="book-info-card" style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('<%=reading.book.poster_url%>'); background-size: cover ">
-              <div class="d-flex flex-column">
-                <div class="d-flex justify-content-end p-2">
-                  <%= link_to book_path(reading.book), method: :delete, remote: true do %>
-                    <i class="fa fa-trash" aria-hidden="true" style="color:white"></i>
-                  <% end %>
-                </div>
-                <div id="card-info">
-                  <h3><%= reading.book.title %></h3>
-                  <p><%= reading.book.author %></p>
-                  <p>Rated: <%= reading.user_rating %></p>
+      <div style="display: flex; width: 350px; height: 470px; align-item: center; justify-content:center">
+        <div data-controller="library-card" class="m-3">
+          <div data-action="mouseenter->library-card#changeCard mouseleave->library-card#changeCardBack">
+          <%# <img src= <%= reading.book.poster_url %>
+            <div data-library-card-target="cover">
+              <%= image_tag reading.book.poster_url, style:"width: 280px; height: 400px; object-fit: contain" %>
+            </div>
+            <div class="d-none" data-library-card-target="info" style="width: 300px; height: 420px; margin-top: -20px" >
+              <div style="color: white; background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('<%=reading.book.poster_url%>');
+                          background-size: cover; padding: 8px ">
+                <div class="d-flex flex-column">
+                  <div class="d-flex justify-content-end p-2">
+                    <%= link_to book_path(reading.book), method: :delete, remote: true do %>
+                      <i class="fa fa-trash" aria-hidden="true" style="color:white"></i>
+                    <% end %>
+                  </div>
+                  <div id="card-info">
+                    <h4><%= reading.book.title %></h4>
+                    <p><%= reading.book.author %></p>
+                    <p>Rated: <%= reading.user_rating %></p>
+                  </div>
                 </div>
               </div>
             </div>

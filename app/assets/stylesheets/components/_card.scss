@@ -74,12 +74,9 @@
   border-color: grey;
 }
 
-.book-info-card {
-  color: lightgrey;
-  position: relative;
-}
-
 #card-info {
-  position: absolute;
-  top: 0;
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }

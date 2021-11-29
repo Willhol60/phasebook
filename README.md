@@ -1,7 +1,5 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
-
 # Description:
-A social media platform for book lovers.
+A social media platform for book lovers, created as a final project in Le Wagon's Web Development bootcamp.
 
 # Mock-up:
 <img src="https://github.com/Willhol60/phasebook/blob/master/Phasebook-V2.png" alt="mock-up-v2" width="300"/>

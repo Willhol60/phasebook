@@ -19,3 +19,14 @@ require("channels")
 import "controllers"
 import "bootstrap"
 import "chartkick/chart.js"
+// import "/js/jquery.min.js"
+import "jquery.flipster/dist/jquery.flipster.min.js"
+import "jquery.flipster/dist/jquery.flipster.min.css"
+import "jquery.flipster/dist/jquery.flipster.css"
+
+document.addEventListener('turbolinks:load', () => {
+  $('.my-flipster').flipster({
+    style: 'flat',
+    spacing: -0.25
+  });
+})

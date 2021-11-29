@@ -2,6 +2,24 @@
   <br>
   <h1>My Reads</h1>
 
+  <div class="my-flipster">
+    <ul>
+    <% current_user.readings.where('read_status = ?', 'Current').reverse.each do |reading| %>
+      <li data-flip-category="<%= reading.read_status %>" class='flip-current'>
+        <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain" %>
+      </li>
+    <% end %>
+    <% current_user.readings.where('read_status = ?', 'Future').reverse.each do |reading| %>
+      <li data-flip-category="<%= reading.read_status %>" class='flip-future'>
+        <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain" %>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+
+
+
+
   Top categories:
   <br>
   <% current_user.top_categories.each do |key, value| %>
@@ -21,7 +39,7 @@
   <br>
 
   <%# Copied from readings index: %>
-  <% current_user.readings.reverse.each do |reading| %>
+  <% current_user.readings.where('read_status = ?', 'Finished').reverse.each do |reading| %>
     <%# CARD: %>
     <div data-controller="comment-window">
       <div class="container card-product">
@@ -55,6 +73,9 @@
                 </div>
                 <div class='row'>
                   <p>Category: <%= reading.book.category %></p>
+                </div>
+                <div class='row'>
+                  <p>Reading status: <%= reading.read_status %></p>
                 </div>
                 <br>
                 <%= link_to "Delete", book_path(reading.book), method: :delete, class: "btn btn-danger"  %>

@@ -5,20 +5,25 @@
 }
 
 .footer {
-  background: #6cd1f4;
+  background: #28374E;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 100px;
   padding: 0px 50px;
-  color: rgba(0,0,0,0.3);
+  color: white;
 }
+.footer-copyright {
+  font-weight: 300;
+  font-style: italic;
+}
+
 .footer-links {
   display: flex;
   align-items: center;
 }
 .footer-links a {
-  color: black;
+  color: white;
   opacity: 0.15;
   text-decoration: none;
   font-size: 24px;

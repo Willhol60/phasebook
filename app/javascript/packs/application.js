@@ -27,6 +27,6 @@ import "jquery.flipster/dist/jquery.flipster.css"
 document.addEventListener('turbolinks:load', () => {
   $('.my-flipster').flipster({
     style: 'flat',
-    spacing: -0.25
+    spacing: -0.1
   });
 })

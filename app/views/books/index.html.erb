@@ -6,12 +6,18 @@
     <ul>
     <% current_user.readings.where('read_status = ?', 'Current').reverse.each do |reading| %>
       <li data-flip-category="<%= reading.read_status %>" class='flip-current'>
-        <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain" %>
+        <div class='bookmark b-current'>
+          <i class="fas fa-bookmark"></i>
+        </div>
+        <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain;" %>
       </li>
     <% end %>
     <% current_user.readings.where('read_status = ?', 'Future').reverse.each do |reading| %>
       <li data-flip-category="<%= reading.read_status %>" class='flip-future'>
-        <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain" %>
+        <div class='bookmark b-future'>
+          <i class="fas fa-bookmark"></i>
+        </div>
+        <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain;" %>
       </li>
     <% end %>
     </ul>

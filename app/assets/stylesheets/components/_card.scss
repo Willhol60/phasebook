@@ -117,3 +117,10 @@ body {
   border-width: 1px;
   border-color: grey;
 }
+
+#card-info {
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}

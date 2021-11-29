@@ -63,7 +63,7 @@
                 <p><%= pluralize(reading.votes_for.size, 'cheer') %>
                 <%= pluralize(reading.comments.count, 'comment') %></p>
 
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-around">
                   <%= link_to cheers_book_reading_path(reading.book, reading) do %>
                     <% if current_user.voted_for? reading %>
                       <i class="fas fa-check-circle" style="color:lightblue"></i>

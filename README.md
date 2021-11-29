@@ -7,8 +7,6 @@ A social media platform for book lovers, created as a team final project in Le W
 * Library page of user's books
 * Profile page of user's reading statistics
 
-# Mock-up:
-<img src="https://github.com/Willhol60/phasebook/blob/master/Phasebook-V2.png" alt="mock-up-v2" width="300"/>
 
 # Tools and technologies used:
 * Ruby on Rails
@@ -17,3 +15,7 @@ A social media platform for book lovers, created as a team final project in Le W
 * jQuery
 * Bootstrap
 * Heroku
+
+# Mock-up:
+<img src="https://github.com/Willhol60/phasebook/blob/master/Phasebook-V2.png" alt="mock-up-v2" width="300"/>
+

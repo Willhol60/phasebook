@@ -1,25 +1,71 @@
+body {
+  background-color: $darkblue;
+}
+
+.newsfeed-title {
+  padding: 30px;
+}
+
+.newsfeed-title h2 {
+  font-size: $headers-font-size;
+  font-style: $headers-font-style;
+  color: white;
+  text-align: center;
+
+}
+
+.readings-cards {
+  margin-left: 80px;
+  margin-right: 80px;
+}
+
+.readings-cards-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 .card-product {
   overflow: hidden;
   //height: 350px;
-  height: fit-content;
+  // height: fit-content;
+  width: 350px;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  // display: flex;
-  // align-items: center;
-  margin-bottom: 25px;
-  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  // margin: 10px;
+  margin-bottom: 50px;
+  border-radius: 3px;
+}
+
+.book-image {
+  width: 120px;
+  height: 180px;
+  background-color: gray;
 }
 
 .card-product img {
-  height: 100%;
-  width: 80px;
+  // height: 100%;
+  width: 120px;
+  max-height: 180px;
   object-fit: cover;
+}
+
+.card-product .card-product-infos {
+  // padding: 16px;
+  // display: flex;
+  // height: 200px;
+}
+
+.user-info {
+  display: inline;
 }
 
 .card-product h2 {
   font-size: 16px;
   font-weight: bold;
-  margin: 0;
+  // margin: 0;
 }
 
 .avatar {
@@ -27,16 +73,11 @@
 }
 
 .card-product p {
-  font-size: 16px;
+  font-size: 10px;
   line-height: 1.4;
   opacity: .7;
   margin-bottom: 0;
-  margin-top: 8px;
-}
-
-.card-product .card-product-infos {
-  padding: 15px;
-  // display: flex;
+  // margin-top: 8px;
 }
 
 .user-info {
@@ -44,17 +85,19 @@
 }
 
 .reading-info {
-  padding: 10px;
+  // padding: 10px;
   margin-bottom: auto;
+  overflow: hidden;
 }
 
 .reaction-counts {
-  padding: 10px;
+  // padding: 10px;
   border-top: 5px black;
+  font-size: 10px;
 }
 
 .buttons {
-  padding: 10px;
+  // padding: 10px;
   border-top-style: solid;
   border-width: 1px;
   border-color: grey;
@@ -63,12 +106,13 @@
 
 .button-col {
   padding: 0px;
-  margin-left: 2px;
-  margin-right: 2px;
+  // margin-left: 2px;
+  // margin-right: 2px;
 }
 
 .reaction-counts {
-  padding: 10px;
+  // padding: 10px;
+  font-size: 12px;
   border-top-style: solid;
   border-width: 1px;
   border-color: grey;

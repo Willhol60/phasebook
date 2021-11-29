@@ -4,7 +4,7 @@ Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/ra
 A social media platform for book lovers.
 
 # Mock-up:
-![mock-up-v2](https://github.com/Willhol60/phasebook/phasebook-V2.png?raw=true)
+![mock-up-v2](https://github.com/Willhol60/phasebook/Phasebook-V2.png?raw=true)
 
 # Tools and technologies used:
 * Ruby on Rails

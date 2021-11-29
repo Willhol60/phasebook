@@ -41,10 +41,9 @@ class ReadingsController < ApplicationController
     else
       @reading.liked_by current_user
     end
-    book = @reading.book
     # give an anchor to stop the page jumping
     # redirect_to book_readings_path(@reading.book, @reading)
-    redirect_to book_readings_path(book, anchor: "reading-#{@reading.id}")
+    redirect_to book_readings_path(anchor: "reading-#{@reading.id}")
   end
 
   def add_to_library

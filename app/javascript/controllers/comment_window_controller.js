@@ -7,7 +7,4 @@ export default class extends Controller {
     this.contentTarget.classList.toggle('d-none');
   }
 
-  toggleCheer() {
-
-  }
 }

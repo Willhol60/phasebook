@@ -1,14 +1,11 @@
 <div class='container'>
-  <br>
   <h1>My Reads</h1>
 
   Top categories:
-  <br>
   <% current_user.top_categories.each do |key, value| %>
-    <%= "Category: #{key}, Number of books: #{value}. "%>
+    <%= "#{key}- #{pluralize(value, 'book')} read "%>
     <br>
   <% end %>
-  <br>
   <%= form_tag search_books_path, method: :get do |form| %>
     <%= text_field_tag :query,
       params[:query],
@@ -18,52 +15,40 @@
     <%= submit_tag "Search", class: "btn btn-primary mb-2 mt-2" %>
   <% end %>
   <%= link_to "Random!", random_books_path, class: 'btn btn-success mb-2' %>
-  <br>
 
-  <%# Copied from readings index: %>
-  <% current_user.readings.reverse.each do |reading| %>
+  <div class="d-flex flex-wrap justify-content-center align-items-center p-2">
+    <% current_user.readings.reverse.each do |reading| %>
     <%# CARD: %>
-    <div data-controller="comment-window">
-      <div class="container card-product">
-        <%# <img src= <%= reading.book.poster_url %>
-        <div class="row card-product-infos">
-
-          <div class="col col-md-4">
-            <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain" %>
-          </div>
-
-          <div class="col">
-            <%# id below needed for when comment auto-loads to stop page jumping %>
-            <div class="row reading-info">
-              <div class="col">
-                <div class="row">
-                  <% if reading.end_date && reading.start_date %>
-                    <p>days to read:<%= (reading.end_date - reading.start_date).to_i %></p>
-                  <% end %>
+      <div class="library-card" >
+        <div data-controller="library-card" class="m-3">
+          <div data-action="mouseenter->library-card#changeCard mouseleave->library-card#changeCardBack">
+            <div data-library-card-target="cover" >
+              <%= image_tag reading.book.poster_url, style:"width: 280px; height: 400px; object-fit: contain" %>
+            </div>
+            <div class="d-none" data-library-card-target="info" style="width: 300px; height: 420px; margin-top: -20px" >
+              <div style="color: white; background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('<%=reading.book.poster_url%>');
+                          background-size: cover; padding: 12px ">
+                <div class="d-flex flex-column">
+                  <div class="d-flex justify-content-end p-2">
+                    <%= link_to book_path(reading.book), method: :delete, remote: true do %>
+                      <i class="fa fa-trash" aria-hidden="true" style="color:white"></i>
+                    <% end %>
+                  </div>
+                  <div id="card-info">
+                    <h4><%= reading.book.title %></h4>
+                    <p><%= reading.book.author %></p>
+                    <p>Rated: <%= reading.user_rating %></p>
+                  </div>
                 </div>
-                <div class="row">
-                  <p><%= reading.book.title %></p>
-                </div>
-                <div class="row">
-                  <p><%= reading.book.author %></p>
-                </div>
-                <div class="row">
-                  <p><%= reading.book.pages %> pages</p>
-                </div>
-                <div class="row">
-                  <p>User rating: <%= reading.user_rating %></p>
-                </div>
-                <div class='row'>
-                  <p>Category: <%= reading.book.category %></p>
-                </div>
-                <br>
-                <%= link_to "Delete", book_path(reading.book), method: :delete, class: "btn btn-danger"  %>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <%# END OF CARD %>
-  <% end %>
+
+    <% end %>
+  </div>
+  <%# <% if reading.end_date && reading.start_date %>
+    <%# <p>days to read:<%= (reading.end_date - reading.start_date).to_i %>
+  <%# <% end %>
 </div>

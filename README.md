@@ -16,6 +16,6 @@ A social media platform for book lovers, created as a team final project in Le W
 * Bootstrap
 * Heroku
 
-# Mock-up:
+# Mock-up design:
 <img src="https://github.com/Willhol60/phasebook/blob/master/Phasebook-V2.png" alt="mock-up-v2" width="300"/>
 

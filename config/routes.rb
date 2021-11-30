@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :readings, except: :destroy do
       resources :comments, except: :destroy
       member do
-        get :cheers
+        patch :cheers
 
         # Add book to library:
         get :add_to_library

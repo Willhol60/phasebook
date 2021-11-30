@@ -57,7 +57,7 @@
             </div>
             <div class="feedback-bar d-flex my-3 justify-content-around">
               <div class="cheer-button d-flex">
-                <%= link_to cheers_book_reading_path(reading.book, reading) do %>
+                <%= link_to cheers_book_reading_path(reading.book, reading), method: :patch, remote: true do %>
                   <% if current_user.voted_for? reading %>
                     <i class="fas fa-check-circle" style="color:lightblue; font-size:40px; padding:8px"></i>
                   <% else %>

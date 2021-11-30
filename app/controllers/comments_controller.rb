@@ -17,19 +17,6 @@ class CommentsController < ApplicationController
     end
   end
 
-  # def edit
-  # end
-
-  # def update
-  #   @comment = Comment.find(params[:id])
-  #   @comment.update(comment_params)
-
-  #   respond_to do |format|
-  #     format.html { redirect_to book_readings_path(anchor: "comment-#{@comment.id}") }
-  #     # format.text
-  #   end
-  # end
-
   def destroy
     puts params[:id]
     @comment = Comment.find(params[:id])

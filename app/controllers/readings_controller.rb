@@ -33,7 +33,7 @@ class ReadingsController < ApplicationController
 
   def finish
     @reading = Reading.find(params[:id])
-    @reading.update(read_status: "Finished", start_date: DateTime.now)
+    @reading.update(read_status: "Finished", start_date: DateTime.now, user_rating: params[:reading][:user_rating])
     flash[:notice] = 'Your reading has been updated!'
     redirect_to request.referrer
   end

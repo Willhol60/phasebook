@@ -1,5 +1,5 @@
 //populate modal
-$('#modal').html("#{ escape_javascript(<%= render partial: 'rating', locals: {reading: @reading} %> )}");
+$('#finishModal').html('<%= j render partial: 'rating', locals: { reading: @reading } %>');
 
 //render modal
-$('#modal').modal('open');
+$('#finishModal').modal();

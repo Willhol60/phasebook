@@ -2,10 +2,6 @@
 //   background-color: $darkblue;
 // }
 
-h6 {
-  font-size: small;
-}
-
 #newsfeed-header {
   width: 100%;
   height: 200px;
@@ -23,12 +19,6 @@ h6 {
   font-weight: lighter;
   color: white;
   text-align: center;
-}
-
-.readings-cards {
-  background: linear-gradient($darkblue, white);
-  padding-left: 80px;
-  padding-right: 80px;
 }
 
 .literature-quotes-container {
@@ -85,75 +75,59 @@ h6 {
   // text-align: center;
 }
 
-.readings-cards-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-.card-product {
-  overflow: hidden;
-  height: 20vh;
-  width: 30vw;
-  background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  display: flex;
-  align-items: center;
-  margin-bottom: 50px;
-  border-radius: 3px;
+.flip-future {
+  opacity: 0.5;
   position: relative;
 }
 
-.book-image {
-  width: 20%;
-  height: 20vh;
-  object-fit: cover;
+.flip-current {
+  opacity: 1;
+  position: relative;
+}
+
+.bookmark {
   position: absolute;
-  left: 0;
+  left: 190px;
+  top: -20px;
+  font-size: 50px;
 }
 
-.right-align {
+.b-current {
+  color: #03cfa6;
+}
+
+.b-future {
+  color: #0071bc;
+}
+
+.read-button {
   position: absolute;
-  right: 0;
-  width: 20vw;
-}
-
-.card-product h2 {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.card-product p {
-  font-size: 10px;
-  line-height: 1.4;
-  opacity: .7;
-  margin-bottom: 0;
-  // margin-top: 8px;
-}
-
-.reading-info {
-  margin-bottom: auto;
-  overflow: hidden;
-}
-
-.reaction-counts {
-  border-top: 5px black;
-  font-size: 10px;
-}
-
-.buttons {
-  border-top-style: solid;
-  border-width: 1px;
-  border-color: grey;
-}
-
-.button-col {
-  padding: 0px;
-}
-
-.reaction-counts {
+  width: 60%;
+  right: 20%;
+  margin-bottom: 5px;
+  text-align: center;
+  bottom: 0px;
+  padding: 10px 15px;
+  color: white;
+  transition-duration: 0.2s;
   font-size: 12px;
-  border-top-style: solid;
-  border-width: 1px;
-  border-color: grey;
+  font-weight: bold;
+  border-radius: 5px;
+}
+.current {
+  background-color:#03cfa6;
+}
+
+.future {
+  background-color:#0071bc;
+}
+
+
+.read-button:hover {
+  color: #0071bc;
+  font-style: bold;
+  background-color: white;
+  border: #28374e solid 2px;
+  text-decoration: none;
+  box-shadow: 0px 0px 3px #28374e;
 }

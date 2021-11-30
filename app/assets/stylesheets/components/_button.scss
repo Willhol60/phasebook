@@ -1,24 +1,23 @@
 button {
-  // width: 100%;
-  // height: fit-content;
   border-radius: 6px;
   border-style: none;
-  // border-width: 2px;
   background-color: #F9F3DF;
   transition: 0.2s;
-  // padding: 10px;
   font-size: 12px;
-
   &:hover {
     background-color: #F4D19B;
   }
 }
 
-.button-cheer {
-  background: url('cheering.gif');
-  width: 140px;
-  height: 60px;
-  background-size: 300px;
+.button-feedback {
+  font-size:16px;
+  padding:8px;
+  background-color: whitesmoke;
+  // border: 2px solid grey;
+}
+
+.button-comment {
+  font-size: 40px;
   color: white;
 }
 

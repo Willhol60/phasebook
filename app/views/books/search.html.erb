@@ -1,71 +1,56 @@
-  <% @books.each do |book| %>
-    <!--
-    Creating attributes with API hardening so that unavailable categories dont break page
-    -->
-    <%
-      title = book['volumeInfo']['title'] || "No title"
-      poster_url = book['volumeInfo']['imageLinks'] ? book['volumeInfo']['imageLinks']['thumbnail'] : "placeholder.jpg"
-      author = book['volumeInfo']['authors'] ? book['volumeInfo']['authors'].first : "Unknown Author"
-      publisher = book['volumeInfo']['publisher'] || "Unknown publisher"
-      pages = book['volumeInfo']['pageCount'] || 100
-      category = book['volumeInfo']['categories'] ? book['volumeInfo']['categories'].first : "No category"
-      if book['volumeInfo']['industryIdentifiers'] && book['volumeInfo']['industryIdentifiers'][0]['type'].include?('ISBN')
-        isban = book['volumeInfo']['industryIdentifiers'][0]['identifier']
-      else
-        isban = "No ISBN"
-      end
-      description = book['volumeInfo']['description'] || "No description"
-      google_link = book['volumeInfo']['previewLink'] || "www.google.com"
-      rating = book['volumeInfo']['averageRating'] || 0
-      rating_count = book['volumeInfo']['ratingsCount'] || 0
-    %>
+<% @books.each do |book| %>
+  <!--
+  Creating attributes with API hardening so that unavailable categories dont break page
+  -->
+  <%
+    title = book['volumeInfo']['title'] || "No title"
+    poster_url = book['volumeInfo']['imageLinks'] ? book['volumeInfo']['imageLinks']['thumbnail'] : "placeholder.jpg"
+    author = book['volumeInfo']['authors'] ? book['volumeInfo']['authors'].first : "Unknown Author"
+    publisher = book['volumeInfo']['publisher'] || "Unknown publisher"
+    pages = book['volumeInfo']['pageCount'] || 100
+    category = book['volumeInfo']['categories'] ? book['volumeInfo']['categories'].first : "No category"
+    if book['volumeInfo']['industryIdentifiers'] && book['volumeInfo']['industryIdentifiers'][0]['type'].include?('ISBN')
+      isban = book['volumeInfo']['industryIdentifiers'][0]['identifier']
+    else
+      isban = "No ISBN"
+    end
+    description = book['volumeInfo']['description'] || "No description"
+    google_link = book['volumeInfo']['previewLink'] || "www.google.com"
+    rating = book['volumeInfo']['averageRating'] || 0
+    rating_count = book['volumeInfo']['ratingsCount'] || 0
+  %>
 
-    <%# CARD: %>
-  <div data-controller="comment-window">
-    <div class="container card-product">
-      <%# <img src= <%= book.poster_url %>
-      <div class="row card-product-infos">
+  <%# CARD: %>
+  <div class="container card-product">
+    <%# <img src= <%= book.poster_url %>
+    <div class="col book-image">
+      <%= image_tag poster_url, style:"width: 250px; height: 100%; object-fit: contain" %>
+    </div>
 
-        <div class="col col-md-4">
-          <%= image_tag poster_url, style:"width: 250px; height: 100%; object-fit: contain" %>
-        </div>
-
-        <div class="col">
-          <%# id below needed for when comment auto-loads to stop page jumping %>
-          <div class="row reading-info">
-            <div class="col">
-              <div class="row">
-                <p><%= title %></p>
-              </div>
-              <div class="row">
-                <p><%= author %></p>
-              </div>
-              <div class="row">
-                <p><%= pages %> pages</p>
-              </div>
-              Category: <%= category %>
-               <% params_hash = { title: title,
-                                  author: author,
-                                  poster_url: poster_url,
-                                  publisher: publisher,
-                                  ISBN: isban,
-                                  pages: pages,
-                                  category: category,
-                                  description: description,
-                                  google_link: google_link,
-                                  rating: rating,
-                                  rating_count: rating_count
-                                } %>
-              <div class="row">
-                <%= link_to "Add to Library", books_path(book: params_hash), method: :post, class: "btn btn-outline-primary"  %>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="col right-align">
+      <div class="align-items-center">
+        <h4><%= title %></h4>
+        <%= author %><br>
+        <%= pages %> pages
+      </div>
+      Category: <%= category %>
+        <% params_hash = { title: title,
+                          author: author,
+                          poster_url: poster_url,
+                          publisher: publisher,
+                          ISBN: isban,
+                          pages: pages,
+                          category: category,
+                          description: description,
+                          google_link: google_link,
+                          rating: rating,
+                          rating_count: rating_count
+                        } %>
+      <div class="col">
+        <%= link_to "Add to Library", books_path(book: params_hash), method: :post, class: "btn btn-outline-primary"  %>
       </div>
     </div>
   </div>
-  <%# END OF CARD %>
-  <% end %>
+<% end %>
 
 <!-- order library by most recently added, and change submit button to add to library-->

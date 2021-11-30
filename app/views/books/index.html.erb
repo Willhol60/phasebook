@@ -1,6 +1,7 @@
 <div class='container'>
   <h1>My Reads</h1>
 
+
   <div class="my-flipster">
     <ul>
     <% current_user.readings.where('read_status = ?', 'Current').reverse.each do |reading| %>
@@ -32,6 +33,7 @@
     <%= "#{key}- #{pluralize(value, 'book')} read "%>
     <br>
   <% end %>
+
   <%= form_tag search_books_path, method: :get do |form| %>
     <%= text_field_tag :query,
       params[:query],
@@ -61,7 +63,7 @@
                     <% end %>
                   </div>
                   <div id="card-info">
-                    <h4><%= reading.book.title %></h4>
+                    <h4 style='color: white'><%= reading.book.title %></h4>
                     <p><%= reading.book.author %></p>
                     <p>Rated: <%= reading.user_rating %></p>
                   </div>

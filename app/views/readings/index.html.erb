@@ -8,14 +8,13 @@
     <%# <%= image_tag("trees-and-sunset.svg", style: "width: 200; height: 200px; position: absolute; left:750px; top: 145px;")%>
   <%# </div> %>
 
+  <div class="newsfeed-title">
+    <h2>My Newsfeed</h2>
+  </div>
 
   <%# <div class="divider divider-center pb-5"></div> %>
 
   <div class="readings-cards">
-    <div class="newsfeed-title">
-      <h2>My Newsfeed</h2>
-    </div>
-
     <div class="row readings-cards-row">
       <% @readings.select { |reading| reading.read_status == 'Finished' && reading.end_date }.sort_by { |reading| reading[:end_date] }.reverse.each do |reading| %>
         <div data-controller="comment-window">

@@ -1,3 +1,16 @@
+.card-product {
+  overflow: hidden;
+  //height: 350px;
+  // height: fit-content;
+  width: 350px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  // margin: 10px;
+  margin-bottom: 50px;
+  border-radius: 3px;
+}
 // body {
 //   background-color: $darkblue;
 // }
@@ -78,6 +91,7 @@
 .flip-future {
   opacity: 0.5;
   position: relative;
+
 }
 
 .flip-current {

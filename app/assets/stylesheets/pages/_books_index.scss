@@ -1,0 +1,44 @@
+// Specific CSS for your books-index-page
+h4 {
+  color: #28374E;
+  font-weight: 300;
+  font-style: italic;
+}
+
+
+#query {
+ width: 50vw;
+}
+
+.book-poster-image {
+  width: 280px;
+  height: 400px;
+}
+
+.book-poster-image img {
+  height: 100%;
+  width: 100%;
+  // object-fit: cover;
+}
+
+.hover-shade {
+  width: 280px;
+  height: 400px;
+  margin-top: -20px;
+
+}
+
+#book {
+
+  width: 30%;
+  height: 30%;
+
+}
+
+#twinkle {
+  position: relative;
+  width: 20%;
+  height: 20%;
+  bottom: 30px;
+  right: 40px;
+}

@@ -1,11 +1,12 @@
 .comment-window {
+  border-radius: 12px;
   overflow: scroll;
   height: 20vh;
   width: 100%;
-  background: white;
+  background: lightgrey;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  margin-top: -50px;
   margin-bottom: 24px;
+  padding-top: 1em;
 }
 
 .comment-row {
@@ -16,8 +17,7 @@
 .comment {
   border: 1px solid grey;
   border-radius: 8px;
-  background-color: #3FA9F5;
-  color: white;
+  background-color: lightsteelblue;
   flex-grow: 1;
   padding: 3px;
 }

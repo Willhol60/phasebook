@@ -1,12 +1,13 @@
 button {
-  width: 100%;
-  height: fit-content;
+  // width: 100%;
+  // height: fit-content;
   border-radius: 6px;
   border-style: none;
   // border-width: 2px;
   background-color: #F9F3DF;
   transition: 0.2s;
-  padding: 10px;
+  // padding: 10px;
+  font-size: 12px;
 
   &:hover {
     background-color: #F4D19B;
@@ -26,15 +27,18 @@ button {
 // }
 
 .btn-landing {
-  color: white;
-  background: #6cd1f4;
-  border: 2px solid white;
-  padding: 8px 24px;
-  border-radius: 50px;
+  z-index: 9;
+  width: 85px;
+  height: 85px;
+  background: white;
+  margin-top: 160px;
+  padding: 15px;
+  border-radius: 50%;
   font-weight: 400;
 }
 
 .btn-landing:hover {
-  background: #f4d19b;
+  #edit {color: white;}
+  background: #3FA9F5;
   color: white;
 }

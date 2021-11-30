@@ -1,74 +1,158 @@
-.card-product {
-  overflow: hidden;
-  //height: 350px;
-  height: fit-content;
-  background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  // display: flex;
-  // align-items: center;
-  margin-bottom: 25px;
-  border-radius: 6px;
+// body {
+//   background-color: $darkblue;
+// }
+
+h6 {
+  font-size: small;
 }
 
-.card-product img {
-  height: 100%;
-  width: 80px;
+#newsfeed-header {
+  width: 100%;
+  height: 200px;
+  background-color: white;
+}
+
+.newsfeed-title {
+  padding: 40px;
+  position: sticky;
+}
+
+.newsfeed-title h2 {
+  font-size: 60px;
+  font-style: italic;
+  font-weight: lighter;
+  color: white;
+  text-align: center;
+}
+
+.readings-cards {
+  background: linear-gradient($darkblue, white);
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+.literature-quotes-container {
+  width: 100%;
+  height: 300px;
+  background-color: $darkblue;
+  position: relative;
+  color: white;
+  text-align: center;
+  padding: 50px 0;
+}
+
+.literature-quotes {
+  position:absolute;
+  top: 50%; left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 90%;
+}
+
+.literature-quotes h2 {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.literature-quotes p {
+  font-weight: lighter;
+  font-style: italic;
+  font-size: 20px;
+}
+
+.literature-quote-icons {
+  position: relative;
+  padding: 10px;
+}
+
+.quote-icon-circle {
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+  background-color: white;
+  border-radius: 50%;
+  // text-align: center;
+}
+
+.quote-icon-circle-current {
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+  background-color: #28374E;
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;
+  border-radius: 50%;
+  // text-align: center;
+}
+
+.readings-cards-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.card-product {
+  overflow: hidden;
+  height: 20vh;
+  width: 30vw;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+  border-radius: 3px;
+  position: relative;
+}
+
+.book-image {
+  width: 20%;
+  height: 20vh;
   object-fit: cover;
+  position: absolute;
+  left: 0;
+}
+
+.right-align {
+  position: absolute;
+  right: 0;
+  width: 20vw;
 }
 
 .card-product h2 {
   font-size: 16px;
   font-weight: bold;
-  margin: 0;
-}
-
-.avatar {
-  padding: 0px;
 }
 
 .card-product p {
-  font-size: 16px;
+  font-size: 10px;
   line-height: 1.4;
   opacity: .7;
   margin-bottom: 0;
-  margin-top: 8px;
-}
-
-.card-product .card-product-infos {
-  padding: 15px;
-  // display: flex;
-}
-
-.user-info {
-  padding: 10px;
+  // margin-top: 8px;
 }
 
 .reading-info {
-  padding: 10px;
   margin-bottom: auto;
+  overflow: hidden;
 }
 
 .reaction-counts {
-  padding: 10px;
   border-top: 5px black;
+  font-size: 10px;
 }
 
 .buttons {
-  padding: 10px;
   border-top-style: solid;
   border-width: 1px;
   border-color: grey;
-  // border-top: 5px black;
 }
 
 .button-col {
   padding: 0px;
-  margin-left: 2px;
-  margin-right: 2px;
 }
 
 .reaction-counts {
-  padding: 10px;
+  font-size: 12px;
   border-top-style: solid;
   border-width: 1px;
   border-color: grey;

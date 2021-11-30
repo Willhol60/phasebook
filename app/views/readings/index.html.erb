@@ -1,232 +1,152 @@
 <body>
-  <div class="row">
-    <div class="col-sm left-third">
-      <h1>Newsfeed</h1>
-      <%# QUOTES AND NEWS: %>
-      <%= form_tag book_readings_path(:book), method: :get do %>
-        <%= text_field_tag :query,
-          params[:query],
-          class: "form-control",
-          placeholder: "Search for a friend to see what they've been reading..."
-        %>
-        <%= submit_tag "Search", class: "btn btn-primary" %>
-      <% end %><br>
-      <div class="flip-card">
-        <div class="flip-card-inner card-quote-of-the-day">
-          <div class="flip-card-front">
+
+  <div id="newsfeed-header">
+    <%= image_tag("shapes-left.svg", style: "width: 200px; height: 140px; position: absolute; top:200px; left: 40px")%>
+
+    <%= image_tag("book-pages-left.svg", style: "width: 200; height: 200px; position: absolute; top:200px")%>
+    <%= image_tag("woman-sitting-reading.svg", style: "width: 200px; height: 200px; position: absolute; left:650px; top: 170px;")%>
+    <%= image_tag("trees-and-sunset.svg", style: "width: 200; height: 200px; position: absolute; left:750px; top: 145px;")%>
+  </div>
+
+  <div class="newsfeed-title">
+    <h2>My Newsfeed</h2>
+  </div>
+
+  <div class="readings-cards">
+    <% card_counter = 0 %>
+    <div class="row readings-cards-row">
+      <% @readings.select { |reading| reading.read_status == 'Finished' }.sort_by { |reading| reading[:end_date] }.reverse.each do |reading| %>
+        <% if card_counter != 0 && card_counter % 1 == 0 %>
           </div>
-          <div class="flip-card-back">
-            "I would always rather be happy than dignified."
-            ― Charlotte Brontë, Jane Eyre
-          </div>
-        </div>
-      </div>
-      <div class="flip-card">
-        <div class="flip-card-inner card-news">
-          <div class="flip-card-front">
-          </div>
-          <div class="flip-card-back">
-            <div class="card-news-source">
-              BBC:
-            </div>
-            <div class="card-news-title">
-              <a href="https://www.bbc.co.uk/news/uk-wales-59354988" target="_blank">
-                Old and rare books among 400,000 destroyed in fire
-              </a>
-            </div>
-            <div class="card-news-posting-time">
-              14:57 20 Nov
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="flip-card">
-        <div class="flip-card-inner card-news">
-          <div class="flip-card-front">
-          </div>
-          <div class="flip-card-back">
-            <div class="card-news-source">
-              Independent:
-            </div>
-            <div class="card-news-title">
-              <a href="https://www.independent.co.uk/arts-entertainment/books/features/abdulrazak-gurnah-nobel-prize-books-b1949697.html" target="_blank">
-                Why one Nobel Laureate is struggling to sell books in America
-              </a>
-            </div>
-            <div class="card-news-posting-time">
-              00:00 05 Nov
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="flip-card">
-        <div class="flip-card-inner card-news">
-          <div class="flip-card-front">
-          </div>
-          <div class="flip-card-back">
-            <div class="card-news-source">
-              Independent:
-            </div>
-            <div class="card-news-title">
-              <a href="https://www.independent.co.uk/arts-entertainment/books/features/abdulrazak-gurnah-nobel-prize-books-b1949697.html" target="_blank">
-                Why one Nobel Laureate is struggling to sell books in America
-              </a>
-            </div>
-            <div class="card-news-posting-time">
-              00:00 05 Nov
-            </div>
-          </div>
-        </div>
-      </div>
-      <%# END OF QUOTES AND NEWS %>
-      <div class="terms">
-        Terms of Service |
-        Privacy Policy |
-        Cookie Policy
-        <br>
-        © 2021 Phasebook, Inc.
-      </div>
-    </div>
-
-    <div class="col-sm middle-third">
-      <% @readings.each do |reading| %>
-        <% if reading.read_status == 'Finished' %>
-
-          <%# CARD: %>
-          <div data-controller="comment-window">
-            <div class="container card-product">
-              <%# <img src= <%= reading.book.poster_url %>
-              <div class="row card-product-infos">
-
-                <div class="col col-md-4">
-                  <%= image_tag reading.book.poster_url, style:"width: 100%; height: 100%; object-fit: contain" %>
-                </div>
-
-                <div class="col">
-                  <%# id below needed for when comment auto-loads to stop page jumping %>
-                  <div class="row user-info" id="reading-<%= reading.id %>" >
-                    <%= image_tag reading.user.profile_image, class: "col col-2 avatar" %>
-                    <div class="col col-md-auto">
-                      <div class="row">
-                        <div class="col user-full-name">
-                          <%= reading.user.first_name %> <%= reading.user.last_name %>
-                        </div>
-                        <% if reading.end_date %>
-                        <%# need to set the start_date whenever the read_status is marked as 'Current' %>
-                        <%# need to set the end_date whenever the read_status is marked as 'Finished' %>
-                          <div class="col post-time">
-                            <% if (Date.today - reading.end_date) < 1/24/60 %>
-                              <%= "Today" %>
-                            <% elsif (Date.today - reading.end_date).to_f < 2 %>
-                              <%= "Yesterday" %>
-                            <% elsif (Date.today - reading.end_date).to_f < 7 %>
-                              <%= "This week" %>
-                            <% else %>
-                            <%= reading.end_date %>
-                            <% end %>
-                          </div>
-                        <% end %>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row reading-info">
-                    <div class="col">
-                      <div class="row">
-                        <% if reading.end_date && reading.start_date %>
-                          <p>days to read:<%= (reading.end_date - reading.start_date).to_i %></p>
-                        <% end %>
-                      </div>
-                      <div class="row">
-                        <p><%= reading.book.title %></p>
-                      </div>
-                      <div class="row">
-                        <p><%= reading.book.author %></p>
-                      </div>
-                      <div class="row">
-                        <p><%= reading.book.pages %> pages</p>
-                      </div>
-                      <div class="row">
-                        <p>User rating: <%= reading.user_rating %></p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row reaction-counts">
-                    <div class="col">
-                      <%= pluralize(reading.votes_for.size, 'cheer') %>
-                    </div>
-                    <div class="col">
-                      <%= pluralize(reading.comments.count, 'comment') %>
-                    </div>
-                  </div>
-
-                  <div class="row mt-auto buttons">
-                    <div class="col button-col">
-                      <%= link_to cheers_book_reading_path(reading.book, reading) do %>
-                        <% if current_user.voted_for? reading %>
-                          <button class="btn button-cheer"></button>
-                        <% else %>
-                          <button>Cheer</button>
-                        <% end %>
-                      <% end %>
-                    </div>
-                    <div class="col button-col">
-                      <button data-action="click->comment-window#revealWindow">Comment</button>
-                    </div>
-                    <div class="col button-col">
-                      <%= link_to add_to_library_book_reading_path(reading.book, reading) do %>
-                        <button class="button-add-to-library">Add to library</button>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            <div class="container comment-window <%= "d-none" unless params[:reading] == reading.id.to_s %>" data-comment-window-target="content">
-              <%= simple_form_for([reading.book, reading, @comment], remote: true) do |f| %>
-                <% if reading.comments.empty? %>
-                  <%= f.input :content, placeholder: 'Be the first to comment!...', label:false %>
-                <% else %>
-                  <%= f.input :content, placeholder: 'Comment here...', label:false %>
-                <% end %>
-                <%= f.button :submit, class: "btn btn-primary" %>
-              <% end %>
-              <% reading.comments.reverse.each do |comment| %>
-                <div class="comment-row">
-                  <%= image_tag (comment.user.profile_image), class: "avatar" %>
-                  <div class="comment">
-                    <div class="comment-first-line">
-
-                      <% if comment.user.id == current_user.id %>
-                        <p><strong>You</strong></p>
-                        <%= link_to comment_path(comment), method: :delete, remote: true do %>
-                          <i class="fa fa-trash" aria-hidden="true"></i>
-                        <% end %>
-                      <% else %>
-                        <p><strong ><%= comment.user.first_name %> <%= comment.user.last_name %></strong></p>
-                      <% end %>
-
-                    </div>
-                    <div class="comment-second-line">
-                      <p id="comment-<%= comment.id %>"><%= comment.content %></p>
-                      <p><em><%= (comment.created_at).strftime('%A, %d %b %Y %l:%M %p') %></em></p>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-            <%# END OF CARD %>
-
-          </div>
-
+          <div class="row readings-cards-row">
         <% end %>
+        <%# CARD: %>
+        <div data-controller="comment-window">
+          <%# <div class="container card-product"> %>
+          <div class="card-product">
+            <div class="book-image">
+              <%= image_tag reading.book.poster_url %>
+            </div>
+            <div class="right-align">
+              <div class="">
+                <div class="d-flex align-items-center">
+                  <%= image_tag reading.user.profile_image, class:"avatar-square" %>
+                  <h2><%= reading.user.first_name %> <%= reading.user.last_name %></h2>
+                </div>
+                <div>
+                  <% if reading.end_date %>
+                  <%# need to set the start_date whenever the read_status is marked as 'Current' %>
+                  <%# need to set the end_date whenever the read_status is marked as 'Finished' %>
+                    <%# <div class="col post-time"> %>
+                    <% if (Date.today - reading.end_date) < 1/24/60 %>
+                      <h6> Posted: Today <h6>
+                    <% elsif (Date.today - reading.end_date).to_f < 2 %>
+                      <h6> Posted: Yesterday </h6>
+                    <% elsif (Date.today - reading.end_date).to_f < 7 %>
+                      <h6> Posted: This week </h6>
+                    <% else %>
+                    <h6> Posted:<%= reading.end_date.strftime("%B %e %Y") %></h6>
+                    <% end %>
+
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="flex-fill">
+                <%# <% if reading.end_date && reading.start_date %>
+                  <%# <p>days to read:<%= (reading.end_date - reading.start_date).to_i %>
+                <%# <% end %>
+
+                <h6><em><%= reading.book.title %></em></h6>
+                <p><%= reading.book.author %></p>
+                <p>User rating: <%= reading.user_rating %></p>
+                <p><%= pluralize(reading.votes_for.size, 'cheer') %>
+                <%= pluralize(reading.comments.count, 'comment') %></p>
+
+                <div class="d-flex justify-content-around">
+                  <%= link_to cheers_book_reading_path(reading.book, reading) do %>
+                    <% if current_user.voted_for? reading %>
+                      <i class="fas fa-check-circle" style="color:lightblue"></i>
+                    <% else %>
+                      <i class="fas fa-check-circle"></i>
+                    <% end %>
+                  <% end %>
+
+                  <button data-action="click->comment-window#revealWindow"><i class="far fa-comments"></i></button>
+
+                  <%= link_to add_to_library_book_reading_path(reading.book, reading) do %>
+                    <button class="button-add-to-library">Add to library</button>
+                  <% end %>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="container pt-2 comment-window <%= "d-none" unless params[:reading] == reading.id.to_s %>" data-comment-window-target="content">
+            <%= simple_form_for([reading.book, reading, @comment], remote: true) do |f| %>
+              <% if reading.comments.empty? %>
+                <%= f.input :content, placeholder: 'Be the first to comment!...', label:false %>
+              <% else %>
+                <%= f.input :content, placeholder: 'Comment here...', label:false %>
+              <% end %>
+              <%# <%= f.button :submit, class: "btn btn-primary" %>
+            <% end %>
+            <% reading.comments.reverse.each do |comment| %>
+              <div class="comment-row">
+                <%= image_tag (comment.user.profile_image), class: "avatar-square" %>
+                <div class="comment">
+                  <div class="comment-first-line">
+
+                    <% if comment.user.id == current_user.id %>
+                      <p style="text-decoration: underline"><strong>You</strong></p>
+                      <%= link_to comment_path(comment), method: :delete, remote: true do %>
+                        <i class="fa fa-trash" aria-hidden="true" style="color: white"></i>
+                      <% end %>
+                    <% else %>
+                      <p style="text-decoration: underline"><strong ><%= comment.user.first_name %> <%= comment.user.last_name %></strong></p>
+                    <% end %>
+
+                  </div>
+                  <div class="comment-second-line">
+                    <h6 id="comment-<%= comment.id %>"><%= comment.content %></h6>
+                    <h6><em><%= (comment.created_at).strftime('%A, %b %d') %></em></h6>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <%# END OF CARD %>
+
+        <% card_counter += 1 %>
       <% end %>
     </div>
-    <div class="col-sm right-third">
 
+    <%= image_tag("woman-reading-lounge.svg", style: "width: 200; height: 200px; position: absolute; z-index: 9; left:50px; top: 1700px;")%>
+    <%= image_tag("book-pages-right.svg", style: "width: 200; height: 200px; position: absolute; z-index: 9; left:1000px; bottom: 100px;")%>
+    <%= image_tag("shapes-right.svg", style: "width: 200; height: 200px; position: absolute; z-index: 9; left:1000px; bottom: 100px;")%>
+
+  </div>
+
+  <div class="literature-quotes-container">
+    <%= image_tag("bottom-blue-curvy-shape.svg", style: "transform: rotate(180deg); width: 100%; height: 200px; z-index: 9; position: absolute; top: -120px; left: 40px")%>
+    <%= image_tag("book-pages-right.svg", style: "width: 200; height: 200px; position: absolute; top:-120px; left: 650px")%>
+    <%= image_tag("shapes-left.svg", style: "width: 200px; height: 140px; position: absolute; top:-120px; left: 650px")%>
+
+    <%# <div class="literature-quote-text"> %>
+    <div class="literature-quotes">
+      <h2>
+        "I would always rather be happy than dignified."
+      </h2>
+      <p>Charlotte Brontë, Jane Eyre</p>
+      <%# <div class="literature-quote-source"> %>
+      <div class="literature-quote-icons">
+        <div class="quote-icon-circle-current"></div>
+        <div class="quote-icon-circle"></div>
+        <div class="quote-icon-circle"></div>
+      </div>
     </div>
   </div>
+
 </body>

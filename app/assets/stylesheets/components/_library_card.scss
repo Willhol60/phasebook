@@ -1,0 +1,14 @@
+#card-info {
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.library-card {
+  display: flex;
+  width: 350px;
+  height: 470px;
+  // align-items: center;
+  justify-content: center;
+}

@@ -1,14 +1,21 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+# Description:
+A social media platform for book lovers, created as a team final project in Le Wagon's Web Development bootcamp.
+
+# Features:
+* Landing page with call-to-action button
+* Newsfeed page of user's friends' recent reads
+* Library page of user's books
+* Profile page of user's reading statistics
 
 
-//
-To-do list, Fri 26 Nov:
--Fix randomiser button on Heroku (broken for some users)
--Will's disappearing cards
--Really fix the styling guys
--Try to find out why some links dont always work
+# Tools and technologies used:
+* Ruby on Rails
+* PostgreSQL
+* HTML, CSS, JavaScript
+* jQuery
+* Bootstrap
+* Heroku
 
+# Mock-up design:
+<img src="https://github.com/Willhol60/phasebook/blob/master/Phasebook-V2.png" alt="mock-up-v2" width="300"/>
 
-
-
-//

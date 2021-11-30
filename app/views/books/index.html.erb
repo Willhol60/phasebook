@@ -1,7 +1,7 @@
 
 <div class='container mt-5'>
   <div class="d-flex pt-5 justify-content-center">
-    <h1>My Reads</h1>
+    <h1>My Bookshelf</h1>
   </div>
 
       <div class="divider divider-center pb-5"></div>
@@ -44,7 +44,7 @@
   <!-- Modal -->
   <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   </div>
- <div class="search-bar d-flex flex-row justify-content-center py-3 mb-5">
+ <div class="search-bar d-flex flex-row justify-content-center py-3 mt-5 mb-5">
       <div>
         <%= form_tag search_books_path, class: "d-flex", method: :get do |form| %>
           <%= text_field_tag :query,
@@ -59,6 +59,13 @@
         <%= link_to "Random!", random_books_path, class: 'btn btn-outline-secondary ml-2' %>
       </div>
   </div>
+
+  <div class="d-flex pt-5 justify-content-center">
+    <h1>My Library</h1>
+  </div>
+
+      <div class="divider divider-center pb-5"></div>
+
 
   <div class="d-flex flex-wrap justify-content-center align-items-center p-2">
     <%# Copied from readings index: %>

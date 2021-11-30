@@ -1,0 +1,60 @@
+// body {
+//   background-color: $darkblue;
+// }
+
+#newsfeed-header {
+  width: 100%;
+  height: 200px;
+  background-color: white;
+}
+
+.newsfeed-title {
+  padding: 40px;
+  position: sticky;
+}
+
+.newsfeed-title h2 {
+  font-size: 60px;
+  font-style: italic;
+  font-weight: lighter;
+  color: white;
+  text-align: center;
+}
+
+.literature-quotes-container {
+  width: 100%;
+  height: 300px;
+  background-color: $darkblue;
+  position: relative;
+  color: white;
+  text-align: center;
+  padding: 50px 0;
+}
+
+.literature-quotes {
+  position:absolute;
+  top: 50%; left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 90%;
+}
+
+.literature-quotes h2 {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.literature-quotes p {
+  font-weight: lighter;
+  font-style: italic;
+  font-size: 20px;
+}
+
+.flip-future {
+  opacity: 0.5;
+  position: relative;
+}
+
+.flip-current {
+  opacity: 1;
+  position: relative;
+}

@@ -29,7 +29,7 @@
                     <%# need to set the start_date whenever the read_status is marked as 'Current' %>
                     <%# need to set the end_date whenever the read_status is marked as 'Finished' %>
                       <%# <div class="col post-time"> %>
-                    <% if (Date.today - reading.end_date) < 1/24/60 %>
+                    <% if (Date.today - reading.end_date) < 1 %>
                       <h6> Posted: Today <h6>
                     <% elsif (Date.today - reading.end_date).to_f < 2 %>
                       <h6> Posted: Yesterday </h6>
@@ -71,7 +71,7 @@
                 <p><%= reading.comments.count %></p>
               </div>
               <div class="add-book-button">
-                <%= link_to books_path(book: reading.book), method: :post do %>
+                <%= link_to book_readings_path(reading.book), method: :post do %>
                   <button class="button-feedback">Add to My Books</button>
                 <% end %>
               </div>

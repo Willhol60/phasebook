@@ -1,6 +1,7 @@
 .whole-card {
   min-width: 50vw;
   background-color: whitesmoke;
+  border-radius: 12px;
 }
 
 .top-line {
@@ -18,6 +19,7 @@
 .book-cover-image {
   height: 100%;
   width: 33%;
+  display: contents;
 }
 
 .book-card {
@@ -25,6 +27,12 @@
   width: 40vw;
 }
 
+.book-post-info {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
 .card-product {
   overflow: hidden;
   height: 20vh;

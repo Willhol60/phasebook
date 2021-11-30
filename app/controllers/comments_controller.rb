@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: :create
   def new
     @comment = Comment.new
   end
@@ -10,24 +11,11 @@ class CommentsController < ApplicationController
     reading = @comment.reading_id
     if @comment.save
       # this will need to be changed to Stimulus auto-loading
-      redirect_to book_readings_path(anchor: "reading-#{reading}", reading: reading)
+      redirect_to book_readings_path(:book, anchor: "reading-#{reading}", reading: reading)
     else
       render :new
     end
   end
-
-  # def edit
-  # end
-
-  # def update
-  #   @comment = Comment.find(params[:id])
-  #   @comment.update(comment_params)
-
-  #   respond_to do |format|
-  #     format.html { redirect_to book_readings_path(anchor: "comment-#{@comment.id}") }
-  #     # format.text
-  #   end
-  # end
 
   def destroy
     puts params[:id]

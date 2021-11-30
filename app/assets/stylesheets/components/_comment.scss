@@ -1,12 +1,12 @@
 .comment-window {
+  border-radius: 12px;
   overflow: scroll;
-  height: 200px;
-  width: 70%;
-  background: white;
+  height: 20vh;
+  width: 100%;
+  background: lightgrey;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  // display: flex;
   margin-bottom: 24px;
-  height: fit-content;
+  padding-top: 1em;
 }
 
 .comment-row {
@@ -17,9 +17,9 @@
 .comment {
   border: 1px solid grey;
   border-radius: 8px;
-  background-color: lightblue;
+  background-color: lightsteelblue;
   flex-grow: 1;
-  padding: 6px;
+  padding: 3px;
 }
 
 .comment-first-line {

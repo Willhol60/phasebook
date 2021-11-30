@@ -7,4 +7,11 @@ export default class extends Controller {
     this.contentTarget.classList.toggle('d-none');
   }
 
+  submit(event) {
+    if (event.key == 'Enter') {
+      event.target.parentElement.parentElement.submit()
+    }
+    // console.log(event.key)
+  }
+
 }

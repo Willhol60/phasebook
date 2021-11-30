@@ -1,12 +1,12 @@
 // Import Google fonts
 // @import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Teko:wght@500&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
 
 // Define fonts for body and headers
-$body-font: "Merriweather :400", "Merriweather", "sans-serif";
-$headers-font: "Merriweather :200", "Merriweather", "sans-serif";
-$headers-font-size: 60px;
-$headers-font-style: oblique 30deg;
+
+$body-font: "Merriweather", "Helvetica", "serif";
+$headers-font: "Merriweather", "Helvetica", "serif";
+
 
 
 // To use a font file (.woff) uncomment following lines

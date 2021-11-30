@@ -17,7 +17,7 @@
     <div class="row readings-cards-row">
       <% @readings.select { |reading| reading.read_status == 'Finished' }.sort_by { |reading| reading[:end_date] }.reverse.each do |reading| %>
         <div data-controller="comment-window">
-          <div class="whole-card">
+          <div class="whole-card" id=<%= "reading-#{reading.id}" %>>
             <div class="top-line p-2">
               <div class="user-line d-flex align-items-center">
                 <div class="profile-image pr-2">
@@ -49,9 +49,9 @@
                   <%= image_tag reading.book.poster_url %>
                 </div>
                 <div class="book-post-info">
-                  <h3><em><%= reading.book.title.truncate(70) %></em></h3>
+                  <h3><em><strong><%= reading.book.title.truncate(70) %></strong></em></h3>
                   <p><%= reading.book.author %></p>
-                  <p>User rating: <%= reading.user_rating %></p>
+                  <p>⭐<%=reading.user.first_name %> awarded <%= pluralize(reading.user_rating, 'star') %> ⭐</p>
                 </div>
               </div>
             </div>
@@ -59,33 +59,32 @@
               <div class="cheer-button d-flex">
                 <%= link_to cheers_book_reading_path(reading.book, reading) do %>
                   <% if current_user.voted_for? reading %>
-                    <i class="fas fa-check-circle" style="color:lightblue; font-size:40px"></i>
+                    <i class="fas fa-check-circle" style="color:lightblue; font-size:40px; padding:8px"></i>
                   <% else %>
-                    <i class="fas fa-check-circle" style="font-size:40px"></i>
+                    <i class="fas fa-check-circle" style="font-size:40px; padding:8px"></i>
                   <% end %>
                 <% end %>
                 <p><%= reading.votes_for.size %></p>
               </div>
               <div class="comment-button d-flex">
-                <button data-action="click->comment-window#revealWindow"><i class="far fa-comments" style="font-size:40px"></i></button>
+                <button class="button-feedback" data-action="click->comment-window#revealWindow"><i class="far fa-comments" style="font-size:40px"></i></button>
                 <p><%= reading.comments.count %></p>
               </div>
               <div class="add-book-button">
                 <%= link_to books_path(book: reading.book), method: :post do %>
-                  <button style="font-size:16px">Add to My Books</button>
+                  <button class="button-feedback">Add to My Books</button>
                 <% end %>
               </div>
             </div>
           </div>
           <div class="container comment-window <%= "d-none" unless params[:reading] == reading.id.to_s %>" data-comment-window-target="content">
-            <%= simple_form_for([reading.book, reading, @comment], remote: true) do |f| %>
-              <% if reading.comments.empty? %>
-                <%= f.input :content, placeholder: 'Be the first to comment!...', label:false %>
-              <% else %>
-                <%= f.input :content, placeholder: 'Comment here...', label:false %>
+              <%= simple_form_for([reading.book, reading, @comment], remote: true) do |f| %>
+                <% if reading.comments.empty? %>
+                  <%= f.input :content, placeholder: 'Be the first to comment!...', label:false, input_html: { data: { action:"keyup->comment-window#submit"} } %>
+                <% else %>
+                  <%= f.input :content, placeholder: 'Comment here...', label:false, input_html: { data: { action:"keyup->comment-window#submit"} }  %>
+                <% end %>
               <% end %>
-              <%= f.submit %>
-            <% end %>
             <% reading.comments.reverse.each do |comment| %>
               <div class="comment-row">
                 <%= image_tag (comment.user.profile_image), class: "avatar-square" %>
@@ -103,7 +102,7 @@
 
                   </div>
                   <div class="comment-second-line">
-                    <h6 id="comment-<%= comment.id %>"><%= comment.content %></h6>
+                    <p id="comment-<%= comment.id %>"><%= comment.content %></p>
                     <h6><em><%= (comment.created_at).strftime('%A, %b %d') %></em></h6>
                   </div>
                 </div>

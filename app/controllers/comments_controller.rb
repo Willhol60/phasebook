@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     reading = @comment.reading_id
     if @comment.save
       # this will need to be changed to Stimulus auto-loading
-      redirect_to book_readings_path(anchor: "reading-#{reading}", reading: reading)
+      redirect_to book_readings_path(:book, anchor: "reading-#{reading}", reading: reading)
     else
       render :new
     end

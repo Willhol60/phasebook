@@ -15,7 +15,7 @@
     </div>
 
     <div class="row readings-cards-row">
-      <% @readings.select { |reading| reading.read_status == 'Finished' }.sort_by { |reading| reading[:end_date] }.reverse.each do |reading| %>
+      <% @readings.select { |reading| reading.read_status == 'Finished' && reading.end_date }.sort_by { |reading| reading[:end_date] }.reverse.each do |reading| %>
         <div data-controller="comment-window">
           <div class="whole-card" id=<%= "reading-#{reading.id}" %>>
             <div class="top-line p-2">

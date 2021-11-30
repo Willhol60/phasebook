@@ -42,9 +42,13 @@
   </div>
 
   <!-- Modal -->
-  <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  </div>
- <div class="search-bar d-flex flex-row justify-content-center py-3 mt-5 mb-5">
+
+  <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+  
+  <!-- End of Modal -->
+  
+  <div class="search-bar d-flex flex-row justify-content-center py-3 mb-5">
+
       <div>
         <%= form_tag search_books_path, class: "d-flex", method: :get do |form| %>
           <%= text_field_tag :query,
@@ -68,9 +72,7 @@
 
 
   <div class="d-flex flex-wrap justify-content-center align-items-center p-2">
-    <%# Copied from readings index: %>
     <% current_user.readings.where('read_status = ?', 'Finished').reverse.each do |reading| %>
-    <%# CARD: %>
       <div class="library-card" >
         <div data-controller="library-card" class="m-3">
           <div data-action="mouseenter->library-card#changeCard mouseleave->library-card#changeCardBack">
@@ -89,11 +91,12 @@
                   <div id="card-info">
                     <h4 style='color: white'><%= reading.book.title %></h4>
                     <p><%= reading.book.author %></p>
-                    <p>Rated: <%= reading.user_rating %></p>
+
+                    <p>User Rating: <%= reading.user_rating %></p>
+                    <% new_average = (reading.book.rating.to_f*reading.book.rating_count.to_f + reading.user_rating.to_f) / (reading.book.rating_count.to_f + 1) %>
+                    <p>Average Rating: <%= new_average.round(1) %></p>
+
                   </div>
-                </div>
-                <div class='row'>
-                  <p>Reading status: <%= reading.read_status %></p>
                 </div>
               </div>
             </div>

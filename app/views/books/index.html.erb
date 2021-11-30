@@ -80,8 +80,11 @@
                   <div id="card-info">
                     <h4 style='color: white'><%= reading.book.title %></h4>
                     <p><%= reading.book.author %></p>
-                    <p>Rated: <%= reading.user_rating %></p>
-                    <p>Reading status: <%= reading.read_status %></p>
+
+                    <p>User Rating: <%= reading.user_rating %></p>
+                    <% new_average = (reading.book.rating.to_f*reading.book.rating_count.to_f + reading.user_rating.to_f) / (reading.book.rating_count.to_f + 1) %>
+                    <p>Average Rating: <%= new_average.round(1) %></p>
+
                   </div>
                 </div>
               </div>

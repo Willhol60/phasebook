@@ -9,7 +9,7 @@
           <i class="fas fa-bookmark"></i>
         </div>
         <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain;" %>
-        <%= link_to "Finish Reading", "#", class: "read-button current"  %>
+        <%= link_to "Finish Reading", open_list_modal_reading_path(reading), class: "read-button current", remote: true  %>
       </li>
     <% end %>
     <% current_user.readings.where('read_status = ?', 'Future').reverse.each do |reading| %>
@@ -18,20 +18,35 @@
           <i class="fas fa-bookmark"></i>
         </div>
         <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain;" %>
-        <%= link_to "Start Reading", "#", class: "read-button future"  %>
+        <%= link_to "Start Reading", start_reading_path(reading), method: :put, class: "read-button future"  %>
       </li>
     <% end %>
     </ul>
   </div>
 
+  <!-- Modal -->
+  <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Please enter a rating:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= link_to "Enter Ratings", "#", class: "btn btn-primary"  %>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
-
-  Top categories:
-  <% current_user.top_categories.each do |key, value| %>
-    <%= "#{key}- #{pluralize(value, 'book')} read "%>
-    <br>
-  <% end %>
+  <br>
   <%= form_tag search_books_path, method: :get do |form| %>
     <%= text_field_tag :query,
       params[:query],
@@ -69,8 +84,6 @@
                 <div class='row'>
                   <p>Reading status: <%= reading.read_status %></p>
                 </div>
-                <br>
-                <%= link_to "Delete", book_path(reading.book), method: :delete, class: "btn btn-danger"  %>
               </div>
             </div>
           </div>

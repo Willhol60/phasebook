@@ -23,6 +23,13 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :readings, only: :destroy
+  resources :readings, only: :destroy do
+    member do
+      put "start"
+      put "finish"
+      get "open_list_modal"
+    end
+  end
+
   resources :comments, only: :destroy
 end

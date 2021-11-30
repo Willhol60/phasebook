@@ -19,14 +19,19 @@ require("channels")
 import "controllers"
 import "bootstrap"
 import "chartkick/chart.js"
+import $ from "jquery";
 // import "/js/jquery.min.js"
 import "jquery.flipster/dist/jquery.flipster.min.js"
 import "jquery.flipster/dist/jquery.flipster.min.css"
 import "jquery.flipster/dist/jquery.flipster.css"
+
+// To expose jQuery to my js.erb views
 
 document.addEventListener('turbolinks:load', () => {
   $('.my-flipster').flipster({
     style: 'flat',
     spacing: -0.1
   });
-})
+});
+
+global.$ = jQuery;

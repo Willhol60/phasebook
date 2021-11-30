@@ -26,14 +26,6 @@
   </div>
 
 
-
-
-  Top categories:
-  <% current_user.top_categories.each do |key, value| %>
-    <%= "#{key}- #{pluralize(value, 'book')} read "%>
-    <br>
-  <% end %>
-
   <%= form_tag search_books_path, method: :get do |form| %>
     <%= text_field_tag :query,
       params[:query],

@@ -1,0 +1,106 @@
+.whole-card {
+  min-width: 50vw;
+  background-color: whitesmoke;
+}
+
+.top-line {
+  border-bottom: 2px solid grey;
+}
+
+.book-image {
+  width: 20%;
+  height: 20vh;
+  object-fit: cover;
+  position: absolute;
+  left: 0;
+}
+
+.book-cover-image {
+  height: 100%;
+  width: 33%;
+}
+
+.book-card {
+  background-color: #3FA9F5;
+  width: 40vw;
+}
+
+.card-product {
+  overflow: hidden;
+  height: 20vh;
+  width: 30vw;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+  border-radius: 3px;
+  position: relative;
+}
+
+.card-product h2 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.card-product p {
+  font-size: 10px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  // margin-top: 8px;
+}
+
+h6 {
+  font-size: small;
+}
+
+.readings-cards {
+  background: linear-gradient($darkblue, white);
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+.readings-cards-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.right-align {
+  position: absolute;
+  right: 0;
+  width: 20vw;
+}
+
+
+.reading-info {
+  margin-bottom: auto;
+  overflow: hidden;
+}
+
+.reaction-counts {
+  border-top: 5px black;
+  font-size: 10px;
+}
+
+.buttons {
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: grey;
+}
+
+.button-col {
+  padding: 0px;
+}
+
+.reaction-counts {
+  font-size: 12px;
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: grey;
+}
+
+.feedback-bar {
+  border-top: 2px solid grey;
+}

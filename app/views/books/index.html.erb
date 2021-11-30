@@ -1,6 +1,32 @@
 <div class='container'>
   <h1>My Reads</h1>
 
+  <div class="my-flipster">
+    <ul>
+    <% current_user.readings.where('read_status = ?', 'Current').reverse.each do |reading| %>
+      <li data-flip-category="<%= reading.read_status %>" class='flip-current'>
+        <div class='bookmark b-current'>
+          <i class="fas fa-bookmark"></i>
+        </div>
+        <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain;" %>
+        <%= link_to "Finish Reading", "#", class: "read-button current"  %>
+      </li>
+    <% end %>
+    <% current_user.readings.where('read_status = ?', 'Future').reverse.each do |reading| %>
+      <li data-flip-category="<%= reading.read_status %>" class='flip-future'>
+        <div class='bookmark b-future'>
+          <i class="fas fa-bookmark"></i>
+        </div>
+        <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain;" %>
+        <%= link_to "Start Reading", "#", class: "read-button future"  %>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+
+
+
+
   Top categories:
   <% current_user.top_categories.each do |key, value| %>
     <%= "#{key}- #{pluralize(value, 'book')} read "%>
@@ -15,9 +41,9 @@
     <%= submit_tag "Search", class: "btn btn-primary mb-2 mt-2" %>
   <% end %>
   <%= link_to "Random!", random_books_path, class: 'btn btn-success mb-2' %>
-
   <div class="d-flex flex-wrap justify-content-center align-items-center p-2">
-    <% current_user.readings.reverse.each do |reading| %>
+    <%# Copied from readings index: %>
+    <% current_user.readings.where('read_status = ?', 'Finished').reverse.each do |reading| %>
     <%# CARD: %>
       <div class="library-card" >
         <div data-controller="library-card" class="m-3">
@@ -40,6 +66,11 @@
                     <p>Rated: <%= reading.user_rating %></p>
                   </div>
                 </div>
+                <div class='row'>
+                  <p>Reading status: <%= reading.read_status %></p>
+                </div>
+                <br>
+                <%= link_to "Delete", book_path(reading.book), method: :delete, class: "btn btn-danger"  %>
               </div>
             </div>
           </div>

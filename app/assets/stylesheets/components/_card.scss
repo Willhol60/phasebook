@@ -157,3 +157,60 @@ h6 {
   border-width: 1px;
   border-color: grey;
 }
+
+.flip-future {
+  opacity: 0.5;
+  position: relative;
+}
+
+.flip-current {
+  opacity: 1;
+  position: relative;
+}
+
+.bookmark {
+  position: absolute;
+  left: 190px;
+  top: -20px;
+  font-size: 50px;
+}
+
+.b-current {
+  color: #03cfa6;
+}
+
+.b-future {
+  color: #0071bc;
+}
+
+.read-button {
+  position: absolute;
+  width: 60%;
+  right: 20%;
+  margin-bottom: 5px;
+  text-align: center;
+  bottom: 0px;
+  padding: 10px 15px;
+  color: white;
+  transition-duration: 0.2s;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+.current {
+  background-color:#03cfa6;
+}
+
+.future {
+  background-color:#0071bc;
+}
+
+
+.read-button:hover {
+  color: #0071bc;
+  font-style: bold;
+  background-color: white;
+  border: #28374e solid 2px;
+  text-decoration: none;
+  box-shadow: 0px 0px 3px #28374e;
+}

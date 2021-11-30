@@ -12,9 +12,6 @@ Rails.application.routes.draw do
       resources :comments, except: :destroy
       member do
         get :cheers
-
-        # Add book to library:
-        get :add_to_library
       end
     end
   end
@@ -23,6 +20,7 @@ Rails.application.routes.draw do
       put "start"
       put "finish"
       get "open_list_modal"
+      put "add"
     end
   end
 

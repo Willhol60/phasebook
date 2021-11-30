@@ -1,31 +1,74 @@
-<div class='container'>
-  <h1>My Reads</h1>
 
-  Top categories:
-  <% current_user.top_categories.each do |key, value| %>
-    <%= "#{key}- #{pluralize(value, 'book')} read "%>
-    <br>
-  <% end %>
-  <%= form_tag search_books_path, method: :get do |form| %>
-    <%= text_field_tag :query,
-      params[:query],
-      class: "form-control",
-      placeholder: "Find a book by title, ISBN, author, or category"
-    %>
-    <%= submit_tag "Search", class: "btn btn-primary mb-2 mt-2" %>
-  <% end %>
-  <%= link_to "Random!", random_books_path, class: 'btn btn-success mb-2' %>
+<div class='container mt-5'>
+  <div class="d-flex pt-5 justify-content-center">
+    <h1>My Reads</h1>
+  </div>
+
+      <div class="divider divider-center pb-5"></div>
+
+      <div class="d-flex justify-content-around py-3 mb-5">
+
+            <h4>Top categories:</h4>
+            <% current_user.top_categories.each do |key, value| %>
+            <div class="border-left px-5 border-right text-center">
+              <h4><%= "#{key}"%></h4>
+              <h4><%= "#{pluralize(value, 'book')} read " %></h4>
+            </div>
+            <% end %>
+
+      </div>
+
+  <div class="my-flipster">
+    <ul>
+    <% current_user.readings.where('read_status = ?', 'Current').reverse.each do |reading| %>
+      <li data-flip-category="<%= reading.read_status %>" class='flip-current'>
+        <div class='bookmark b-current'>
+          <i class="fas fa-bookmark"></i>
+        </div>
+        <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain;" %>
+        <%= link_to "Finish Reading", open_list_modal_reading_path(reading), class: "read-button current", remote: true  %>
+      </li>
+    <% end %>
+    <% current_user.readings.where('read_status = ?', 'Future').reverse.each do |reading| %>
+      <li data-flip-category="<%= reading.read_status %>" class='flip-future'>
+        <div class='bookmark b-future'>
+          <i class="fas fa-bookmark"></i>
+        </div>
+        <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain;" %>
+        <%= link_to "Start Reading", start_reading_path(reading), method: :put, class: "read-button future"  %>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+
+  <div class="search-bar d-flex flex-row justify-content-center py-3 mb-5">
+      <div>
+        <%= form_tag search_books_path, class: "d-flex", method: :get do |form| %>
+          <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            placeholder: "Find a book by title, ISBN, author, or category"
+          %>
+          <%= submit_tag "Search", class: "btn btn-primary ml-2" %>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to "Random!", random_books_path, class: 'btn btn-outline-secondary ml-2' %>
+      </div>
+  </div>
 
   <div class="d-flex flex-wrap justify-content-center align-items-center p-2">
-    <% current_user.readings.reverse.each do |reading| %>
-    <%# CARD: %>
+    <% current_user.readings.where('read_status = ?', 'Finished').reverse.each do |reading| %>
       <div class="library-card" >
         <div data-controller="library-card" class="m-3">
           <div data-action="mouseenter->library-card#changeCard mouseleave->library-card#changeCardBack">
-            <div data-library-card-target="cover" >
-              <%= image_tag reading.book.poster_url, style:"width: 280px; height: 400px; object-fit: contain" %>
+            <div data-library-card-target="cover" class="book-poster-image" >
+              <%= image_tag reading.book.poster_url %>
             </div>
-            <div class="d-none" data-library-card-target="info" style="width: 300px; height: 420px; margin-top: -20px" >
+            <div class="d-none hover-shade" data-library-card-target="info" >
               <div style="color: white; background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('<%=reading.book.poster_url%>');
                           background-size: cover; padding: 12px ">
                 <div class="d-flex flex-column">
@@ -35,11 +78,13 @@
                     <% end %>
                   </div>
                   <div id="card-info">
-                    <h4><%= reading.book.title %></h4>
+                    <h4 style='color: white'><%= reading.book.title %></h4>
                     <p><%= reading.book.author %></p>
+
                     <p>User Rating: <%= reading.user_rating %></p>
                     <% new_average = (reading.book.rating.to_f*reading.book.rating_count.to_f + reading.user_rating.to_f) / (reading.book.rating_count.to_f + 1) %>
                     <p>Average Rating: <%= new_average.round(1) %></p>
+
                   </div>
                 </div>
               </div>
@@ -49,8 +94,8 @@
       </div>
 
     <% end %>
+
   </div>
-  <%# <% if reading.end_date && reading.start_date %>
-    <%# <p>days to read:<%= (reading.end_date - reading.start_date).to_i %>
-  <%# <% end %>
+  <div class="d-flex" id="book"><%= image_tag "book-pages-left.svg" %></div>
+  <div class="d-flex" id="twinkle"><%= image_tag "shapes-left.svg" %></div>
 </div>

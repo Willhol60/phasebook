@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  get 'comments/new'
-  get 'comments/create'
-  get 'comments/edit'
-  get 'comments/update'
-  get 'comments/destroy'
   get '/profile', to: 'pages#profile'
   devise_for :users
   root to: 'pages#home'
@@ -23,6 +18,13 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :readings, only: :destroy
+  resources :readings, only: :destroy do
+    member do
+      put "start"
+      put "finish"
+      get "open_list_modal"
+    end
+  end
+
   resources :comments, only: :destroy
 end

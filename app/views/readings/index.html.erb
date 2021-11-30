@@ -8,36 +8,27 @@
     <%= image_tag("trees-and-sunset.svg", style: "width: 200; height: 200px; position: absolute; left:750px; top: 145px;")%>
   </div>
 
-  <div class="newsfeed-title">
-    <h2>My Newsfeed</h2>
-  </div>
 
   <div class="readings-cards">
-    <% card_counter = 0 %>
+    <div class="newsfeed-title">
+      <h2>My Newsfeed</h2>
+    </div>
+
     <div class="row readings-cards-row">
-      <% @readings.select { |reading| reading.read_status == 'Finished' }.sort_by { |reading| reading[:end_date] }.reverse.each do |reading| %>
-        <% if card_counter != 0 && card_counter % 1 == 0 %>
-          </div>
-          <div class="row readings-cards-row">
-        <% end %>
-        <%# CARD: %>
+      <% @readings.select { |reading| reading.read_status == 'Finished' && reading.end_date }.sort_by { |reading| reading[:end_date] }.reverse.each do |reading| %>
         <div data-controller="comment-window">
-          <%# <div class="container card-product"> %>
-          <div class="card-product">
-            <div class="book-image">
-              <%= image_tag reading.book.poster_url %>
-            </div>
-            <div class="right-align">
-              <div class="">
-                <div class="d-flex align-items-center">
+          <div class="whole-card" id=<%= "reading-#{reading.id}" %>>
+            <div class="top-line p-2">
+              <div class="user-line d-flex align-items-center">
+                <div class="profile-image pr-2">
                   <%= image_tag reading.user.profile_image, class:"avatar-square" %>
-                  <h2><%= reading.user.first_name %> <%= reading.user.last_name %></h2>
                 </div>
-                <div>
+                <div class="profile-user">
+                  <h2><%= reading.user.first_name %> <%= reading.user.last_name %></h2>
                   <% if reading.end_date %>
-                  <%# need to set the start_date whenever the read_status is marked as 'Current' %>
-                  <%# need to set the end_date whenever the read_status is marked as 'Finished' %>
-                    <%# <div class="col post-time"> %>
+                    <%# need to set the start_date whenever the read_status is marked as 'Current' %>
+                    <%# need to set the end_date whenever the read_status is marked as 'Finished' %>
+                      <%# <div class="col post-time"> %>
                     <% if (Date.today - reading.end_date) < 1/24/60 %>
                       <h6> Posted: Today <h6>
                     <% elsif (Date.today - reading.end_date).to_f < 2 %>
@@ -47,51 +38,53 @@
                     <% else %>
                     <h6> Posted:<%= reading.end_date.strftime("%B %e %Y") %></h6>
                     <% end %>
-
                   <% end %>
                 </div>
               </div>
+            </div>
 
-              <div class="flex-fill">
-                <%# <% if reading.end_date && reading.start_date %>
-                  <%# <p>days to read:<%= (reading.end_date - reading.start_date).to_i %>
-                <%# <% end %>
-
-                <h6><em><%= reading.book.title %></em></h6>
-                <p><%= reading.book.author %></p>
-                <p>User rating: <%= reading.user_rating %></p>
-                <p><%= pluralize(reading.votes_for.size, 'cheer') %>
-                <%= pluralize(reading.comments.count, 'comment') %></p>
-
-                <div class="d-flex justify-content-around">
-                  <%= link_to cheers_book_reading_path(reading.book, reading) do %>
-                    <% if current_user.voted_for? reading %>
-                      <i class="fas fa-check-circle" style="color:lightblue"></i>
-                    <% else %>
-                      <i class="fas fa-check-circle"></i>
-                    <% end %>
-                  <% end %>
-
-                  <button data-action="click->comment-window#revealWindow"><i class="far fa-comments"></i></button>
-
-                  <%= link_to add_to_library_book_reading_path(reading.book, reading) do %>
-                    <button class="button-add-to-library">Add to library</button>
-                  <% end %>
+            <div class="book-card-holder d-flex justify-content-around">
+              <div class="book-card d-flex m-3">
+                <div class="book-cover-image">
+                  <%= image_tag reading.book.poster_url %>
+                </div>
+                <div class="book-post-info">
+                  <h3><em><strong><%= reading.book.title.truncate(70) %></strong></em></h3>
+                  <p><%= reading.book.author %></p>
+                  <p>⭐<%=reading.user.first_name %> awarded <%= pluralize(reading.user_rating, 'star') %> ⭐</p>
                 </div>
               </div>
-
+            </div>
+            <div class="feedback-bar d-flex my-3 justify-content-around">
+              <div class="cheer-button d-flex">
+                <%= link_to cheers_book_reading_path(reading.book, reading) do %>
+                  <% if current_user.voted_for? reading %>
+                    <i class="fas fa-check-circle" style="color:lightblue; font-size:40px; padding:8px"></i>
+                  <% else %>
+                    <i class="fas fa-check-circle" style="font-size:40px; padding:8px"></i>
+                  <% end %>
+                <% end %>
+                <p><%= reading.votes_for.size %></p>
+              </div>
+              <div class="comment-button d-flex">
+                <button class="button-feedback" data-action="click->comment-window#revealWindow"><i class="far fa-comments" style="font-size:40px"></i></button>
+                <p><%= reading.comments.count %></p>
+              </div>
+              <div class="add-book-button">
+                <%= link_to books_path(book: reading.book), method: :post do %>
+                  <button class="button-feedback">Add to My Books</button>
+                <% end %>
+              </div>
             </div>
           </div>
-
-          <div class="container pt-2 comment-window <%= "d-none" unless params[:reading] == reading.id.to_s %>" data-comment-window-target="content">
-            <%= simple_form_for([reading.book, reading, @comment], remote: true) do |f| %>
-              <% if reading.comments.empty? %>
-                <%= f.input :content, placeholder: 'Be the first to comment!...', label:false %>
-              <% else %>
-                <%= f.input :content, placeholder: 'Comment here...', label:false %>
+          <div class="container comment-window <%= "d-none" unless params[:reading] == reading.id.to_s %>" data-comment-window-target="content">
+              <%= simple_form_for([reading.book, reading, @comment], remote: true) do |f| %>
+                <% if reading.comments.empty? %>
+                  <%= f.input :content, placeholder: 'Be the first to comment!...', label:false, input_html: { data: { action:"keyup->comment-window#submit"} } %>
+                <% else %>
+                  <%= f.input :content, placeholder: 'Comment here...', label:false, input_html: { data: { action:"keyup->comment-window#submit"} }  %>
+                <% end %>
               <% end %>
-              <%# <%= f.button :submit, class: "btn btn-primary" %>
-            <% end %>
             <% reading.comments.reverse.each do |comment| %>
               <div class="comment-row">
                 <%= image_tag (comment.user.profile_image), class: "avatar-square" %>
@@ -109,7 +102,7 @@
 
                   </div>
                   <div class="comment-second-line">
-                    <h6 id="comment-<%= comment.id %>"><%= comment.content %></h6>
+                    <p id="comment-<%= comment.id %>"><%= comment.content %></p>
                     <h6><em><%= (comment.created_at).strftime('%A, %b %d') %></em></h6>
                   </div>
                 </div>
@@ -117,17 +110,19 @@
             <% end %>
           </div>
         </div>
-        <%# END OF CARD %>
-
-        <% card_counter += 1 %>
       <% end %>
     </div>
-
-    <%= image_tag("woman-reading-lounge.svg", style: "width: 200; height: 200px; position: absolute; z-index: 9; left:50px; top: 1700px;")%>
-    <%= image_tag("book-pages-right.svg", style: "width: 200; height: 200px; position: absolute; z-index: 9; left:1000px; bottom: 100px;")%>
-    <%= image_tag("shapes-right.svg", style: "width: 200; height: 200px; position: absolute; z-index: 9; left:1000px; bottom: 100px;")%>
-
   </div>
+
+
+
+
+
+
+  <%= image_tag("woman-reading-lounge.svg", style: "width: 200; height: 200px; position: absolute; z-index: 9; left:50px; top: 1700px;")%>
+  <%= image_tag("book-pages-right.svg", style: "width: 200; height: 200px; position: absolute; z-index: 9; left:1000px; bottom: 100px;")%>
+  <%= image_tag("shapes-right.svg", style: "width: 200; height: 200px; position: absolute; z-index: 9; left:1000px; bottom: 100px;")%>
+
 
   <div class="literature-quotes-container">
     <%= image_tag("bottom-blue-curvy-shape.svg", style: "transform: rotate(180deg); width: 100%; height: 200px; z-index: 9; position: absolute; top: -120px; left: 40px")%>

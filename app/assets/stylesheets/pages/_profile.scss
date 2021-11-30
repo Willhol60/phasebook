@@ -1,0 +1,83 @@
+.profile-feature {
+  width: 450px;
+  height: 350px;
+}
+
+h1 {
+  color: #28374E;
+  font-weight: 300;
+  font-style: italic;
+}
+
+h3 {
+  color: #28374E;
+  font-weight: 300;
+  font-style: italic;
+}
+
+h4 {
+  color: #28374E;
+  font-weight: 300;
+  font-style: italic;
+}
+#Top-cat-chart {
+  position: relative;
+// height: 500px;
+}
+
+.book-graphic {
+  z-index: 9;
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  top: 1055px;
+
+}
+
+.stats h2 {
+  color: #28374E;
+  font-size: 78px;
+  font-weight: 800;
+}
+
+.stats h4 {
+  padding-left: 100px;
+}
+
+#avs{
+  padding-left: 60px;
+}
+
+#ts{
+  padding-right: 15px;
+}
+
+.divider {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 1rem auto;
+    color: #E5E5E5;
+    width: 100%;
+}
+
+.divider::after, .divider::before {
+    content: '';
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+    height: 2px;
+    background-color: #EEE;
+}
+
+.astro {
+  padding-top: 40px;
+  height: 100%;
+  width: 100%;
+
+}

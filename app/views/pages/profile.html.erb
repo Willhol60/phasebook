@@ -1,21 +1,46 @@
 <div class="container mt-5">
-
-  <div class="row">
-      <h1>My Profile</h1>
-
-
-    <%= pie_chart current_user.top_categories, donut: true %>
+  <div class="d-flex pt-5 justify-content-center">
+    <h1>My Profile</h1>
+  </div>
+  <div class="divider divider-center pb-5"></div>
+  <div class="d-flex p-2 mb-1 justify-content-center">
+    <div class="profile-feature">
+      <%= image_tag "woman-profile-feature.svg" %>
+    </div>
   </div>
 
-  <div class='row'>
-    <h3>Books read: <%= current_user.books_read %></h3>
-    <br>
+  <div class="d-flex p-3 justify-content-center">
+    <h3>Top Categories</h3>
   </div>
-  <div class='row'>
-    <h3>Total time spent reading: <%= current_user.time_spent %></h3>
-    <br>
+  <div class="row p-1 mb-5">
+    <%= pie_chart current_user.top_categories, id: "Top-cat-chart", height: "500px", donut: true %>
   </div>
-  <div class='row'>
-    <h3>Reading speed: <%= current_user.avg_speed %></h3>
+
+  <div class="d-flex justify-content-center">
+    <div class="book-graphic"
+         ><%= image_tag "top-cat-donut-book.svg" %>
+    </div>
   </div>
+
+  <div class='d-flex flex-row justify-content-around py-3 mb-1'>
+    <div class="stats">
+      <h2><%= current_user.books_read %></h2>
+    </div>
+    <div class="stats">
+      <h2><%= current_user.time_spent %></h2>
+    </div>
+    <div class="stats">
+      <h2> <%= current_user.avg_speed %></h2>
+    </div>
+  </div>
+
+  <div class='d-flex flex-row justify-content-around pb-5 mb-5'>
+    <div class="stats"><h4>Books read</h4></div>
+    <div id="avs" class="stats"><h4>Average reading speed</h4></div>
+    <div id="ts" class="stats"><h4>Total time spent reading</h4></div>
+  </div>
+    <div class="d-flex justify-content-center">
+      <div class="astro"><%= image_tag "footer-graphic.svg" %></div>
+    </div>
+
 </div>

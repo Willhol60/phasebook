@@ -1,6 +1,11 @@
 body {
-  background-color: $darkblue;
+  background-color: white;
 }
+
+// svg {
+//   width: 100%;
+//   height: 100%;
+// }
 
 #newsfeed-header {
   width: 100%;
@@ -17,12 +22,12 @@ body {
   font-size: 60px;
   font-style: italic;
   font-weight: lighter;
-  color: white;
+  color: $darkblue;
   text-align: center;
 }
 
 .readings-cards {
-  background: linear-gradient($darkblue, white);
+  background: linear-gradient(white, $darkblue);
   padding-left: 80px;
   padding-right: 80px;
 }
@@ -30,15 +35,15 @@ body {
 .literature-quotes-container {
   width: 100%;
   height: 300px;
-  background-color: $darkblue;
+  background-color: white;
   position: relative;
-  color: white;
+  color: $darkblue;
   text-align: center;
   padding: 50px 0;
 }
 
 .literature-quotes {
-  position:absolute;
+  position: absolute;
   top: 50%; left: 50%;
   transform: translateX(-50%) translateY(-50%);
   width: 90%;
@@ -64,7 +69,7 @@ body {
   display: inline-block;
   height: 12px;
   width: 12px;
-  background-color: white;
+  background-color: $darkblue;
   border-radius: 50%;
   // text-align: center;
 }
@@ -73,9 +78,9 @@ body {
   display: inline-block;
   height: 12px;
   width: 12px;
-  background-color: #28374E;
+  background-color: white;
   border-style: solid;
-  border-color: white;
+  border-color: $darkblue;
   border-width: 1px;
   border-radius: 50%;
   // text-align: center;

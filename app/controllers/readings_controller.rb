@@ -24,15 +24,38 @@ class ReadingsController < ApplicationController
     end
   end
 
-  # def edit
-  #   @reading = Reading.find(params[:id])
-  # end
+  def start
+    @reading = Reading.find(params[:id])
+    @reading.update(read_status: "Current", start_date: DateTime.now)
+    flash[:notice] = 'Your reading has been updated!'
+    redirect_to request.referrer
+  end
 
-  # def update
-  #   @reading = Reading.find(params[:id])
-  #   @reading.update(reading_params)
-  #   redirect_to reading_path(@reading)
-  # end
+  def finish
+    @reading = Reading.find(params[:id])
+    @reading.update(read_status: "Finished", start_date: DateTime.now, user_rating: params[:reading][:user_rating])
+    flash[:notice] = 'Your reading has been updated!'
+    redirect_to request.referrer
+  end
+
+  def open_list_modal
+    @reading = Reading.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+=begin
+  def edit
+    @reading = Reading.find(params[:id])
+  end
+
+  def update
+    @reading = Reading.find(params[:id])
+    @reading.update(reading_params)
+    redirect_to reading_path(@reading)
+  end
+=end
 
   def cheers
     @reading = Reading.find(params[:id])

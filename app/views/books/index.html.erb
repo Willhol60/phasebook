@@ -26,7 +26,7 @@
           <i class="fas fa-bookmark"></i>
         </div>
         <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain;" %>
-        <%= link_to "Finish Reading", "#", class: "read-button current"  %>
+        <%= link_to "Finish Reading", open_list_modal_reading_path(reading), class: "read-button current", remote: true  %>
       </li>
     <% end %>
     <% current_user.readings.where('read_status = ?', 'Future').reverse.each do |reading| %>
@@ -35,12 +35,14 @@
           <i class="fas fa-bookmark"></i>
         </div>
         <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain;" %>
-        <%= link_to "Start Reading", "#", class: "read-button future"  %>
+        <%= link_to "Start Reading", start_reading_path(reading), method: :put, class: "read-button future"  %>
       </li>
     <% end %>
     </ul>
   </div>
 
+  <!-- Modal -->
+  <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
  <div class="search-bar d-flex flex-row justify-content-center py-3 mb-5">
       <div>
@@ -86,8 +88,6 @@
                 <div class='row'>
                   <p>Reading status: <%= reading.read_status %></p>
                 </div>
-                <br>
-                <%= link_to "Delete", book_path(reading.book), method: :delete, class: "btn btn-danger"  %>
               </div>
             </div>
           </div>

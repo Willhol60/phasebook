@@ -43,7 +43,7 @@ class BooksController < ApplicationController
     url = "https://www.googleapis.com/books/v1/volumes?q=#{current_user.randomise}"
     open_file = URI.open(url).read
     read_books = JSON.parse(open_file)
-    random_book = read_books['items'][rand(1..10)]
+    random_book = read_books['items'][rand(0...10)]
     hash = random_book_hash(random_book)
     @book = Book.new(hash)
     @book.save!
@@ -60,7 +60,7 @@ class BooksController < ApplicationController
   end
 
   def random_book_hash(book)
-    title = book['volumeInfo']['title'] || "No title"
+    title = book['volumeInfo']['title'] ? book['volumeInfo']['title'] : "No title"
     poster_url = book['volumeInfo']['imageLinks'] ? book['volumeInfo']['imageLinks']['thumbnail'] : "placeholder.jpg"
     author = book['volumeInfo']['authors'] ? book['volumeInfo']['authors'].first : "Unknown Author"
     publisher = book['volumeInfo']['publisher'] || "Unknown publisher"

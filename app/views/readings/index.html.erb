@@ -22,7 +22,11 @@
             <div class="top-line p-2">
               <div class="user-line d-flex align-items-center">
                 <div class="profile-image pr-2">
-                  <%= image_tag reading.user.profile_image, class:"avatar-square" %>
+                  <% if reading.user.profile_image%>
+                    <%= image_tag reading.user.profile_image, class:"avatar-square" %>
+                  <% else %>
+                    <%= image_tag "placeholder.jpg", class: "avatar-square" %>
+                  <% end %>
                 </div>
                 <div class="profile-user">
                   <h2><%= reading.user.first_name %> <%= reading.user.last_name %></h2>
@@ -58,7 +62,7 @@
                         <i class="fas fa-star"></i>
                       <% end %>
                     <% else %>
-                      <p>No User Rating</p>
+                      <p>Not rated by <%= reading.user.first_name%></p>
                     <% end %>
                   </div>
                 </div>

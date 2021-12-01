@@ -7,20 +7,19 @@
   <div class="divider divider-center pb-5"></div>
 
   <div class="search-bar d-flex flex-row justify-content-center py-3 mb-5">
-
-      <div>
-        <%= form_tag search_books_path, class: "d-flex", method: :get do |form| %>
-          <%= text_field_tag :query,
-            params[:query],
-            class: "form-control",
-            placeholder: "Find a book by title, ISBN, author, or category"
-          %>
-          <%= submit_tag "Search", class: "btn btn-primary ml-2" %>
-        <% end %>
-      </div>
-      <div>
-        <%= link_to "Suggest me!", random_books_path, class: 'btn btn-outline-secondary ml-2' %>
-      </div>
+    <div>
+      <%= form_tag search_books_path, class: "d-flex", method: :get do |form| %>
+        <%= text_field_tag :query,
+          params[:query],
+          class: "form-control",
+          placeholder: "Find a book by title, ISBN, author, or category"
+        %>
+        <%= submit_tag "Search", class: "btn btn-primary ml-2" %>
+      <% end %>
+    </div>
+    <div>
+      <%= link_to "Suggest me!", random_books_path, class: 'btn btn-outline-secondary ml-2' %>
+    </div>
   </div>
 
   <div class="my-flipster">
@@ -66,13 +65,14 @@
   </div>
 
   <div class="divider divider-center pb-5"></div>
+
   <div class="d-flex justify-content-around py-3 mb-5">
     <h4>Top categories:</h4>
     <% current_user.top_categories.each do |key, value| %>
-    <div class="border-left px-5 border-right text-center">
-      <h4><%= "#{key}"%></h4>
-      <h4><%= "#{pluralize(value, 'book')} read " %></h4>
-    </div>
+      <div class="border-left px-5 border-right text-center">
+        <h4><%= "#{key}"%></h4>
+        <h4><%= "#{pluralize(value, 'book')} read " %></h4>
+      </div>
     <% end %>
   </div>
 
@@ -112,6 +112,8 @@
     <% end %>
 
   </div>
-  <div class="d-flex" id="book"><%= image_tag "book-pages-left.svg" %></div>
-  <div class="d-flex" id="twinkle"><%= image_tag "shapes-left.svg" %></div>
+  <div class="d-flex">
+    <div id="book"><%= image_tag "book-pages-left.svg" %></div>
+    <div id="twinkle"><%= image_tag "shapes-left.svg" %></div>
+  </div>
 </div>

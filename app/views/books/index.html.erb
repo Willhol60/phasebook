@@ -32,7 +32,7 @@
         </div>
         <div class='del'>
           <%= link_to reading_path(reading), method: :delete, remote: true do %>
-            <i class="fa fa-trash" aria-hidden="true" style="color:darkgrey"></i>
+            <i class="fa fa-trash" aria-hidden="true" style="color:grey"></i>
           <% end %>
         </div>
         <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain;" %>
@@ -90,7 +90,7 @@
                 <div class="d-flex flex-column">
                   <div class="d-flex justify-content-end p-2">
                     <%= link_to book_path(reading.book), method: :delete, remote: true do %>
-                      <i class="fa fa-trash" aria-hidden="true" style="color:white"></i>
+                      <i class="fa fa-trash" aria-hidden="true" style="color:white; font-size:24px"></i>
                     <% end %>
                   </div>
                   <div id="card-info">

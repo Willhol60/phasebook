@@ -25,19 +25,19 @@
                   <%= image_tag reading.user.profile_image, class:"avatar-square" %>
                 </div>
                 <div class="profile-user">
-                  <h2><%= reading.user.first_name %> <%= reading.user.last_name %></h2>
+                  <h3><%= reading.user.first_name %> <%= reading.user.last_name %></h3>
                   <% if reading.end_date %>
                     <%# need to set the start_date whenever the read_status is marked as 'Current' %>
                     <%# need to set the end_date whenever the read_status is marked as 'Finished' %>
                       <%# <div class="col post-time"> %>
                     <% if (Date.today - reading.end_date) < 1 %>
-                      <h6> Posted: Today <h6>
+                      <h6> Today <h6>
                     <% elsif (Date.today - reading.end_date).to_f < 2 %>
-                      <h6> Posted: Yesterday </h6>
+                      <h6> Yesterday </h6>
                     <% elsif (Date.today - reading.end_date).to_f < 7 %>
-                      <h6> Posted: This week </h6>
+                      <h6> This week </h6>
                     <% else %>
-                    <h6> Posted:<%= reading.end_date.strftime("%B %e %Y") %></h6>
+                    <h6> <%= reading.end_date.strftime("%B %e %Y") %></h6>
                     <% end %>
                   <% end %>
                 </div>
@@ -57,23 +57,25 @@
               </div>
             </div>
             <div class="feedback-bar d-flex my-3 justify-content-around">
-              <div class="cheer-button d-flex">
+              <div class="cheer-button d-flex align-items-center">
                 <%= link_to cheers_book_reading_path(reading.book, reading), method: :patch, remote: true do %>
                   <% if current_user.voted_for? reading %>
                     <i class="fas fa-check-circle" style="color:lightblue; font-size:40px; padding:8px"></i>
                   <% else %>
-                    <i class="fas fa-check-circle" style="font-size:40px; padding:8px"></i>
+                    <i class="fas fa-check-circle" style="font-size:40px; color:#004370; padding:8px"></i>
                   <% end %>
                 <% end %>
-                <p><%= reading.votes_for.size %></p>
+                <p style="font-size:20px; color:#004370"><%= reading.votes_for.size %></p>
               </div>
-              <div class="comment-button d-flex">
-                <button class="button-feedback" data-action="click->comment-window#revealWindow"><i class="far fa-comments" style="font-size:40px"></i></button>
-                <p><%= reading.comments.count %></p>
+              <div class="comment-button d-flex align-items-center">
+                <button class="button-feedback" data-action="click->comment-window#revealWindow"><i class="far fa-comments"></i></button>
+                <p style="font-size:20px; color:#004370"><%= reading.comments.count %></p>
               </div>
-
-              <%= link_to "Add to library", add_reading_path(reading), method: :put, class: "add-book-button" %>
-
+              <div class="d-flex align-items-center">
+                <%= link_to add_reading_path(reading), method: :put, class: "add-book-button", style: "color:#004370" do %>
+                  <i class="far fa-plus-square" style="font-size:40px"></i>
+                <% end %>
+              </div>
             </div>
           </div>
           <div class="container comment-window <%= "d-none" unless params[:reading] == reading.id.to_s %>" data-comment-window-target="content">
@@ -91,12 +93,12 @@
                   <div class="comment-first-line">
 
                     <% if comment.user.id == current_user.id %>
-                      <p style="text-decoration: underline"><strong>You</strong></p>
+                      <p><strong>You</strong></p>
                       <%= link_to comment_path(comment), method: :delete, remote: true do %>
                         <i class="fa fa-trash" aria-hidden="true" style="color: white"></i>
                       <% end %>
                     <% else %>
-                      <p style="text-decoration: underline"><strong ><%= comment.user.first_name %> <%= comment.user.last_name %></strong></p>
+                      <p><strong ><%= comment.user.first_name %> <%= comment.user.last_name %></strong></p>
                     <% end %>
 
                   </div>

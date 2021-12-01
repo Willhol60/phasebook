@@ -1,3 +1,9 @@
+<div class="d-flex pt-5 justify-content-center">
+  <h1>Search results</h1>
+</div>
+
+<div class="divider divider-center"></div>
+
 <div class="container d-flex flex-wrap justify-content-center align-items-center p-2">
   <% @books.each do |book| %>
     <!--
@@ -54,7 +60,7 @@
                   <h4 style='color: white'><%= title %></h4>
                   <p>by <%= author %></p>
                   <p>Category: <%= category %></p>
-                  <p>Average Rating: <%= rating.round(1) %></p>
+                  <%= rating.round(1) == 0 ? "No ratings yet" : "Average Rating: #{rating.round(1)}" %>
                 </div>
               </div>
             </div>

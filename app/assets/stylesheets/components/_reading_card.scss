@@ -31,11 +31,15 @@
 
 .book-post-info {
   padding-top: 1em;
-  padding-left: 0.5em;
+  padding-left: 0.7em;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   border-radius: 10px;
+}
+
+.book-further-info {
+  padding-left: 1.2em;
 }
 
 .card-product {

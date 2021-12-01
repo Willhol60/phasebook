@@ -1,17 +1,18 @@
 .comment-window {
   border-radius: 12px;
   overflow: scroll;
-  height: 20vh;
+  height: 22vh;
   width: 100%;
   background: lightgrey;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  margin-top: -15px;
   margin-bottom: 24px;
   padding-top: 1em;
 }
 
 .comment-row {
   display: flex;
-  margin: 3px;
+  // margin: 2px;
 }
 
 .comment {
@@ -20,6 +21,7 @@
   background-color: lightsteelblue;
   flex-grow: 1;
   padding: 3px;
+  height: 80px;
 }
 
 .comment-first-line {

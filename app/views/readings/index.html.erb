@@ -13,126 +13,126 @@
       <h1>My Newsfeed</h1>
     </div>
 
-  <%# <div class="divider divider-center pb-5"></div> %>
+  <div class="divider divider-center pb-5"></div>
 
-  <div class="readings-cards">
-    <div class="row readings-cards-row">
-      <% @readings.select { |reading| reading.read_status == 'Finished' && reading.end_date }.sort_by { |reading| reading[:end_date] }.reverse.each do |reading| %>
-        <div data-controller="comment-window">
-          <div class="whole-card" id=<%= "reading-#{reading.id}" %>>
-            <div class="top-line p-2">
-              <div class="user-line d-flex align-items-center">
-                <div class="profile-image pr-2">
-                  <% if reading.user.profile_image%>
-                    <%= image_tag reading.user.profile_image, class:"avatar-square" %>
-                  <% else %>
-                    <%= image_tag "placeholder.jpg", class: "avatar-square" %>
-                  <% end %>
-                </div>
-                <div class="profile-user">
-                  <h3><%= reading.user.first_name %> <%= reading.user.last_name %></h3>
-                  <% if reading.end_date %>
-                    <%# need to set the start_date whenever the read_status is marked as 'Current' %>
-                    <%# need to set the end_date whenever the read_status is marked as 'Finished' %>
-                      <%# <div class="col post-time"> %>
-                    <% if (Date.today - reading.end_date) < 1 %>
-                      <h6> Today <h6>
-                    <% elsif (Date.today - reading.end_date).to_f < 2 %>
-                      <h6> Yesterday </h6>
-                    <% elsif (Date.today - reading.end_date).to_f < 7 %>
-                      <h6> This week </h6>
+    <div class="readings-cards">
+      <div class="row readings-cards-row">
+        <% @readings.select { |reading| reading.read_status == 'Finished' && reading.end_date }.sort_by { |reading| reading[:end_date] }.reverse.each do |reading| %>
+          <div data-controller="comment-window">
+            <div class="whole-card" id=<%= "reading-#{reading.id}" %>>
+              <div class="top-line p-2">
+                <div class="user-line d-flex align-items-center">
+                  <div class="profile-image pr-2">
+                    <% if reading.user.profile_image%>
+                      <%= image_tag reading.user.profile_image, class:"avatar-square" %>
                     <% else %>
-                    <h6> <%= reading.end_date.strftime("%B %e %Y") %></h6>
+                      <%= image_tag "placeholder.jpg", class: "avatar-square" %>
                     <% end %>
                   </div>
-                </div>
-              </div>
-
-            <div class="book-card-holder d-flex justify-content-around">
-              <div class="book-card d-flex m-3">
-                <div class="book-cover-image">
-                  <%= image_tag reading.book.poster_url %>
-                </div>
-                <div class="book-post-info">
-                  <h3><em><strong><%= reading.book.title.truncate(70) %></strong></em></h3>
-                  <p><%= reading.book.author %></p>
-                  <div>
-                    <% if reading.user_rating %>
-                      <% reading.user_rating.times do %>
-                        <i class="fas fa-star"></i>
+                  <div class="profile-user">
+                    <h3><%= reading.user.first_name %> <%= reading.user.last_name %></h3>
+                    <% if reading.end_date %>
+                      <%# need to set the start_date whenever the read_status is marked as 'Current' %>
+                      <%# need to set the end_date whenever the read_status is marked as 'Finished' %>
+                        <%# <div class="col post-time"> %>
+                      <% if (Date.today - reading.end_date) < 1 %>
+                        <h6> Today <h6>
+                      <% elsif (Date.today - reading.end_date).to_f < 2 %>
+                        <h6> Yesterday </h6>
+                      <% elsif (Date.today - reading.end_date).to_f < 7 %>
+                        <h6> This week </h6>
+                      <% else %>
+                      <h6> <%= reading.end_date.strftime("%B %e %Y") %></h6>
                       <% end %>
-                    <% else %>
-                      <p>Not rated by <%= reading.user.first_name%></p>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="feedback-bar d-flex my-3 justify-content-around">
-              <div class="cheer-button d-flex align-items-center">
-                <%= link_to cheers_book_reading_path(reading.book, reading), method: :patch, remote: true do %>
-                  <% if current_user.voted_for? reading %>
-                    <i class="fas fa-check-circle" style="color:lightblue; font-size:40px; padding:8px"></i>
-                  <% else %>
-                    <i class="fas fa-check-circle" style="font-size:40px; color:#004370; padding:8px"></i>
-                  <% end %>
-                <% end %>
-                <p style="font-size:20px; color:#004370"><%= reading.votes_for.size %></p>
-              </div>
-              <div class="comment-button d-flex align-items-center">
-                <button class="button-feedback" data-action="click->comment-window#revealWindow"><i class="far fa-comments"></i></button>
-                <p style="font-size:20px; color:#004370"><%= reading.comments.count %></p>
-              </div>
-              <div class="d-flex align-items-center">
-                <%= link_to add_reading_path(reading), method: :put, class: "add-book-button", style: "color:#004370" do %>
-                  <i class="far fa-plus-square" style="font-size:40px"></i>
-                <% end %>
-              </div>
-            </div>
-            <div class="container comment-window <%= "d-none" unless params[:reading] == reading.id.to_s %>" data-comment-window-target="content">
-                <%= simple_form_for([reading.book, reading, @comment], remote: true) do |f| %>
-                  <% if reading.comments.empty? %>
-                    <%= f.input :content, placeholder: 'Be the first to comment!...', label:false, input_html: { data: { action:"keyup->comment-window#submit"} } %>
-                  <% else %>
-                    <%= f.input :content, placeholder: 'Comment here...', label:false, input_html: { data: { action:"keyup->comment-window#submit"} }  %>
-                  <% end %>
-                <% end %>
-              <% end %>
-            <% reading.comments.reverse.each do |comment| %>
-              <div class="comment-row">
-                <%= image_tag (comment.user.profile_image), class: "avatar-square" %>
-                <div class="comment">
-                  <div class="comment-first-line">
-
-                    <% if comment.user.id == current_user.id %>
-                      <p><strong>You</strong></p>
-                      <%= link_to comment_path(comment), method: :delete, remote: true do %>
-                        <i class="fa fa-trash" aria-hidden="true" style="color: white"></i>
-                      <% end %>
-                    <% else %>
-                      <p><strong ><%= comment.user.first_name %> <%= comment.user.last_name %></strong></p>
-                    <% end %>
-
-                    </div>
-                    <div class="comment-second-line">
-                      <p id="comment-<%= comment.id %>"><%= comment.content %></p>
-                      <h6><em><%= (comment.created_at).strftime('%A, %b %d') %></em></h6>
                     </div>
                   </div>
                 </div>
-              <% end %>
+
+              <div class="book-card-holder d-flex justify-content-around">
+                <div class="book-card d-flex m-3">
+                  <div class="book-cover-image">
+                    <%= image_tag reading.book.poster_url %>
+                  </div>
+                  <div class="book-post-info">
+                    <h3><em><strong><%= reading.book.title.truncate(70) %></strong></em></h3>
+                    <p><%= reading.book.author %></p>
+                    <div>
+                      <% if reading.user_rating %>
+                        <% reading.user_rating.times do %>
+                          <i class="fas fa-star"></i>
+                        <% end %>
+                      <% else %>
+                        <p>Not rated by <%= reading.user.first_name%></p>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="feedback-bar d-flex my-3 justify-content-around">
+                <div class="cheer-button d-flex align-items-center">
+                  <%= link_to cheers_book_reading_path(reading.book, reading), method: :patch, remote: true do %>
+                    <% if current_user.voted_for? reading %>
+                      <i class="fas fa-check-circle" style="color:lightblue; font-size:40px; padding:8px"></i>
+                    <% else %>
+                      <i class="fas fa-check-circle" style="font-size:40px; color:#004370; padding:8px"></i>
+                    <% end %>
+                  <% end %>
+                  <p style="font-size:20px; color:#004370"><%= reading.votes_for.size %></p>
+                </div>
+                <div class="comment-button d-flex align-items-center">
+                  <button class="button-feedback" data-action="click->comment-window#revealWindow"><i class="far fa-comments"></i></button>
+                  <p style="font-size:20px; color:#004370"><%= reading.comments.count %></p>
+                </div>
+                <div class="d-flex align-items-center">
+                  <%= link_to add_reading_path(reading), method: :put, class: "add-book-button", style: "color:#004370" do %>
+                    <i class="far fa-plus-square" style="font-size:40px"></i>
+                  <% end %>
+                </div>
+              </div>
+              <div class="container comment-window <%= "d-none" unless params[:reading] == reading.id.to_s %>" data-comment-window-target="content">
+                  <%= simple_form_for([reading.book, reading, @comment], remote: true) do |f| %>
+                    <% if reading.comments.empty? %>
+                      <%= f.input :content, placeholder: 'Be the first to comment!...', label:false, input_html: { data: { action:"keyup->comment-window#submit"} } %>
+                    <% else %>
+                      <%= f.input :content, placeholder: 'Comment here...', label:false, input_html: { data: { action:"keyup->comment-window#submit"} }  %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% reading.comments.reverse.each do |comment| %>
+                <div class="comment-row">
+                  <%= image_tag (comment.user.profile_image), class: "avatar-square" %>
+                  <div class="comment">
+                    <div class="comment-first-line">
+
+                      <% if comment.user.id == current_user.id %>
+                        <p><strong>You</strong></p>
+                        <%= link_to comment_path(comment), method: :delete, remote: true do %>
+                          <i class="fa fa-trash" aria-hidden="true" style="color: white"></i>
+                        <% end %>
+                      <% else %>
+                        <p><strong ><%= comment.user.first_name %> <%= comment.user.last_name %></strong></p>
+                      <% end %>
+
+                      </div>
+                      <div class="comment-second-line">
+                        <p id="comment-<%= comment.id %>"><%= comment.content %></p>
+                        <h6><em><%= (comment.created_at).strftime('%A, %b %d') %></em></h6>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
             </div>
-          </div>
-        <% end %>
-      </div>
+          <% end %>
+        </div>
 
-      <div class="readings-cards-images">
-        <%= image_tag("shapes-right.svg", style: "width: 200; height: 200px;")%>
-        <%= image_tag("woman-reading-lounge.svg", style: "width: 200; height: 200px;")%>
-        <%= image_tag("book-pages-right.svg", style: "width: 200; height: 200px;")%>
-      </div>
+        <div class="readings-cards-images">
+          <%# <%= image_tag("shapes-right.svg", style: "width: 200; height: 600px;")%>
+          <%# <%= image_tag("woman-reading-lounge.svg", style: "width: 200; height: 400px;")%>
+          <%# <%= image_tag("book-pages-right.svg", style: "width: 200; height: 400px;")%>
+        </div>
 
-    </div>
+      </div>
 
   </div>
     <!-- Testimonials -->

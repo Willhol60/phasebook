@@ -4,7 +4,7 @@
     <h1>My Bookshelf</h1>
   </div>
 
-  <div class="divider divider-center pb-5"></div>
+  <div class="divider divider-center pb-2"></div>
 
   <div class="search-bar d-flex flex-row justify-content-center py-3 mb-5">
     <div>
@@ -12,13 +12,13 @@
         <%= text_field_tag :query,
           params[:query],
           class: "form-control",
-          placeholder: "Find a book by title, ISBN, author, or category"
+          placeholder: "Find a book to add to your bookshelf..."
         %>
         <%= submit_tag "Search", class: "btn btn-primary ml-2" %>
       <% end %>
     </div>
     <div>
-      <%= link_to "Suggest me!", random_books_path, class: 'btn btn-outline-secondary ml-2' %>
+      <%= link_to "Suggest one!", random_books_path, class: 'btn btn-outline-secondary ml-2' %>
     </div>
   </div>
 
@@ -85,8 +85,7 @@
               <%= image_tag reading.book.poster_url %>
             </div>
             <div class="d-none hover-shade" data-library-card-target="info" >
-              <div style="color: white; background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('<%=reading.book.poster_url%>');
-                          background-size: cover; background-position: center; padding: 12px ">
+              <div class="shaded-lib-card">
                 <div class="d-flex flex-column">
                   <div class="d-flex justify-content-end p-2">
                     <%= link_to book_path(reading.book), method: :delete, remote: true do %>

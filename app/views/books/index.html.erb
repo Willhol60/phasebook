@@ -4,19 +4,24 @@
     <h1>My Bookshelf</h1>
   </div>
 
-      <div class="divider divider-center pb-5"></div>
+  <div class="divider divider-center pb-5"></div>
 
-      <div class="d-flex justify-content-around py-3 mb-5">
+  <div class="search-bar d-flex flex-row justify-content-center py-3 mb-5">
 
-            <h4>Top categories:</h4>
-            <% current_user.top_categories.each do |key, value| %>
-            <div class="border-left px-5 border-right text-center">
-              <h4><%= "#{key}"%></h4>
-              <h4><%= "#{pluralize(value, 'book')} read " %></h4>
-            </div>
-            <% end %>
-
+      <div>
+        <%= form_tag search_books_path, class: "d-flex", method: :get do |form| %>
+          <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            placeholder: "Find a book by title, ISBN, author, or category"
+          %>
+          <%= submit_tag "Search", class: "btn btn-primary ml-2" %>
+        <% end %>
       </div>
+      <div>
+        <%= link_to "Suggest me!", random_books_path, class: 'btn btn-outline-secondary ml-2' %>
+      </div>
+  </div>
 
   <div class="my-flipster">
     <ul>
@@ -56,30 +61,20 @@
   <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
 
   <!-- End of Modal -->
-
-  <div class="search-bar d-flex flex-row justify-content-center py-3 mb-5">
-
-      <div>
-        <%= form_tag search_books_path, class: "d-flex", method: :get do |form| %>
-          <%= text_field_tag :query,
-            params[:query],
-            class: "form-control",
-            placeholder: "Find a book by title, ISBN, author, or category"
-          %>
-          <%= submit_tag "Search", class: "btn btn-primary ml-2" %>
-        <% end %>
-      </div>
-      <div>
-        <%= link_to "Suggest me!", random_books_path, class: 'btn btn-outline-secondary ml-2' %>
-      </div>
-  </div>
-
   <div class="d-flex pt-5 justify-content-center">
     <h1>My Library</h1>
   </div>
 
-      <div class="divider divider-center pb-5"></div>
-
+  <div class="divider divider-center pb-5"></div>
+  <div class="d-flex justify-content-around py-3 mb-5">
+    <h4>Top categories:</h4>
+    <% current_user.top_categories.each do |key, value| %>
+    <div class="border-left px-5 border-right text-center">
+      <h4><%= "#{key}"%></h4>
+      <h4><%= "#{pluralize(value, 'book')} read " %></h4>
+    </div>
+    <% end %>
+  </div>
 
   <div class="d-flex flex-wrap justify-content-center align-items-center p-2">
     <% current_user.readings.where('read_status = ?', 'Finished').reverse.each do |reading| %>
@@ -91,7 +86,7 @@
             </div>
             <div class="d-none hover-shade" data-library-card-target="info" >
               <div style="color: white; background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('<%=reading.book.poster_url%>');
-                          background-size: cover; padding: 12px ">
+                          background-size: cover; background-position: center; padding: 12px ">
                 <div class="d-flex flex-column">
                   <div class="d-flex justify-content-end p-2">
                     <%= link_to book_path(reading.book), method: :delete, remote: true do %>
@@ -102,9 +97,9 @@
                     <h4 style='color: white'><%= reading.book.title %></h4>
                     <p><%= reading.book.author %></p>
 
-                    <p>User Rating: <%= reading.user_rating %></p>
-                    <% new_average = (reading.book.rating.to_f*reading.book.rating_count.to_f + reading.user_rating.to_f) / (reading.book.rating_count.to_f + 1) %>
-                    <p>Average Rating: <%= new_average.round(1) %></p>
+                    <p>Your Rating: <%= reading.user_rating.round(1) %></p>
+                    <%# <% new_average = (reading.book.rating.to_f*reading.book.rating_count.to_f + reading.user_rating.to_f) / (reading.book.rating_count.to_f + 1) %>
+                    <%# <p>Average Rating: <%= new_average.round(1) %>
 
                   </div>
                 </div>

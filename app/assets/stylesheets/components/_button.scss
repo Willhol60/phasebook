@@ -10,20 +10,13 @@ button {
 }
 
 .button-feedback {
-  font-size:16px;
-  padding:8px;
+  font-size:40px;
+  color:#004370;
   background-color: whitesmoke;
-  // border: 2px solid grey;
+  &:hover {
+    background-color: whitesmoke;
+  }
 }
-
-.button-comment {
-  font-size: 40px;
-  color: white;
-}
-
-// .button-add-to-library:active {
-//   background-color: #F4D19B;
-// }
 
 .btn-landing {
   z-index: 9;

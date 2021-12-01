@@ -44,7 +44,7 @@ body {
 }
 
 .readings-cards {
-  background: $darkblue;
+  background: white;
   padding-top: 80px;
   padding-left: 80px;
   padding-right: 80px;
@@ -56,18 +56,28 @@ body {
   justify-content: space-around;
 }
 
-
-#Group_162 {
-  position: absolute;
-  bottom: 100;
-  width: 100%;
+.readings-cards-images {
+  position: fixed;
+  z-index: 9;
+  top: 0px;
+  left: 700px;
 }
+
+
+// #Group_162 {
+//   position: absolute;
+//   bottom: 100;
+//   width: 100%;
+// }
 
 #curve-div {
   width: 100%;
   position: relative;
-  bottom: -100px;
+  // bottom: -100px;
+  top: -200px;
   z-index: 8;
+  transform: scaleY(-1);
+  padding-bottom: 100px;
 }
 
 // curve png style

@@ -5,6 +5,9 @@
 }
 
 .top-line {
+  width: 96%;
+  margin-left: 15px;
+  margin-right: -10px;
   border-bottom: 1px solid grey;
 }
 
@@ -24,14 +27,14 @@
 }
 
 .book-card {
-  background-color: #3FA9F5;
+  // background-color: #3FA9F5;
   width: 45vw;
   border-radius: 10px;
 }
 
 .book-post-info {
   padding-top: 1em;
-  padding-left: 0.5em;
+  padding-left: 1em;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -115,5 +118,8 @@ h6 {
 }
 
 .feedback-bar {
+  width: 96%;
+  margin-left: 15px;
+  margin-right: -10px;
   border-top: 1px solid grey;
 }

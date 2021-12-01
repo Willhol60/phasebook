@@ -11,3 +11,12 @@
   height: 470px;
   justify-content: center;
 }
+
+.shaded-lib-card {
+  color: white;
+  background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('<%=reading.book.poster_url%>');
+  background-size: cover;
+  background-position: center;
+  padding: 12px;
+  border-radius: 10px;
+}

@@ -85,9 +85,16 @@
 
 .bookmark {
   position: absolute;
-  left: 190px;
+  right: 190px;
   top: -20px;
   font-size: 50px;
+}
+
+.del {
+  position: absolute;
+  left: 220px;
+  top: 2px;
+  font-size: 25px;
 }
 
 .b-current {
@@ -112,6 +119,7 @@
   font-weight: bold;
   border-radius: 5px;
 }
+
 .current {
   background-color:#03cfa6;
 }
@@ -119,7 +127,6 @@
 .future {
   background-color:#0071bc;
 }
-
 
 .read-button:hover {
   color: #0071bc;

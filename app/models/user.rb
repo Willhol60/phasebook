@@ -20,14 +20,14 @@ class User < ApplicationRecord
 
   def books_read
     total = 0
-    readings.each { |reading| total += 1 if reading.read_status == 'Future' }
+    readings.each { |reading| total += 1 if reading.read_status == 'Finished' }
     return total
   end
 
   def time_spent
     time = 0
     readings.each do |reading|
-      if reading.end_date && reading.start_date
+      if reading.end_date && reading.start_date && (reading.read_status == 'Finished')
         duration = (reading.end_date - reading.start_date).to_i
         time += duration
       end
@@ -40,6 +40,6 @@ class User < ApplicationRecord
   end
 
   def top_categories
-    Book.joins(:users).where("first_name = ?", first_name).where("category != ?", "No category").group(:category).count.sort_by {|k,v| v}.reverse[0..2].to_h
+    Book.joins(:readings).joins(:users).where("readings.read_status = ?", "Finished").where("first_name = ?", first_name).where("category != ?", "No category").group(:category).count.sort_by {|k,v| v}.reverse[0..2].to_h
   end
 end

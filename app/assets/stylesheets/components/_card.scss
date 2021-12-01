@@ -87,9 +87,17 @@
 
 .bookmark {
   position: absolute;
-  left: 190px;
+  right: 190px;
   top: -20px;
   font-size: 50px;
+}
+
+.del {
+  position: absolute;
+  left: 220px;
+  top: 2px;
+  font-size: 25px;
+  color: darkgray;
 }
 
 .b-current {

@@ -25,6 +25,11 @@
         <div class='bookmark b-current'>
           <i class="fas fa-bookmark"></i>
         </div>
+        <div class='del'>
+          <%= link_to reading_path(reading), method: :delete, remote: true do %>
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          <% end %>
+        </div>
         <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain;" %>
         <%= link_to "Finish Reading", open_list_modal_reading_path(reading), class: "read-button current", remote: true  %>
       </li>
@@ -33,6 +38,11 @@
       <li data-flip-category="<%= reading.read_status %>" class='flip-future'>
         <div class='bookmark b-future'>
           <i class="fas fa-bookmark"></i>
+        </div>
+        <div class='del'>
+          <%= link_to reading_path(reading), method: :delete, remote: true do %>
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          <% end %>
         </div>
         <%= image_tag reading.book.poster_url, style:"width: 250px; height: 100%; object-fit: contain;" %>
         <%= link_to "Start Reading", start_reading_path(reading), method: :put, class: "read-button future"  %>
@@ -44,9 +54,9 @@
   <!-- Modal -->
 
   <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
-  
+
   <!-- End of Modal -->
-  
+
   <div class="search-bar d-flex flex-row justify-content-center py-3 mb-5">
 
       <div>

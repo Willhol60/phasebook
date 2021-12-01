@@ -52,7 +52,15 @@
                 <div class="book-post-info">
                   <h3><em><strong><%= reading.book.title.truncate(70) %></strong></em></h3>
                   <p><%= reading.book.author %></p>
-                  <p>⭐<%=reading.user.first_name %> awarded <%= pluralize(reading.user_rating, 'star') %> ⭐</p>
+                  <div>
+                    <% if reading.user_rating %>
+                      <% reading.user_rating.times do %>
+                        <i class="fas fa-star"></i>
+                      <% end %>
+                    <% else %>
+                      <p>No User Rating</p>
+                    <% end %>
+                  </div>
                 </div>
               </div>
             </div>

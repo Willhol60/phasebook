@@ -1,14 +1,38 @@
+.whole-card-container {
+  padding-bottom: 20px;
+}
+
 .whole-card {
   min-width: 50vw;
   background-color: whitesmoke;
   border-radius: 10px;
+  box-shadow: 0 0 5px $darkblue;
 }
 
 .top-line {
-  width: 96%;
-  margin-left: 15px;
-  margin-right: -10px;
+  // width: 96%;
+  // margin-left: 15px;
+  // margin-right: -10px;
+  // padding-top: 8px;
+  margin-left: 8px;
+  margin-right: 8px;
   border-bottom: 1px solid grey;
+}
+
+.user-line .profile-user h3 {
+  font-size: 1rem;
+  font-weight: bold;
+  font-style: normal;
+}
+
+.user-line .profile-user h6 {
+  margin: 0px;
+}
+
+.avatar-square {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
 }
 
 .book-image {
@@ -33,9 +57,9 @@
 }
 
 .book-post-info {
-  padding-top: 1em;
+  // padding-top: 1em;
 
-  padding-left: 0.7em;
+  padding-left: 1em;
 
   display: flex;
   flex-direction: column;
@@ -44,7 +68,11 @@
 }
 
 .book-further-info {
-  padding-left: 1.2em;
+  // padding-left: 0.7em;
+}
+
+.fa-star {
+  color: $darkblue;
 }
 
 .card-product {
@@ -75,6 +103,24 @@
 
 h6 {
   font-size: small;
+}
+
+.cheer-button p {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: bold;
+}
+
+.comment-button .button-feedback {
+  padding-top: 5px;
+  padding: 8px;
+  // padding-right: 8px;
+}
+
+.comment-button p {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: bold;
 }
 
 .readings-cards {

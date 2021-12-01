@@ -1,11 +1,11 @@
 .whole-card {
   min-width: 50vw;
   background-color: whitesmoke;
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
 .top-line {
-  border-bottom: 2px solid grey;
+  border-bottom: 1px solid grey;
 }
 
 .book-image {
@@ -20,18 +20,22 @@
   height: 100%;
   width: 33%;
   display: contents;
+  border-radius: 10px;
 }
 
 .book-card {
   background-color: #3FA9F5;
-  width: 40vw;
+  width: 45vw;
+  border-radius: 10px;
 }
 
 .book-post-info {
-  padding: 2em;
+  padding-top: 1em;
+  padding-left: 0.5em;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  border-radius: 10px;
 }
 
 .card-product {
@@ -111,5 +115,5 @@ h6 {
 }
 
 .feedback-bar {
-  border-top: 2px solid grey;
+  border-top: 1px solid grey;
 }

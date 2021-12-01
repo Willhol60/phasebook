@@ -1,6 +1,6 @@
 .profile-feature {
-  width: 450px;
-  height: 350px;
+  width: 35%;
+  height: 35%;
 }
 // VARIABLES
 $default-delay: .2s;
@@ -91,11 +91,11 @@ $graph-height: 253px;
 // Bar chart style begins
 
 #bar-chart {
-  padding-left: 60px;
+  padding-left: 130px;
   height: 380px;
-  width: 70%;
+  width: 40%;
   position: relative;
-  margin: 50px auto 0;
+  margin: 50px 0 0;
   * {
    box-sizing: border-box;
   }
@@ -130,18 +130,18 @@ $graph-height: 253px;
       height: 0;
       position: absolute;
       text-align: center;
-      width: 25%;
-      &:nth-child(2) {
-        left: 35%;
-      }
-      &:nth-child(3) {
-        left: 70%;
-      }
+      width: 100%;
+      // // &:nth-child(2) {
+      // //   left: 35%;
+      // // }
+      // // &:nth-child(3) {
+      // //   left: 70%;
+      // }
       span {
        display: none;
       }
     }
-    @for $i from 1 through 15 {
+    @for $i from 1 through 9 {
       .bar-#{$i} {
         animation-delay: $default-delay+.1*$i;
         -webkit-animation-delay: $default-delay+.1*$i;
@@ -161,6 +161,8 @@ $graph-height: 253px;
     li {
       float: left;
       margin-right: 10.5%;
+      color:  #28374E;
+      font-style: italic;
       font-size: 11px;
       width: 11.5%;
       &:last-child {
@@ -176,7 +178,7 @@ $graph-height: 253px;
       border-top: 1px solid #4e5464;
       display: block;
       height: $graph-height/4;
-      width: 100%;
+      width: 65%;
       span {
         display: block;
         font-size: 11px;
@@ -187,13 +189,13 @@ $graph-height: 253px;
     }
   }
   .stat-1 {
-    @include stat-bar(#3FA9F5,  #0071BC, to right, left);
+    @include stat-bar(#0071BC,  #3FA9F5, to right, left);
   }
   .stat-2 {
-    @include stat-bar(#3FA9F5,  #0071BC, to right, left);
+    @include stat-bar(#0071BC,  #3FA9F5, to right, left);
   }
   .stat-3 {
-    @include stat-bar(#3FA9F5,  #0071BC, to right, left);
+    @include stat-bar(#0071BC,  #3FA9F5, to right, left);
   }
 }
 
@@ -201,7 +203,8 @@ $graph-height: 253px;
 
 
 .my-profile-image {
-
+  width: 200px;
+  border-radius: 50%;
 }
 
 h1 {

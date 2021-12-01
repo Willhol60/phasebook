@@ -16,7 +16,7 @@
   <div class="readings-cards">
     <div class="row readings-cards-row">
       <% @readings.select { |reading| reading.read_status == 'Finished' && reading.end_date }.sort_by { |reading| reading[:end_date] }.reverse.each do |reading| %>
-        <div data-controller="comment-window">
+        <div data-controller="comment-window" class="whole-card-container">
           <div class="whole-card" id=<%= "reading-#{reading.id}" %>>
             <div class="top-line p-2">
               <div class="user-line d-flex align-items-center">
@@ -47,8 +47,9 @@
               </div>
             </div>
 
-            <div class="book-card-holder d-flex justify-content-around">
-              <div class="book-card d-flex m-3">
+            <div class="book-card-holder d-flex">
+            <%# justify-content-around %>
+              <div class="book-card d-flex m-3 align-items-start">
                 <div class="book-cover-image">
                   <%= image_tag reading.book.poster_url %>
                 </div>
@@ -74,29 +75,30 @@
               <div class="cheer-button d-flex align-items-center">
                 <%= link_to cheers_book_reading_path(reading.book, reading), method: :patch, remote: true do %>
                   <% if current_user.voted_for? reading %>
-                    <i class="fas fa-check-circle" style="color:lightblue; font-size:40px; padding:8px"></i>
+                    <%# <i class="fas fa-check-circle" style="color:lightblue; font-size:30px; padding:8px"></i> %>
+                    <i class="fa fa-check-circle" style="color:#004370; font-size:30px; padding:8px"></i>
                   <% else %>
-                    <i class="fas fa-check-circle" style="font-size:40px; color:#004370; padding:8px"></i>
+                    <i class="far fa-check-circle" style="font-size:30px; color:#004370; padding:8px"></i>
                   <% end %>
                 <% end %>
                 <p style="font-size:20px; color:#004370"><%= reading.votes_for.size %></p>
               </div>
               <div class="comment-button d-flex align-items-center">
-                <button class="button-feedback" data-action="click->comment-window#revealWindow"><i class="far fa-comments"></i></button>
+                <button class="button-feedback" data-action="click->comment-window#revealWindow"><i class="far fa-comments" style="font-size:30px;"></i></button>
                 <p style="font-size:20px; color:#004370"><%= reading.comments.count %></p>
               </div>
               <div class="d-flex align-items-center">
                 <%= link_to add_reading_path(reading), method: :put, class: "add-book-button", style: "color:#004370" do %>
-                  <i class="far fa-plus-square" style="font-size:40px"></i>
+                  <i class="far fa-plus-square" style="font-size:30px"></i>
                 <% end %>
               </div>
             </div>
             <div class="container comment-window <%= "d-none" unless params[:reading] == reading.id.to_s %>" data-comment-window-target="content">
               <%= simple_form_for([reading.book, reading, @comment], remote: true) do |f| %>
                 <% if reading.comments.empty? %>
-                  <%= f.input :content, placeholder: 'Be the first to comment!...', label:false, input_html: { data: { action:"keyup->comment-window#submit"} } %>
+                  <%= f.input :content, placeholder: 'Be the first to comment!', label:false, input_html: { data: { action:"keyup->comment-window#submit"} } %>
                 <% else %>
-                  <%= f.input :content, placeholder: 'Comment here...', label:false, input_html: { data: { action:"keyup->comment-window#submit"} }  %>
+                  <%= f.input :content, placeholder: 'Leave a comment...', label:false, input_html: { data: { action:"keyup->comment-window#submit"} }  %>
                 <% end %>
               <% end %>
               <% reading.comments.reverse.each do |comment| %>
@@ -142,15 +144,15 @@
       <div class="carousel-inner">
         <div class="carousel-item active container-fluid">
           <h2 class="testimonial-text">"I would always rather be happy than dignified."</h2>
-          <em>Charlotte Brontë, Jane Eyre</em>
+          <em>Jane Eyre, Charlotte Brontë</em>
         </div>
         <div class="carousel-item container-fluid">
-          <h2 class="testimonial-text">"The Answer to the ultimate question of Life, The Universe and Everything is…42!"</h2>
-          <em>Narrator, The Hitchhiker’s Guide to the Galaxy, Douglas Adams</em>
+          <h2 class="testimonial-text">"A bear, however hard he tries, grows tubby without exercise."</h2>
+          <em>When We Were Very Young, A.A. Milne</em>
         </div>
         <div class="carousel-item container-fluid">
-          <h2 class="testimonial-text">"Pass the damn ham, please."</h2>
-          <em>Uncle Jack, To Kill a Mockingbird</em>
+          <h2 class="testimonial-text">“It matters not what someone is born, but what they grow to be.”</h2>
+          <em>Harry Potter and the Goblet of Fire, J.K. Rowling</em>
         </div>
       </div>
       <a class="carousel-control-prev" href="#testimonial-carousel" role="button" data-slide="prev">

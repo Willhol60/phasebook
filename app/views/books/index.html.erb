@@ -85,7 +85,7 @@
               <%= image_tag reading.book.poster_url %>
             </div>
             <div class="d-none hover-shade" data-library-card-target="info" >
-              <div class="shaded-lib-card">
+              <div class="shaded-lib-card" style="background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('<%=reading.book.poster_url%>')">
                 <div class="d-flex flex-column">
                   <div class="d-flex justify-content-end p-2">
                     <%= link_to book_path(reading.book), method: :delete, remote: true do %>

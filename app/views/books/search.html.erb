@@ -61,7 +61,18 @@
                   <h4 style='color: white'><%= title %></h4>
                   <p>by <%= author %></p>
                   <p>Category: <%= category %></p>
-                  <%= rating.round(1) == 0 ? "No ratings yet" : "Average Rating: #{rating.round(1)}" %>
+                  <%# <% star_rating =  %>
+                  <%# <%= rating.round == 0 ? "No ratings yet" : "Average Rating: #{rating.round.times do}" %>
+                    <%# <i class="fas fa-star" style="color:white;"></i> %>
+                  <%# <% end %>
+                  <div class="d-flex">
+                    <%= rating == 0 ? "No ratings yet" : "Average Rating:  " %>
+                    <div>
+                      <% rating.round.times do %>
+                        <i class="fas fa-star" style="color:white;"></i>
+                      <% end %>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

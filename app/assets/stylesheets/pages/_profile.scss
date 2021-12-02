@@ -207,6 +207,21 @@ $graph-height: 253px;
   border-radius: 50%;
 }
 
+.username {
+  margin-top: 8px;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.edit-button {
+  padding: 8px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 5px $darkblue;
+  font-size: 12px;
+}
+
 h1 {
   color: #28374E;
   font-weight: 300;

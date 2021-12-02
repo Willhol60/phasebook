@@ -285,3 +285,28 @@ h4 {
   width: 100%;
 
 }
+
+
+// Testimonials:
+.container-fluid{
+  padding: 7% 15%;
+  z-index: 8;
+}
+
+.colored-section {
+  text-align: center;
+  color: #fff;
+}
+/* Testimonial Section */
+
+#testimonials {
+  background-color: #0071BC;
+  z-index: 8;
+}
+
+.testimonial-text {
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  line-height: 1.5;
+}

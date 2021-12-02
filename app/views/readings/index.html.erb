@@ -175,34 +175,21 @@
 <%# <%= image_tag("woman-reading-lounge.svg", style: "width: 200; height: 400px;")%>
 <%# <%= image_tag("book-pages-right.svg", style: "width: 200; height: 400px;")%>
 
+<%# <script>
 
-<!-- Testimonials -->
-<div>
-  <section class="colored-section" id="testimonials">
-    <div id="testimonial-carousel" class="carousel slide" data-ride="false">
-      <div class="carousel-inner">
-        <div class="carousel-item active container-fluid">
-          <h2 class="testimonial-text">"I would always rather be happy than dignified."</h2>
-          <em>Jane Eyre, Charlotte Brontë</em>
-        </div>
-        <div class="carousel-item container-fluid">
-          <h2 class="testimonial-text">"A bear, however hard he tries, grows tubby without exercise."</h2>
-          <em>When We Were Very Young, A.A. Milne</em>
-        </div>
-        <div class="carousel-item container-fluid">
-          <h2 class="testimonial-text">“It matters not what someone is born, but what they grow to be.”</h2>
-          <em>Harry Potter and the Goblet of Fire, J.K. Rowling</em>
-        </div>
-      </div>
-      <a class="carousel-control-prev" href="#testimonial-carousel" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </a>
-      <a class="carousel-control-next" href="#testimonial-carousel" role="button" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </a>
-    </div>
-  </section>
-</div>
+  const leftAdCol = document.querySelector(".demo-ad");
+  const rightAdCol = document.querySelector(".demo-ad-right");
+
+  window.onscroll = function() {adScroll()};
+
+  function adScroll() {
+    if (document.body.scrollTop > 350 || leftAdCol.scrollTop > 350) {
+      document.getElementById("stickybanner").className = "d-nonet";
+    } else {
+      document.getElementById("stickybanner").className = "";
+    }
+  }
+</script> %>
 
 
 <%# <%= image_tag("book-pages-right.svg", style: "width: 200; height: 200px; position: absolute; z-index: 9; left:1000px; bottom: 100px;")%>

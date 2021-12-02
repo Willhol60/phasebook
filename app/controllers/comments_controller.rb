@@ -18,7 +18,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    puts params[:id]
     @comment = Comment.find(params[:id])
     reading = @comment.reading_id
     book = @comment.reading.book

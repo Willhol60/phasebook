@@ -203,24 +203,33 @@ $graph-height: 253px;
 
 
 .my-profile-image {
-  width: 200px;
+  margin-bottom: 5px;
+  padding-right: 10px;
+  width: 100%;
   border-radius: 50%;
 }
 
 .username {
+  // text-align: center;
   margin-top: 8px;
-  font-weight: bold;
+  color: #28374E;
+  font-weight: 300;
+  font-style: italic;
   font-size: 24px;
 }
 
-.edit-button {
-  padding: 8px;
-  background-color: whitesmoke;
-  border-radius: 10px;
-  border: none;
-  box-shadow: 0 0 5px $darkblue;
-  font-size: 12px;
-}
+
+
+// .edit-button {
+//   padding: 8px;
+//   text-align: center;
+//   background-color: #3FA9F5;
+//   color: white;
+//   border-radius: 10px;
+//   border: none;
+//   // box-shadow: 0 0 5px $darkblue;
+//   font-size: 10px;
+// }
 
 h1 {
   color: #28374E;
@@ -238,6 +247,8 @@ h4 {
   color: #28374E;
   font-weight: 300;
   font-style: italic;
+
+
 }
 #Top-cat-chart {
   position: relative;

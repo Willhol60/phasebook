@@ -19,10 +19,9 @@
       <%= link_to "Suggest one!", random_books_path, class: 'btn btn-outline-secondary ml-2' %>
     </div>
   </div>
-  <div class="d-flex pt-5 justify-content-center">
+  <div class="d-flex justify-content-center">
     <h1>My Bookshelf</h1>
   </div>
-
   <div class="divider divider-center pb-5"></div>
 
 
@@ -83,15 +82,12 @@
   <div class="d-flex flex-wrap justify-content-center align-items-center p-2">
     <% current_user.readings.where('read_status = ?', 'Finished').reverse.each do |reading| %>
       <div class="library-card" >
-        <div data-controller="library-card" class="m-3">
-          <div data-action="mouseenter->library-card#changeCard mouseleave->library-card#changeCardBack">
-            <div data-library-card-target="cover" class="book-poster-image" >
-              <%= image_tag reading.book.poster_url %>
-            </div>
-            <div class="d-none hover-shade" data-library-card-target="info" >
-              <div class="shaded-lib-card" style="background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('<%=reading.book.poster_url%>')">
+        <div class="m-3">
+          <div>
+            <div class="hover-shade">
+              <div class="shaded-lib-card" style="background-image: linear-gradient( 0, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('<%=reading.book.poster_url%>')">
                 <div class="d-flex flex-column">
-                  <div class="d-flex justify-content-end p-2">
+                  <div class="d-flex justify-content-end p-2" id='del'>
                     <%= link_to book_path(reading.book), method: :delete, remote: true do %>
                       <i class="fa fa-trash" aria-hidden="true" style="color:white; font-size:24px"></i>
                     <% end %>
@@ -99,11 +95,15 @@
                   <div id="card-info">
                     <h4 style='color: white'><%= reading.book.title %></h4>
                     <p><%= reading.book.author %></p>
-
-                    <p>Your Rating: <%= reading.user_rating.round(1) %></p>
-                    <%# <% new_average = (reading.book.rating.to_f*reading.book.rating_count.to_f + reading.user_rating.to_f) / (reading.book.rating_count.to_f + 1) %>
-                    <%# <p>Average Rating: <%= new_average.round(1) %>
-
+                    <div style="margin-top: -15px;">
+                      <% if reading.user_rating %>
+                        <% reading.user_rating.times do %>
+                          <i class="fas fa-star" style="color:white;"></i>
+                        <% end %>
+                      <% else %>
+                        <p style="color:white;">No User Rating</p>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -111,7 +111,6 @@
           </div>
         </div>
       </div>
-
     <% end %>
 
   </div>

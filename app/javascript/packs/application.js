@@ -24,6 +24,7 @@ import $ from "jquery";
 import "jquery.flipster/dist/jquery.flipster.min.js"
 
 
+
 // To expose jQuery to my js.erb views
 
 document.addEventListener('turbolinks:load', () => {

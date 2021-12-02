@@ -4333,12 +4333,19 @@ jest-worker@^25.4.0:
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
 
+jquery-bar-rating@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/jquery-bar-rating/-/jquery-bar-rating-1.2.2.tgz#9594d662cff9deb0fe7b372511bb2492a436f392"
+  integrity sha1-lZTWYs/53rD+ezclEbskkqQ285I=
+  dependencies:
+    jquery ">=1.7.2"
+
 jquery.flipster@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/jquery.flipster/-/jquery.flipster-1.1.5.tgz#b8fa1caa066eef5ad6148e023f9b2aa32cc25f9a"
   integrity sha512-wJBjNz7My1AnRLxZHG3WFRaK2H36jWUW2z6ErLQcP1YNzSBxmWR0GjiN2/PiAzbBvNayRctkS++RGFlRiBV10Q==
 
-jquery@^3.6.0:
+jquery@>=1.7.2, jquery@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
   integrity sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==

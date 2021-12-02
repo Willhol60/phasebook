@@ -85,13 +85,15 @@
       <div class="library-card" >
         <div data-controller="library-card" class="m-3">
           <div data-action="mouseenter->library-card#changeCard mouseleave->library-card#changeCardBack">
+            <!--
             <div data-library-card-target="cover" class="book-poster-image" >
               <%= image_tag reading.book.poster_url %>
             </div>
-            <div class="d-none hover-shade" data-library-card-target="info" >
-              <div class="shaded-lib-card" style="background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('<%=reading.book.poster_url%>')">
+            -->
+            <div class="hover-shade" data-library-card-target="info" >
+              <div class="shaded-lib-card" style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('<%=reading.book.poster_url%>')">
                 <div class="d-flex flex-column">
-                  <div class="d-flex justify-content-end p-2">
+                  <div class="d-flex justify-content-end p-2" id='del'>
                     <%= link_to book_path(reading.book), method: :delete, remote: true do %>
                       <i class="fa fa-trash" aria-hidden="true" style="color:white; font-size:24px"></i>
                     <% end %>
@@ -111,7 +113,6 @@
           </div>
         </div>
       </div>
-
     <% end %>
 
   </div>

@@ -3,6 +3,11 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  opacity: 0;
+}
+
+#del {
+  opacity: 0;
 }
 
 .library-card {
@@ -10,13 +15,23 @@
   width: 350px;
   height: 470px;
   justify-content: center;
+  margin: 10px 0;
 }
 
 .shaded-lib-card {
   color: white;
-  background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('<%=reading.book.poster_url%>');
   background-size: cover;
   background-position: center;
   padding: 12px;
   border-radius: 10px;
+  transition: all 0.2s linear;
+  opacity: 0.7;
+}
+
+.shaded-lib-card:hover {
+  scale: 105%;
+  opacity: 1;
+  #card-info, #del {
+    opacity: 1;
+  }
 }

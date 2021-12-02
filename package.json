@@ -10,6 +10,7 @@
     "chart.js": "^3.6.0",
     "chartkick": "^4.1.1",
     "jquery": "^3.6.0",
+    "jquery-bar-rating": "^1.2.2",
     "jquery.flipster": "^1.1.5",
     "popper.js": "^1.16.1",
     "stimulus": "^3.0.1",

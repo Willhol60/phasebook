@@ -123,7 +123,7 @@ Book.all.ids.each do |id|
     reading.end_date = Date.today - rand(20)
     reading.start_date = reading.end_date - rand(20)
     reading.cheers = rand(15)
-    reading.user_rating = rand(5)
+    reading.user_rating = rand(1..5)
   end
   reading.save!
 end

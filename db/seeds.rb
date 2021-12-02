@@ -27,26 +27,30 @@ will = User.new({ first_name: 'Will', last_name: 'Holmes',
                   email: 'will@email.org', password: 'password',
                   profile_image: 'will-selfie.jpg' })
 will.save
-# mark this for mark
-idris = User.new({ first_name: 'Idris', last_name: 'Elba',
-                   email: 'idris@email.org', password: 'password',
-                   profile_image: 'idris.jpg' })
-idris.save
-##
-george = User.new({ first_name: 'George', last_name: 'Clooney',
-                    email: 'gclooney@email.org', password: 'password',
-                    profile_image: 'clooney.jpg' })
-george.save
 
-dua = User.new({ first_name: 'Dua', last_name: 'Lipa',
-                 email: 'dua@email.org', password: 'password',
-                 profile_image: 'dua.jpg' })
-dua.save
+# idris to ebi
+ebi = User.new({ first_name: 'Ebi', last_name: 'Alaibe',
+                 email: 'ebi@email.org', password: 'password',
+                 profile_image: 'ebi.jpg' })
+ebi.save
 
-jolie = User.new({ first_name: 'Angelina', last_name: 'Jolie',
-                   email: 'jolie@email.org', password: 'password',
-                   profile_image: 'jolie.jpg' })
-jolie.save
+# george to max
+max = User.new({ first_name: 'Max', last_name: 'Kern',
+                 email: 'max@email.org', password: 'password',
+                 profile_image: 'max.jpg' })
+max.save
+
+# dua to manrika
+manrika = User.new({ first_name: 'Manrika', last_name: 'Malka',
+                     email: 'manrika@email.org', password: 'password',
+                     profile_image: 'manrika.jpg' })
+manrika.save
+
+# jolie to flaminia
+flaminia = User.new({ first_name: 'Flaminia', last_name: 'Von Grolman',
+                      email: 'flaminia@email.org', password: 'password',
+                      profile_image: 'flaminia.jpg' })
+flaminia.save
 
 # creating books lists
 beatrix_books = JSON.parse(URI.open(beatrix_url).read)

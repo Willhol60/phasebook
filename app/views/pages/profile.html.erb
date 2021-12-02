@@ -5,7 +5,7 @@
 
   <div class="divider divider-center pb-5"></div>
 
-  <div class="d-flex p-2 mb-1 justify-content-around align-items-center">
+  <div class="d-flex p-2 mb-1 mr-5">
     <div class="personal-info">
       <div class="my-profile-image">
         <% if current_user.profile_image%>
@@ -18,20 +18,32 @@
         <p><%= current_user.first_name %> <%= current_user.last_name %></p>
       </div>
       <div>
-        <p>User since: March 15 2020</p>
+        <p id="user-speil">User since: March 15 2020 <br>
+        <i class="fas fa-user-friends"></i> 16 followers | 12 following</p>
       </div>
       <div>
+
         <p><i class="fa-solid fa-people-arrows-left-right"></i> 16 followers · 12 following </p>
       </div>
       <div class="edit-button mb-3">
         Edit your profile information
+
       </div>
+        <button type="button" class="btn btn-outline-primary ">Edit profile</button>
+    </div>
+
+    <div class="col-6 col-md-8 ml-3 px-4 border-left text-justify">
+      <h3>About me</h3>
+        <p>
+          Hi I'm Simon, I really enjoy reading and collecting books. I have amassed quite the selection of Classics Illustrated
+          featuring a veritable cornucopia of literary greats including the Time Machine by H.G Wells, The illiad by Homer, Dune by Frank Herbert and A Tale of Two Cities
+          by Charles Dickens to name but a few... <br><br> It would be great to connect with fellow antique book enthusiasts
+          on this awesome site. Please comment on my feed if you find my book choices helpful!
+        </p>
     </div>
 
 
-    <div class="profile-feature">
-      <%= image_tag "woman-profile-feature.svg" %>
-    </div>
+
 
   </div>
 

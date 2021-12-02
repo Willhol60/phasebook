@@ -1,11 +1,11 @@
 <div class="container mt-5">
   <div class="d-flex pt-5 justify-content-center">
-    <h1><%= current_user.first_name %>'s Profile</h1>
+    <h1><%= current_user.first_name %>'s Reading Statistics</h1>
   </div>
 
   <div class="divider divider-center pb-5"></div>
 
-  <div class="d-flex p-2 mb-1 justify-content-between align-items-center">
+  <div class="d-flex p-2 mb-1 justify-content-around align-items-center">
     <div class="personal-info">
       <div class="my-profile-image">
         <% if current_user.profile_image%>
@@ -23,17 +23,35 @@
       <div>
         <p><i class="fa-solid fa-people-arrows-left-right"></i> 16 followers · 12 following </p>
       </div>
-      <div class="edit-button">
+      <div class="edit-button mb-3">
         Edit your profile information
       </div>
     </div>
 
+
+    <div class="profile-feature">
+      <%= image_tag "woman-profile-feature.svg" %>
+    </div>
+
+  </div>
+
+  <div class="divider divider-center pb-5"></div>
+
+  <%# <div class="d-flex p-3 justify-content-center">
+    <h3>Top Categories</h3>
+  </div> %>
+
+  <div class="d-flex justify-content-around">
+    <h4>Books read per month</h4>
+    <h4>Most read categories</h4>
+  </div>
+  <div class="pt-5 d-flex justify-content-around">
     <div id="bar-chart">
       <div class="graph">
         <ul class="x-axis">
-          <li><span>January</span></li>
-          <li><span>February</span></li>
-          <li><span>March</span></li>
+          <li><span>September</span></li>
+          <li><span>October</span></li>
+          <li><span>November</span></li>
         </ul>
         <ul class="y-axis">
           <li><span>20</span></li>
@@ -79,25 +97,13 @@
         </div>
       </div>
     </div>
-
-    <div class="profile-feature">
-      <%= image_tag "woman-profile-feature.svg" %>
-    </div>
-
-  </div>
-
-  <div class="d-flex p-3 justify-content-center">
-    <h3>Top Categories</h3>
-  </div>
-  <div class="row p-1 mb-5">
-    <%= pie_chart current_user.top_categories, id: "Top-cat-chart", height: "500px", donut: true %>
-  </div>
-
-  <div class="d-flex justify-content-center">
-    <div class="book-graphic"
-         ><%= image_tag "top-cat-donut-book.svg" %>
+    <div class="position-relative">
+      <%= pie_chart current_user.top_categories, class: "top-cat-chart", height: "340px", donut: true %>
+      <%= image_tag "top-cat-donut-book.svg", class:"book-graphic" %>
     </div>
   </div>
+
+  <div class="divider divider-center pb-5"></div>
 
   <div class='d-flex flex-row justify-content-around py-3 mb-1'>
     <div class="stats">
@@ -107,17 +113,17 @@
       <h2>1.2</h2>
     </div>
     <div class="stats">
-      <h2> <%= current_user.avg_speed %></h2>
+      <h2>9.4</h2>
     </div>
   </div>
 
   <div class='d-flex flex-row justify-content-around pb-5 mb-5'>
     <div class="stats"><h4>Books read</h4></div>
-    <div id="avs" class="stats flex-column">
+    <div id="avs" class="stats col justify-content-center">
       <h4>Total time spent reading</h4>
       <h4 style="font-size:smaller">(hours per day)</h4>
     </div>
-    <div id="ts" class="stats flex-column justify-content-center">
+    <div id="ts" class="stats col justify-content-center">
       <h4>Average reading speed</h4>
       <h4 class="pl-8" style="font-size:smaller">(books per month)</h4>
     </div>

@@ -18,7 +18,7 @@ class ReadingsController < ApplicationController
   def create
     @reading = Reading.new(reading_params)
     if @reading.save
-      redirect_to reading_path(@reading)
+      redirect_to book_readings_path(:book, anchor: "reading-#{reading}", reading: @reading)
     else
       render :new
     end
@@ -52,24 +52,22 @@ class ReadingsController < ApplicationController
     else
       reading.liked_by current_user
     end
-    # give an anchor to stop the page jumping
-    # redirect_to book_readings_path(@reading.book, @reading)
-    # raise
     redirect_to book_readings_path(:book, anchor: "reading-#{reading.id}", reading: reading.id)
   end
 
   def add
-    @book = Reading.find(params[:id]).book
+    reading = Reading.find(params[:id])
+    book = Reading.find(params[:id]).book
     # redirect_to new_book_reading_path(@reading)
-    @reading = Reading.new(user_id: current_user.id, book_id: @book.id)
-    @reading.save!
-    redirect_to book_readings_path(@reading.book_id)
+    new_reading = Reading.new(user_id: current_user.id, book_id: book.id)
+    new_reading.save!
+    redirect_to book_readings_path(book, anchor: "reading-#{reading.id}", reading: reading.id)
   end
 
   def destroy
     @reading = Reading.find(params[:id])
     @reading.destroy
-    redirect_to books_path
+    redirect_to books_path(anchor: "categories")
   end
 
   private

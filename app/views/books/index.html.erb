@@ -1,18 +1,16 @@
 
 <div class='container mt-2'>
-  <div class="d-flex pt-5 justify-content-center">
-    <h1>My Bookshelf</h1>
+
+ <div class="d-flex pt-5 justify-content-center">
+    <h1>Find a new book!</h1>
   </div>
-
-  <div class="divider divider-center pb-5"></div>
-
   <div class="search-bar d-flex flex-row justify-content-center py-3 mb-5">
     <div>
       <%= form_tag search_books_path, class: "d-flex", method: :get do |form| %>
         <%= text_field_tag :query,
           params[:query],
           class: "form-control",
-          placeholder: "Find a book by title, ISBN, author, or category"
+          placeholder: "Search by title, ISBN, author, or category"
         %>
         <%= submit_tag "Search", class: "btn btn-primary ml-2" %>
       <% end %>
@@ -21,6 +19,12 @@
       <%= link_to "Suggest me!", random_books_path, class: 'btn btn-outline-secondary ml-2' %>
     </div>
   </div>
+  <div class="d-flex pt-5 justify-content-center">
+    <h1>My Bookshelf</h1>
+  </div>
+
+  <div class="divider divider-center pb-5"></div>
+
 
   <div class="my-flipster">
     <ul>

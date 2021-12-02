@@ -1,8 +1,9 @@
-<div class="d-flex pt-5 justify-content-center">
-  <h1>Search results</h1>
-  <%= link_to "Back to library", books_path%>
+ <div class='d-flex flex-row justify-content-center'>
+  <div class="d-flex flex-column pt-5 justify-content-center">
+    <div class='p-1'><h1>Search results for "<%= params[:query] %>"</h1></div>
+    <div class='p-1 d-flex justify-content-center'><%= link_to "Back to library", books_path, class: "btn btn-outline-secondary"%></div>
+  </div>
 </div>
-
 <div class="divider divider-center"></div>
 
 <div class="container d-flex flex-wrap justify-content-center align-items-center p-2">

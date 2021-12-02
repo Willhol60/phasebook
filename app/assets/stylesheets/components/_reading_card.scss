@@ -3,7 +3,8 @@
 }
 
 .whole-card {
-  min-width: 50vw;
+  width: 40vw;
+  // max-width: 50vw;
   background-color: whitesmoke;
   border-radius: 10px;
   box-shadow: 0 0 5px $darkblue;
@@ -115,6 +116,10 @@ h6 {
   margin-top: 0;
   margin-bottom: 0;
   font-weight: bold;
+}
+
+.fa-plus-square:active {
+
 }
 
 .readings-cards {

@@ -1,10 +1,12 @@
 /* Containers */
+
 .mt-5 {
   padding-bottom: 50px;
 }
 
 .container-fluid{
   padding: 7% 15%;
+  z-index: 8;
 }
 
 .colored-section {
@@ -15,6 +17,7 @@
 
 #testimonials {
   background-color: #0071BC;
+  z-index: 8;
 }
 
 .testimonial-text {
@@ -32,10 +35,15 @@
 // }
 
 .newsfeed-title {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  position: sticky;
-  top: 0px;
+  height: 120px;
+
+  // padding-top: 20px;
+  // padding-bottom: 20px;
+
+  // position: sticky;
+  top: -30px;
+  z-index: 7;
+
   background-color: white;
   border-bottom: 2px solid whitesmoke;
   box-shadow: 0 4px 4px -4px $darkblue;
@@ -49,17 +57,41 @@
   text-align: center;
 }
 
+.demo-ad {
+  position: relative;
+  top: 132px;
+  right: 0px;
+  z-index: 1;
+}
+
+.demo-ad-right {
+  position: relative;
+  top: 132px;
+  right: -165px;
+  z-index: 1;
+}
+
+.left-ads-col,
+.right-ads-col {
+  // position: sticky;
+  margin-top: 500;
+}
+
 .readings-cards {
   background: white;
   padding-top: 40px;
-  padding-left: 80px;
-  padding-right: 80px;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .readings-cards-row {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+.readings-cards-ads {
+
 }
 
 .readings-cards-images {
@@ -69,22 +101,21 @@
   left: 700px;
 }
 
-
 // #Group_162 {
 //   position: absolute;
 //   bottom: 100;
 //   width: 100%;
 // }
 
-#curve-div {
-  width: 100%;
-  position: relative;
-  // bottom: -100px;
-  top: -200px;
-  z-index: 8;
-  transform: scaleY(-1);
-  padding-bottom: 100px;
-}
+// #curve-div {
+//   width: 100%;
+//   position: relative;
+//   // bottom: -100px;
+//   top: -200px;
+//   z-index: 8;
+//   transform: scaleY(-1);
+//   padding-bottom: 100px;
+// }
 
 // curve png style
 // z-index: 8; max-width: 100%; position: absolute; top: 0px; left: 0
@@ -241,23 +272,23 @@
 //   padding: 10px;
 // }
 
-.quote-icon-circle {
-  display: inline-block;
-  height: 12px;
-  width: 12px;
-  background-color: $darkblue;
-  border-radius: 50%;
-  // text-align: center;
-}
+// .quote-icon-circle {
+//   display: inline-block;
+//   height: 12px;
+//   width: 12px;
+//   background-color: $darkblue;
+//   border-radius: 50%;
+//   // text-align: center;
+// }
 
-.quote-icon-circle-current {
-  display: inline-block;
-  height: 12px;
-  width: 12px;
-  background-color: white;
-  border-style: solid;
-  border-color: $darkblue;
-  border-width: 1px;
-  border-radius: 50%;
-  // text-align: center;
-}
+// .quote-icon-circle-current {
+//   display: inline-block;
+//   height: 12px;
+//   width: 12px;
+//   background-color: white;
+//   border-style: solid;
+//   border-color: $darkblue;
+//   border-width: 1px;
+//   border-radius: 50%;
+//   // text-align: center;
+// }

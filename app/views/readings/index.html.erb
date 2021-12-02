@@ -7,13 +7,28 @@
 <%# </div> %>
 
 <div class='container mt-2'>
-  <div class="d-flex pt-5 justify-content-center newsfeed-title" style="justify-content: flex-start">
+  <%# <div class="newsfeed-title" style="justify-content: flex-start"> %>
+  <div class="d-flex pt-5 justify-content-center newsfeed-title" style="justify-content: flex-end">
+    <div class="col demo-ad">
+      <%= image_tag("daunt-left-bookend.jpg") %>
+      <%# style: "width: 200; height: 600px;" %>
+    </div>
     <h1>My Newsfeed</h1>
     <%# <div class="divider divider-center"></div> %>
+    <div class="col demo-ad-right">
+      <%= image_tag("daunt-right-bookend.jpg") %>
+      <%# style: "width: 200; height: 600px;" %>
+    </div>
   </div>
 
-  <div class="readings-cards">
-    <div class="row readings-cards-row">
+  <div class="row readings-cards">
+
+    <div class="col left-ads-col">
+      <%# <%= image_tag("daunt-left-bookend.jpg") %>
+      <%# style: "width: 200; height: 600px;" %>
+    </div>
+
+    <div class="col row readings-cards-row">
       <% @readings.select { |reading| reading.read_status == 'Finished' && reading.end_date }.sort_by { |reading| reading[:end_date] }.reverse.each do |reading| %>
         <div data-controller="comment-window" class="whole-card-container">
           <div class="whole-card" id=<%= "reading-#{reading.id}" %>>
@@ -75,20 +90,24 @@
                 <%= link_to cheers_book_reading_path(reading.book, reading), method: :patch, remote: true do %>
                   <% if current_user.voted_for? reading %>
                     <%# <i class="fas fa-check-circle" style="color:lightblue; font-size:30px; padding:8px"></i> %>
-                    <i class="fa fa-check-circle" style="color:#004370; font-size:30px; padding:8px"></i>
+                    <i class="fa fa-check-circle" style="font-size:25px; color:#004370; padding:8px"></i>
                   <% else %>
-                    <i class="far fa-check-circle" style="font-size:30px; color:#004370; padding:8px"></i>
+                    <i class="far fa-check-circle" style="font-size:25px; color:#004370; padding:8px"></i>
                   <% end %>
                 <% end %>
                 <p style="font-size:20px; color:#004370"><%= reading.votes_for.size %></p>
               </div>
               <div class="comment-button d-flex align-items-center">
-                <button class="button-feedback" data-action="click->comment-window#revealWindow"><i class="far fa-comments" style="font-size:30px;"></i></button>
+                <button class="button-feedback" data-action="click->comment-window#revealWindow"><i class="far fa-comments" style="font-size:25px;"></i></button>
                 <p style="font-size:20px; color:#004370"><%= reading.comments.count %></p>
               </div>
               <div class="d-flex align-items-center">
                 <%= link_to add_reading_path(reading), method: :put, class: "add-book-button", style: "color:#004370" do %>
-                  <i class="far fa-plus-square" style="font-size:30px"></i>
+                  <% if current_user.readings.include? reading %>
+                    <i class="fas fa-plus-square" style="font-size:25px"></i>
+                  <% else %>
+                    <i class="far fa-plus-square" style="font-size:25px"></i>
+                  <% end %>
                 <% end %>
               </div>
             </div>
@@ -100,23 +119,41 @@
                   <%= f.input :content, placeholder: 'Leave a comment...', label:false, input_html: { data: { action:"keyup->comment-window#submit"} }  %>
                 <% end %>
               <% end %>
-              <% reading.comments.reverse.each do |comment| %>
+              <%# <% reading.comments.reverse.each do |comment| %>
+              <% reading.comments.each do |comment| %>
                 <div class="comment-row">
                   <%= image_tag (comment.user.profile_image), class: "avatar-square" %>
-                  <div class="comment">
-                    <div class="comment-first-line">
-                      <% if comment.user.id == current_user.id %>
-                        <p><strong>You</strong></p>
-                        <%= link_to comment_path(comment), method: :delete, remote: true do %>
-                          <i class="fa fa-trash" aria-hidden="true" style="color: white"></i>
+
+                  <%# <div class="comment-first-line"> %>
+                      <%# <% if comment.user.id == current_user.id %>
+                        <%# <p><strong>You</strong></p> %>
+                        <%# <%= link_to comment_path(comment), method: :delete, remote: true do %>
+                          <%# <i class="fa fa-trash" aria-hidden="true" style="color: white"></i> %>
+                        <%# <% end %>
+                      <%# <% else %>
+                        <%# <p><strong ><%= comment.user.first_name <%= comment.user.last_name</strong></p> %>
+                      <%# <% end %>
+                    <%# </div> %>
+                    <%# <div class="comment-second-line"> %>
+                      <%# <p id="comment-<%= comment.id"><%= comment.content</p> %>
+                      <%# <h6><em><%= (comment.created_at).strftime('%A, %b %d')</em></h6> %>
+                    <%# </div> %>
+                  <div class="col comment-col">
+                    <div class="comment">
+                      <div class="d-flex flex-row comment-first-line">
+                        <% if comment.user.id == current_user.id %>
+                          <p id="comment-user-name"><strong>You</strong></p>
+                          <%= link_to comment_path(comment), method: :delete, remote: true do %>
+                            <i class="fa fa-trash" aria-hidden="true" style="color: white"></i>
+                          <% end %>
+                        <% else %>
+                          <p id="comment-user-name"><strong ><%= comment.user.first_name %> <%= comment.user.last_name %></strong></p>
                         <% end %>
-                      <% else %>
-                        <p><strong ><%= comment.user.first_name %> <%= comment.user.last_name %></strong></p>
-                      <% end %>
-                    </div>
-                    <div class="comment-second-line">
-                      <p id="comment-<%= comment.id %>"><%= comment.content %></p>
-                      <h6><em><%= (comment.created_at).strftime('%A, %b %d') %></em></h6>
+                      </div>
+                      <div class="d-flex flex-row comment-second-line justify-content-between">
+                        <p class="comment-text" id="comment-<%= comment.id %>"><%= comment.content %></p>
+                        <p class="comment-created-at-time"><em><%= (comment.created_at).strftime('%A, %b %d') %></em></p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -127,14 +164,17 @@
       <% end %>
     </div>
 
-    <div class="readings-cards-images">
-      <%# <%= image_tag("shapes-right.svg", style: "width: 200; height: 600px;")%>
-      <%# <%= image_tag("woman-reading-lounge.svg", style: "width: 200; height: 400px;")%>
-      <%# <%= image_tag("book-pages-right.svg", style: "width: 200; height: 400px;")%>
+    <div class="col right-ads-col">
+      <%# <%= image_tag("daunt-right-bookend.jpg") %>
     </div>
 
   </div>
 </div>
+
+<%# <%= image_tag("shapes-right.svg", style: "width: 200; height: 600px;")%>
+<%# <%= image_tag("woman-reading-lounge.svg", style: "width: 200; height: 400px;")%>
+<%# <%= image_tag("book-pages-right.svg", style: "width: 200; height: 400px;")%>
+
 
 <!-- Testimonials -->
 <div>

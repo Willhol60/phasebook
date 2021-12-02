@@ -32,6 +32,10 @@
   margin-bottom: 5px;
 }
 
+.comment-col {
+  padding-right: 0px;
+}
+
 .comment {
   // border: 1px solid grey;
   border-radius: 8px;
@@ -43,8 +47,8 @@
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 10px;
-  margin-left: 5px;
-  height: 80px;
+  // margin-left: 5px;
+  // height: 80px;
   margin-bottom: 4px;
 }
 
@@ -52,12 +56,41 @@
   margin: 0px;
 }
 
+.comment p {
+  margin: 0px;
+}
+
+#comment-user-name {
+  font-size: 0.8rem;
+}
+
+.comment-text {
+  font-size: 1rem;
+}
+
+
 .comment-first-line {
+  // position: absolute;
+  // top: 0px;
   display: flex;
   justify-content: space-between;
 }
 
 .comment-second-line {
+  // position: absolute;
+  // bottom: 0;
   display: flex;
   justify-content: space-between;
+}
+
+.comment-created-at-time {
+  // padding-left: 10px;
+  font-size: 0.7rem;
+  bottom: 0;
+}
+
+.comment-created-at-time em {
+  // padding-left: 10px;
+  // position: absolute;
+  // bottom: 0;
 }

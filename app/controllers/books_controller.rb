@@ -61,7 +61,7 @@ class BooksController < ApplicationController
 
   def random_book_hash(book)
     title = book['volumeInfo']['title'] ? book['volumeInfo']['title'] : "No title"
-    poster_url = book['volumeInfo']['imageLinks'] ? book['volumeInfo']['imageLinks']['thumbnail'] : "placeholder.jpg"
+    poster_url = book['volumeInfo']['imageLinks'] ? book['volumeInfo']['imageLinks']['thumbnail'] : "placeholder-cvr.jpg"
     author = book['volumeInfo']['authors'] ? book['volumeInfo']['authors'].first : "Unknown Author"
     publisher = book['volumeInfo']['publisher'] || "Unknown publisher"
     pages = book['volumeInfo']['pageCount'] || 100

@@ -38,8 +38,7 @@
             <%= image_tag poster_url %>
           </div>
           <div class="d-none hover-shade" data-library-card-target="info" >
-            <div style="color: white; background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('<%=poster_url%>');
-                        background-size: cover; background-position: center; padding: 12px ">
+            <div class="shaded-lib-card"style="background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('<%=poster_url%>')">
               <div class="d-flex flex-column">
                 <div class="d-flex justify-content-end p-2">
                   <% params_hash = { title: title,

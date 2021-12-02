@@ -1,12 +1,89 @@
 <div class="container mt-5">
   <div class="d-flex pt-5 justify-content-center">
-    <h1>My Profile</h1>
+    <h1><%= current_user.first_name %>'s Profile</h1>
   </div>
+
   <div class="divider divider-center pb-5"></div>
-  <div class="d-flex p-2 mb-1 justify-content-center">
+
+  <div class="d-flex p-2 mb-1 justify-content-between align-items-center">
+    <div class="personal-info">
+      <div class="my-profile-image">
+        <% if current_user.profile_image%>
+          <%= image_tag current_user.profile_image, class:"my-profile-image" %>
+        <% else %>
+          <%= image_tag "placeholder.jpg", class: "my-profile-image" %>
+        <% end %>
+      </div>
+      <div class="username">
+        <p><%= current_user.first_name %> <%= current_user.last_name %></p>
+      </div>
+      <div>
+        <p>User since: March 15 2020</p>
+      </div>
+      <div>
+        <p><i class="fa-solid fa-people-arrows-left-right"></i> 16 followers · 12 following </p>
+      </div>
+      <div class="edit-button">
+        Edit your profile information
+      </div>
+    </div>
+
+    <div id="bar-chart">
+      <div class="graph">
+        <ul class="x-axis">
+          <li><span>January</span></li>
+          <li><span>February</span></li>
+          <li><span>March</span></li>
+        </ul>
+        <ul class="y-axis">
+          <li><span>20</span></li>
+          <li><span>15</span></li>
+          <li><span>10</span></li>
+          <li><span>5</span></li>
+          <li><span>0</span></li>
+        </ul>
+        <div class="bars">
+          <div class="bar-group">
+            <div class="bar bar-1 stat-1" style="height: 51%;">
+              <span>4080</span>
+            </div>
+            <div class="bar bar-2 stat-2" style="height: 71%;">
+              <span>5680</span>
+            </div>
+            <div class="bar bar-3 stat-3" style="height: 13%;">
+              <span>1040</span>
+            </div>
+          </div>
+          <div class="bar-group">
+            <div class="bar bar-4 stat-1" style="height: 76%;">
+              <span>6080</span>
+            </div>
+            <div class="bar bar-5 stat-2" style="height: 86%;">
+              <span>6880</span>
+            </div>
+            <div class="bar bar-6 stat-3" style="height: 22%;">
+              <span>1760</span>
+            </div>
+          </div>
+          <div class="bar-group">
+            <div class="bar bar-7 stat-1" style="height: 78%;">
+              <span>6240</span>
+            </div>
+            <div class="bar bar-8 stat-2" style="height: 72%;">
+              <span>5760</span>
+            </div>
+            <div class="bar bar-9 stat-3" style="height: 36%;">
+              <span>2880</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="profile-feature">
       <%= image_tag "woman-profile-feature.svg" %>
     </div>
+
   </div>
 
   <div class="d-flex p-3 justify-content-center">
@@ -27,7 +104,7 @@
       <h2><%= current_user.books_read %></h2>
     </div>
     <div class="stats">
-      <h2>1.2 books per week</h2>
+      <h2>1.2</h2>
     </div>
     <div class="stats">
       <h2> <%= current_user.avg_speed %></h2>
@@ -36,11 +113,17 @@
 
   <div class='d-flex flex-row justify-content-around pb-5 mb-5'>
     <div class="stats"><h4>Books read</h4></div>
-    <div id="avs" class="stats"><h4>Total time spent reading</h4></div>
-    <div id="ts" class="stats"><h4>Average reading speed</h4></div>
-  </div>
-    <div class="d-flex justify-content-center">
-      <div class="astro"><%= image_tag "footer-graphic.svg" %></div>
+    <div id="avs" class="stats flex-column">
+      <h4>Total time spent reading</h4>
+      <h4 style="font-size:smaller">(hours per day)</h4>
     </div>
+    <div id="ts" class="stats flex-column justify-content-center">
+      <h4>Average reading speed</h4>
+      <h4 class="pl-8" style="font-size:smaller">(books per month)</h4>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div class="astro"><%= image_tag "footer-graphic.svg" %></div>
+  </div>
 
 </div>

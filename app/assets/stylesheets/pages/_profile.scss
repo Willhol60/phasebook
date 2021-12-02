@@ -1,6 +1,225 @@
 .profile-feature {
-  width: 450px;
-  height: 350px;
+  width: 35%;
+  height: 35%;
+}
+// VARIABLES
+$default-delay: .2s;
+$bars: 15;
+$graph-height: 253px;
+
+// MIXINS
+
+//Horizontal Bar Color Mixin
+@mixin stat-bar($color-dark, $color-light, $direction, $dir-webkit) {
+  background-image: -webkit-linear-gradient($dir-webkit, $color-light 0%, $color-light 47%, $color-dark 50%, $color-dark 100%);
+  background-image: linear-gradient($direction, $color-light 0%, $color-light 47%, $color-dark 50%, $color-dark 100%);
+}
+// Animation Mixin
+@mixin bar-animation($time, $dimension) {
+  visibility: hidden;
+  @if $dimension == width {
+    width: 0;
+    -webkit-animation: animate-width;
+    -moz-animation: animate-width;
+    animation: animate-width;
+  }
+  @if $dimension == height {
+    height: 0;
+    -webkit-animation: animate-height;
+    -moz-animation: animate-height;
+    animation: animate-height;
+  }
+  animation-timing-function: cubic-bezier(.35,.95,.67,.99);
+  -webkit-animation-timing-function: cubic-bezier(.35,.95,.67,.99);
+  -moz-animation-timing-function: cubic-bezier(.35,.95,.67,.99);
+  animation-duration: $time*2;
+  -webkit-animation-duration: $time*2;
+  -moz-animation-duration: $time*2;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes animate-width {
+  0% {
+    width: 0;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+@-moz-keyframes animate-width {
+  0% {
+    width: 0;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+@keyframes animate-width {
+  0% {
+    width: 0;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+@-webkit-keyframes animate-height {
+  0% {
+    height: 0;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+@-moz-keyframes animate-height {
+  0% {
+    height: 0;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+@keyframes animate-height {
+  0% {
+    height: 0;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+
+// Bar chart style begins
+
+#bar-chart {
+  padding-left: 130px;
+  height: 380px;
+  width: 40%;
+  position: relative;
+  margin: 50px 0 0;
+  * {
+   box-sizing: border-box;
+  }
+  .graph {
+    height: 283px;
+    position: relative;
+  }
+  .bars {
+    height: $graph-height;
+    padding: 0 2%;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+  }
+  .bar-group {
+    display: block;
+    float: left;
+    height: 100%;
+    position: relative;
+    width: 12%;
+    margin-right: 10%;
+    &:last-child {
+     margin-right: 0;
+    }
+    .bar {
+      @include bar-animation($default-delay, height);
+      box-shadow: 1px 0 2px rgba(0,0,0,.15);
+      border: 1px solid #2d2d2d;
+      border-radius: 3px 3px 0 0;
+      bottom: 0;
+      cursor: pointer;
+      height: 0;
+      position: absolute;
+      text-align: center;
+      width: 100%;
+      // // &:nth-child(2) {
+      // //   left: 35%;
+      // // }
+      // // &:nth-child(3) {
+      // //   left: 70%;
+      // }
+      span {
+       display: none;
+      }
+    }
+    @for $i from 1 through 9 {
+      .bar-#{$i} {
+        animation-delay: $default-delay+.1*$i;
+        -webkit-animation-delay: $default-delay+.1*$i;
+      }
+    }
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .x-axis {
+    bottom: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    li {
+      float: left;
+      margin-right: 10.5%;
+      color:  #28374E;
+      font-style: italic;
+      font-size: 11px;
+      width: 11.5%;
+      &:last-child {
+       margin-right: 0;
+      }
+    }
+  }
+  .y-axis {
+    position: absolute;
+    text-align: right;
+    width: 100%;
+    li {
+      border-top: 1px solid #4e5464;
+      display: block;
+      height: $graph-height/4;
+      width: 65%;
+      span {
+        display: block;
+        font-size: 11px;
+        margin: -10px 0 0 -60px;
+        padding: 0 10px;
+        width: 40px;
+      }
+    }
+  }
+  .stat-1 {
+    @include stat-bar(#0071BC,  #3FA9F5, to right, left);
+  }
+  .stat-2 {
+    @include stat-bar(#0071BC,  #3FA9F5, to right, left);
+  }
+  .stat-3 {
+    @include stat-bar(#0071BC,  #3FA9F5, to right, left);
+  }
+}
+
+// Bar chart style ends
+
+
+.my-profile-image {
+  width: 200px;
+  border-radius: 50%;
+}
+
+.username {
+  margin-top: 8px;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.edit-button {
+  padding: 8px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 5px $darkblue;
+  font-size: 12px;
 }
 
 h1 {

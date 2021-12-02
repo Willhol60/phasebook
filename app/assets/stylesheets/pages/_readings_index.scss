@@ -4,29 +4,6 @@
   padding-bottom: 50px;
 }
 
-.container-fluid{
-  padding: 7% 15%;
-  z-index: 8;
-}
-
-.colored-section {
-  text-align: center;
-  color: #fff;
-}
-/* Testimonial Section */
-
-#testimonials {
-  background-color: #0071BC;
-  z-index: 8;
-}
-
-.testimonial-text {
-  text-align: center;
-  color: white;
-  font-size: 2rem;
-  line-height: 1.5;
-}
-
 // #newsfeed-header {
 //   // width: 100%;
 //   // height: 200px;
@@ -57,19 +34,29 @@
   text-align: center;
 }
 
-.demo-ad {
+.demo-ad,
+.demo-ad-right {
   position: relative;
-  top: 132px;
-  right: 0px;
+  top: 112px;
   z-index: 1;
 }
 
-.demo-ad-right {
-  position: relative;
-  top: 132px;
-  right: -165px;
-  z-index: 1;
+.demo-ad {
+  right: 0px;
 }
+
+.demo-ad-right {
+  right: -165px;
+}
+
+.demo-ad.scroll-stopped {
+  position:fixed;
+}
+
+.demo-ad-right.scroll-stopped {
+  position: fixed;
+}
+
 
 .left-ads-col,
 .right-ads-col {

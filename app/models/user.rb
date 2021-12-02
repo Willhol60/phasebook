@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   def randomise
     if readings
-      readings.filter_map { |reading| reading.book.category if reading.book.category != "No category" }.uniq!.sample
+      readings.filter_map { |reading| reading.book.category if reading.book.category != "No category" }.uniq.sample
     else
       ["Fiction", "Performing Arts", "Philosophy", "Biography & Autobiography", "Art"].sample
     end

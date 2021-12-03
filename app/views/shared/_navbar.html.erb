@@ -18,7 +18,9 @@
   <%= link_to profile_path do %>
     <p><i class="fas fa-chart-pie"></i>  Statistics</p>
   <% end %>
-  <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+  <%= link_to destroy_user_session_path, method: :delete do %>
+    <p><i class="fas fa-sign-out-alt"></i> Log out</p>
+  <% end %>
 </div>
 
 

@@ -103,7 +103,7 @@
               </div>
               <div class="d-flex align-items-center">
                 <%= link_to add_reading_path(reading), method: :put, class: "add-book-button", style: "color:#004370" do %>
-                  <% if current_user.readings.include? reading %>
+                  <% if current_user.books.include? reading.book %>
                     <i class="fas fa-plus-square" style="font-size:25px"></i>
                   <% else %>
                     <i class="far fa-plus-square" style="font-size:25px"></i>
@@ -150,7 +150,7 @@
                           <p id="comment-user-name"><strong ><%= comment.user.first_name %> <%= comment.user.last_name %></strong></p>
                         <% end %>
                       </div>
-                      <div class="d-flex flex-row comment-second-line justify-content-between">
+                      <div class="comment-second-line">
                         <p class="comment-text" id="comment-<%= comment.id %>"><%= comment.content %></p>
                         <p class="comment-created-at-time"><em><%= (comment.created_at).strftime('%A, %b %d') %></em></p>
                       </div>

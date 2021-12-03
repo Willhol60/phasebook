@@ -91,7 +91,7 @@ $graph-height: 253px;
 // Bar chart style begins
 
 #bar-chart {
-  padding-left: 130px;
+  padding-left: 90px;
   height: 380px;
   width: 40%;
   position: relative;
@@ -234,12 +234,8 @@ h4 {
   color: #28374E;
   font-weight: 300;
   font-style: italic;
-
-
 }
-// .top-cat-chart {
-//   position: relative;
-// }
+
 
 .book-graphic {
   // z-index: 9;
@@ -258,6 +254,7 @@ h4 {
 
 .stats h4 {
   padding-left: 100px;
+  text-align: center;
 }
 
 #avs{

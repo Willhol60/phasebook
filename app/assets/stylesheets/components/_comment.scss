@@ -77,20 +77,13 @@
 }
 
 .comment-second-line {
-  // position: absolute;
-  // bottom: 0;
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
 }
 
 .comment-created-at-time {
   // padding-left: 10px;
   font-size: 0.7rem;
   bottom: 0;
-}
-
-.comment-created-at-time em {
-  // padding-left: 10px;
-  // position: absolute;
-  // bottom: 0;
 }

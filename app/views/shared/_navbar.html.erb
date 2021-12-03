@@ -9,9 +9,15 @@
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <%= link_to 'Newsfeed', book_readings_path(:book) %>
-  <%= link_to 'Bookshelf', books_path %>
-  <%= link_to 'Statistics', profile_path %>
+  <%= link_to book_readings_path(:book) do %>
+    <p><i class="fas fa-comment-alt"></i> Newsfeed</p>
+  <% end %>
+  <%= link_to books_path do %>
+    <p><i class="fas fa-book-open"></i>  Bookshelf</p>
+  <% end %>
+  <%= link_to profile_path do %>
+    <p><i class="fas fa-chart-pie"></i>  Statistics</p>
+  <% end %>
   <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
 </div>
 

@@ -16,7 +16,7 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
     @reading = Reading.new
     if @book.save!
-      redirect_to books_path
+      redirect_to books_path(anchor: "finder")
     else
       render :new
     end
@@ -49,7 +49,7 @@ class BooksController < ApplicationController
     @book.save!
     @reading = Reading.new(book_id: @book.id, user_id: current_user.id)
     @reading.save
-    redirect_to request.referrer
+    redirect_to books_path(anchor: "finder")
   end
 
 

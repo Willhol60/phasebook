@@ -28,14 +28,14 @@ class ReadingsController < ApplicationController
     @reading = Reading.find(params[:id])
     @reading.update(read_status: "Current", start_date: DateTime.now)
     flash[:notice] = 'Your reading has been updated!'
-    redirect_to request.referrer
+    redirect_to books_path(anchor: "finder")
   end
 
   def finish
     @reading = Reading.find(params[:id])
     @reading.update(read_status: "Finished", end_date: DateTime.now, user_rating: params[:reading][:user_rating])
     flash[:notice] = 'Your reading has been updated!'
-    redirect_to request.referrer
+    redirect_to books_path(anchor: "past-reads")
   end
 
   def open_list_modal

@@ -120,7 +120,7 @@
                 <% end %>
               <% end %>
               <%# <% reading.comments.reverse.each do |comment| %>
-              <% reading.comments.each do |comment| %>
+              <% reading.comments.sort_by{ |comment| comment[:created_at]}.each do |comment| %>
                 <div class="comment-row">
                   <%= image_tag (comment.user.profile_image), class: "avatar-square" %>
 

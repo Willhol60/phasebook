@@ -32,6 +32,7 @@ document.addEventListener('turbolinks:load', () => {
     style: 'flat',
     spacing: -0.1
   });
+  $(".alert").fadeOut(2500);
 });
 
 global.$ = jQuery;

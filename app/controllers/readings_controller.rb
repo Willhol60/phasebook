@@ -67,7 +67,7 @@ class ReadingsController < ApplicationController
   def destroy
     @reading = Reading.find(params[:id])
     @reading.destroy
-    redirect_to books_path(anchor: "categories")
+    redirect_to books_path(anchor: "finder")
   end
 
   private

@@ -4,7 +4,9 @@ A social media platform for book lovers, created as a team final project in Le W
 # Features:
 * Landing page with call-to-action button
 * Newsfeed page of user's friends' recent reads
+  * ability to comment, like, add book to user's reading list
 * Library page of user's books
+  * ability to search for books using an API and add a randomly suggested book
 * Profile page of user's reading statistics
 
 

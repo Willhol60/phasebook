@@ -13,9 +13,8 @@ A social media platform for book lovers, created as a team final project in Le W
 # Tools and technologies used:
 * Ruby on Rails
 * PostgreSQL
-* HTML, CSS, JavaScript
-* jQuery
-* Bootstrap
+* HTML, CSS, Bootstrap
+* JavaScript, Stimulus, jQuery
 * Heroku
 
 # Mock-up design:
